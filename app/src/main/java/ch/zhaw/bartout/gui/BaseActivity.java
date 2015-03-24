@@ -1,19 +1,35 @@
-package ch.zhaw.bartout;
+package ch.zhaw.bartout.gui;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import ch.zhaw.bartout.R;
 
-public class HomeActivity extends ActionBarActivity {
+/**
+ * Created by srueg on 24.03.15.
+ */
+public abstract class BaseActivity extends Activity {
+
+    private final int layoutId;
+    private final boolean homeAsUp;
+
+    public BaseActivity(int layoutId){
+        this(layoutId, true);
+    }
+
+    public BaseActivity(int layoutId, boolean homeAsUp){
+        this.layoutId = layoutId;
+        this.homeAsUp = homeAsUp;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(layoutId);
+        getActionBar().setDisplayHomeAsUpEnabled(homeAsUp);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -36,4 +52,5 @@ public class HomeActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
