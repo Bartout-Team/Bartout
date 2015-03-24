@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Bartout</string>
+    <string name="drawer_open">Open Drawer</string>
+    <string name="drawer_close">Close Drawer</string>
     <string-array name="planets_array">
         <item>Home</item>
         <item>Suche</item>
