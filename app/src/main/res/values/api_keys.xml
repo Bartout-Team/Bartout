@@ -1,0 +1,8 @@
+<resources>
+    <string name="google_maps_api_key" translatable="false" templateMergeStrategy="preserve">
+        AIzaSyB6LI0nvEP4qy5Cin1TEMHL8BqrWaXYu8k
+    </string>
+    <string name="google_places_api_key" translatable="false" templateMergeStrategy="preserve">
+        AIzaSyCsDTYBPvk5ZdasB38ZDVI0fCmCahRdG_Y
+    </string>
+</resources>

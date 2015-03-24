@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Bartout</string>
-
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string-array name="planets_array">
+        <item>Home</item>
+        <item>Suche</item>
+        <item>Bartour bearbeiten</item>
+        <item>Trinken</item>
+        <item>Rangliste</item>
+        <item>Fahrtüchtigkeit</item>
+    </string-array>
 </resources>
