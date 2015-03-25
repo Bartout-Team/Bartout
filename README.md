@@ -2,7 +2,6 @@
 
 Bartour-App Bartout
 ### Setup Environment
-* Copy "Dropbox/PSIT3_Share/Entwicklung/debug.keystore" to "$HOME$/.android"
 * Android SDK Manager:
   * Install Android 4.4.2 (API 19)
   * Install Google Play Services
