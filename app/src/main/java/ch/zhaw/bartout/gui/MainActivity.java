@@ -2,6 +2,7 @@ package ch.zhaw.bartout.gui;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -40,14 +41,20 @@ public class MainActivity extends Activity
     @Override
     public void onNavigationDrawerItemSelected(int menuResId) {
         FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment = null;
         switch (menuResId) {
             case R.string.title_home:
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container_fragment, BartourFragment.getInstance())
-                        .commit();
+                fragment = BartourFragment.getInstance();
+                break;
+            case R.string.title_search:
+                fragment = SearchFragment.getInstance();
                 break;
         }
-
+        if(fragment != null) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container_fragment, fragment)
+                    .commit();
+        }
     }
 
     public void restoreActionBar() {
@@ -84,6 +91,6 @@ public class MainActivity extends Activity
 
     @Override
     public void onFragmentInteraction(String id) {
-        
+
     }
 }
