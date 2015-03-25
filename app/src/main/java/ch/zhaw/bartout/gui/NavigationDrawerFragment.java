@@ -98,18 +98,15 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(
+        String[] menuItems = new String[6];
+        for(int i=0; i<menuItems.length; i++){
+            menuItems[i] = getString(getMenuResId(i));
+        }
+        mDrawerListView.setAdapter(new ArrayAdapter<>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
-                new String[]{
-                        getString(R.string.title_home),
-                        getString(R.string.title_search),
-                        getString(R.string.title_edit),
-                        getString(R.string.title_drink),
-                        getString(R.string.title_ranking),
-                        getString(R.string.title_drive)
-                }));
+                menuItems));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }
@@ -192,16 +189,36 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     private void selectItem(int position) {
-        mCurrentSelectedPosition = position;
-        if (mDrawerListView != null) {
-            mDrawerListView.setItemChecked(position, true);
+        if(mCurrentSelectedPosition != position) {
+            mCurrentSelectedPosition = position;
+            if (mDrawerListView != null) {
+                mDrawerListView.setItemChecked(position, true);
+            }
+            if (mDrawerLayout != null) {
+                mDrawerLayout.closeDrawer(mFragmentContainerView);
+            }
+            if (mCallbacks != null) {
+                mCallbacks.onNavigationDrawerItemSelected(getMenuResId(position));
+            }
         }
-        if (mDrawerLayout != null) {
-            mDrawerLayout.closeDrawer(mFragmentContainerView);
+    }
+
+    private int getMenuResId(int position){
+        switch (position){
+            case 0:
+                return R.string.title_home;
+            case 1:
+                return R.string.title_search;
+            case 2:
+                return R.string.title_edit;
+            case 3:
+                return R.string.title_drink;
+            case 4:
+                return R.string.title_ranking;
+            case 5:
+                return R.string.title_drive;
         }
-        if (mCallbacks != null) {
-            mCallbacks.onNavigationDrawerItemSelected(position);
-        }
+        throw new IllegalArgumentException("position");
     }
 
     @Override
@@ -278,7 +295,8 @@ public class NavigationDrawerFragment extends Fragment {
     public static interface NavigationDrawerCallbacks {
         /**
          * Called when an item in the navigation drawer is selected.
+         * @param menuResId
          */
-        void onNavigationDrawerItemSelected(int position);
+        void onNavigationDrawerItemSelected(int menuResId);
     }
 }
