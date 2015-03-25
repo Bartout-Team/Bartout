@@ -1,15 +1,19 @@
 <resources>
     <string name="app_name">Bartout</string>
-    <string name="drawer_open">Open Drawer</string>
-    <string name="drawer_close">Close Drawer</string>
-    <string name="title_activity_serach">Suche</string>
-    <string name="title_activity_home">Home</string>
-    <string-array name="planets_array">
-        <item>Home</item>
-        <item>Suche</item>
-        <item>Bartour bearbeiten</item>
-        <item>Trinken</item>
-        <item>Rangliste</item>
-        <item>Fahrtüchtigkeit</item>
-    </string-array>
+
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_search">Suche</string>
+    <string name="title_edit">Bartour bearbeiten</string>
+    <string name="title_drink">Trinken</string>
+    <string name="title_ranking">Rangliste</string>
+    <string name="title_drive">Fahrtüchtigkeit</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
