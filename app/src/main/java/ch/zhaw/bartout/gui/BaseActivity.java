@@ -1,6 +1,7 @@
 package ch.zhaw.bartout.gui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -71,6 +72,16 @@ public abstract class BaseActivity extends Activity implements ListView.OnItemCl
 
     @Override
     public void onItemClick(AdapterView parent, View view, int position, long id) {
+        switch(position){
+            // Home
+            case 0:
+                break;
+            // Search
+            case 1:
+                Intent intent = new Intent(this, SearchActivity.class);
+                startActivity(intent);
+                break;
+        }
         mDrawerLayout.closeDrawer(mDrawerList);
     }
 
