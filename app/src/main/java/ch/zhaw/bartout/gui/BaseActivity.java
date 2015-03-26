@@ -13,6 +13,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.Arrays;
+import java.util.Map;
+
 import ch.zhaw.bartout.R;
 
 /**
@@ -26,6 +29,7 @@ public abstract class BaseActivity extends Activity implements ListView.OnItemCl
     private ListView mDrawerList;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
+    private String[] mMenuItems;
 
     public BaseActivity(int layoutId){
         this(layoutId, true);
@@ -42,25 +46,32 @@ public abstract class BaseActivity extends Activity implements ListView.OnItemCl
         setContentView(mLayoutId);
         getActionBar().setDisplayHomeAsUpEnabled(mHomeAsUp);
         getActionBar().setHomeButtonEnabled(true);
+        setTitle(getString(getNameRes()));
 
-        String[] drawerTitles = getResources().getStringArray(R.array.planets_array);
+        mMenuItems = new String[getResources().getInteger(R.integer.drawer_item_count)];
+        for(int i=0; i<mMenuItems.length; i++){
+            mMenuItems[i] = getString(getMenuResId(i));
+        }
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close){
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
                 invalidateOptionsMenu();
+                getActionBar().setTitle(getString(getNameRes()));
             }
 
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 invalidateOptionsMenu();
+                getActionBar().setTitle(R.string.app_name);
             }
         };
         mDrawerToggle.syncState();
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        mDrawerList.setAdapter(new ArrayAdapter<>(this, R.layout.drawer_list_item, drawerTitles));
+        mDrawerList.setAdapter(new ArrayAdapter<>(this, R.layout.drawer_list_item, android.R.id.text1, mMenuItems));
         mDrawerList.setOnItemClickListener(this);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerList.setItemChecked(Arrays.asList(mMenuItems).indexOf(getString(getNameRes())), true);
     }
 
     @Override
@@ -72,17 +83,39 @@ public abstract class BaseActivity extends Activity implements ListView.OnItemCl
 
     @Override
     public void onItemClick(AdapterView parent, View view, int position, long id) {
-        switch(position){
-            // Home
-            case 0:
+        int menuItem = getMenuResId(position);
+        Intent intent = null;
+        switch(menuItem){
+            case R.string.title_home:
+                intent = new Intent(this, HomeActivity.class);
                 break;
-            // Search
-            case 1:
-                Intent intent = new Intent(this, SearchActivity.class);
-                startActivity(intent);
+            case R.string.title_search:
+                intent = new Intent(this, SearchActivity.class);
                 break;
+            default:
+                throw new IllegalStateException("Handle all Menues from Drawer!");
         }
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
         mDrawerLayout.closeDrawer(mDrawerList);
+    }
+
+    private int getMenuResId(int position){
+        switch (position){
+            case 0:
+                return R.string.title_home;
+            case 1:
+                return R.string.title_search;
+            case 2:
+                return R.string.title_edit;
+            case 3:
+                return R.string.title_drink;
+            case 4:
+                return R.string.title_ranking;
+            case 5:
+                return R.string.title_drive;
+        }
+        throw new IllegalArgumentException("position");
     }
 
     @Override
@@ -120,4 +153,5 @@ public abstract class BaseActivity extends Activity implements ListView.OnItemCl
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
+    abstract int getNameRes();
 }

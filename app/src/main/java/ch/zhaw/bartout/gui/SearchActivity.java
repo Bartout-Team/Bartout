@@ -15,4 +15,9 @@ public class SearchActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
+    @Override
+    int getNameRes() {
+        return R.string.title_search;
+    }
 }

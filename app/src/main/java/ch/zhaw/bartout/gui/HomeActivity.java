@@ -18,4 +18,10 @@ public class HomeActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
+    @Override
+    protected int getNameRes() {
+        return R.string.title_home;
+    }
+
 }
