@@ -25,7 +25,7 @@ import ch.zhaw.bartout.gui.dummy.DummyContent;
  * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
  * interface.
  */
-public class BartourFragment extends Fragment implements AbsListView.OnItemClickListener {
+public class HomeFragment extends Fragment implements AbsListView.OnItemClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,11 +49,11 @@ public class BartourFragment extends Fragment implements AbsListView.OnItemClick
      */
     private ListAdapter mAdapter;
 
-    private static BartourFragment _instance;
+    private static HomeFragment _instance;
 
-    public static BartourFragment getInstance() {
+    public static HomeFragment getInstance() {
         if(_instance == null){
-            _instance = new BartourFragment();
+            _instance = new HomeFragment();
         }
         return _instance;
     }
@@ -62,7 +62,7 @@ public class BartourFragment extends Fragment implements AbsListView.OnItemClick
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public BartourFragment() {
+    public HomeFragment() {
     }
 
     @Override
@@ -75,7 +75,7 @@ public class BartourFragment extends Fragment implements AbsListView.OnItemClick
         }
 
         // TODO: Change Adapter to display your content
-        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
+        mAdapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
     }
 

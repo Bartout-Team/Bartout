@@ -4,20 +4,25 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import ch.zhaw.bartout.R;
 
 public class MainActivity extends Activity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, BartourFragment.OnFragmentInteractionListener {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, HomeFragment.OnFragmentInteractionListener {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
+    private ArrayList<Fragment> mFragments = new ArrayList<>();
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -36,7 +41,11 @@ public class MainActivity extends Activity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        onNavigationDrawerItemSelected(R.string.title_home);
     }
+
+    private HashMap<Integer, Fragment.SavedState> states = new HashMap<>();
 
     @Override
     public void onNavigationDrawerItemSelected(int menuResId) {
@@ -44,16 +53,38 @@ public class MainActivity extends Activity
         Fragment fragment = null;
         switch (menuResId) {
             case R.string.title_home:
-                fragment = BartourFragment.getInstance();
+                fragment = new HomeFragment(); //HomeFragment.getInstance();
                 break;
             case R.string.title_search:
-                fragment = SearchFragment.getInstance();
+                fragment = new SearchFragment(); // SearchFragment.getInstance();
                 break;
         }
+
         if(fragment != null) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container_fragment, fragment)
+            if(states.containsKey(menuResId)){
+                fragment.setInitialSavedState(states.get(menuResId));
+            }
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.container_fragment, fragment)
+                    .addToBackStack(getString(menuResId))
                     .commit();
+
+            //states.put(menuResId, fragmentManager.saveFragmentInstanceState(fragment));
+
+            /* for(Fragment fr : mFragments){
+                transaction.hide(fr);
+            }
+            if(!fragment.isAdded()){
+                transaction.add(R.id.container_fragment, fragment, getString(menuResId))
+                        .addToBackStack(getString(menuResId))
+                        .commit();
+                mFragments.add(fragment);
+            }else {
+                transaction.show(fragment)
+                        .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+                        .addToBackStack(getString(menuResId))
+                        .commit();
+            } */
         }
     }
 
