@@ -1,5 +1,6 @@
 package ch.zhaw.bartout.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -9,6 +10,10 @@ public class Bartour {
 
     private String name;
     private Date start;
+    private Date end;
+    private ArrayList<User> users;
+    private Ranking ranking;
+    private Chronicle chronicle;
 
     public Bartour(){
         start = new Date();
@@ -31,6 +36,13 @@ public class Bartour {
         return end;
     }
 
-    private Date end;
+
+    public void setEnd(Date end) {
+        this.end = end;
+    }
+
+    public ArrayList<User> getUsers() {
+        return users;
+    }
 
 }
