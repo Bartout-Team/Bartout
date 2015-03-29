@@ -6,7 +6,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.ArrayList;
+
 import ch.zhaw.bartout.R;
+import ch.zhaw.bartout.domain.Bartour;
+import ch.zhaw.bartout.domain.Bartout;
 
 
 public class HomeActivity extends BaseActivity {
@@ -22,6 +26,7 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ArrayList<Bartour> l = Bartout.getInstance().getBartours();
 
     }
 

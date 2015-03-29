@@ -8,10 +8,10 @@ import java.util.ArrayList;
 public class Bartout {
 
     // Singleton
-    private static Bartour _instance;
-    public static Bartour getInstance(){
+    private static Bartout _instance;
+    public static Bartout getInstance(){
         if(_instance == null){
-            _instance = new Bartour();
+            _instance = new Bartout();
         }
         return _instance;
     }
@@ -24,6 +24,10 @@ public class Bartout {
         bartours.add(new Bartour().setName("First Tour"));
         bartours.add(new Bartour().setName("Second Tour"));
         bartours.add(new Bartour().setName("Third Tour"));
+    }
+
+    public ArrayList<Bartour> getBartours(){
+        return bartours;
     }
 
 }
