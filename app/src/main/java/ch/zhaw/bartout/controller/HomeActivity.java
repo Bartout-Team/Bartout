@@ -1,16 +1,12 @@
-package ch.zhaw.bartout.gui;
+package ch.zhaw.bartout.controller;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 
 import java.util.ArrayList;
 
 import ch.zhaw.bartout.R;
-import ch.zhaw.bartout.domain.Bartour;
-import ch.zhaw.bartout.domain.Bartout;
+import ch.zhaw.bartout.model.Bartour;
+import ch.zhaw.bartout.model.Bartout;
 
 
 public class HomeActivity extends BaseActivity {
@@ -26,8 +22,7 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ArrayList<Bartour> l = Bartout.getInstance().getBartours();
-
+        super.onCreate(savedInstanceState);
     }
 
 }

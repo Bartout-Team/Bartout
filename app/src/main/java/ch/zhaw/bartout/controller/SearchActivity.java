@@ -1,12 +1,10 @@
-package ch.zhaw.bartout.gui;
+package ch.zhaw.bartout.controller;
 
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;

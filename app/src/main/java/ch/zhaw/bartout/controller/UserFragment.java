@@ -1,4 +1,4 @@
-package ch.zhaw.bartout.gui;
+package ch.zhaw.bartout.controller;
 
 import android.app.Activity;
 import android.net.Uri;
