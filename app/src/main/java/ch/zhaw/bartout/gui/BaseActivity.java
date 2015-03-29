@@ -14,7 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.Arrays;
-import java.util.Map;
 
 import ch.zhaw.bartout.R;
 
@@ -45,7 +44,7 @@ public abstract class BaseActivity extends Activity implements ListView.OnItemCl
         super.onCreate(savedInstanceState);
         setContentView(mLayoutId);
         getActionBar().setDisplayHomeAsUpEnabled(mHomeAsUp);
-        getActionBar().setHomeButtonEnabled(true);
+        //getActionBar().setHomeButtonEnabled(true);
         setTitle(getString(getNameRes()));
 
         mMenuItems = new String[getResources().getInteger(R.integer.drawer_item_count)];
@@ -84,7 +83,7 @@ public abstract class BaseActivity extends Activity implements ListView.OnItemCl
     @Override
     public void onItemClick(AdapterView parent, View view, int position, long id) {
         int menuItem = getMenuResId(position);
-        Intent intent = null;
+        Intent intent;
         switch(menuItem){
             case R.string.title_home:
                 intent = new Intent(this, HomeActivity.class);
@@ -92,10 +91,22 @@ public abstract class BaseActivity extends Activity implements ListView.OnItemCl
             case R.string.title_search:
                 intent = new Intent(this, SearchActivity.class);
                 break;
+            case  R.string.title_bartour:
+                intent = new Intent(this, BartourActivity.class);
+                break;
+            case R.string.title_drink:
+                intent = new Intent(this, DrinkActivity.class);
+                break;
+            case R.string.title_ranking:
+                intent = new Intent(this, RankingActivity.class);
+                break;
+            case R.string.title_drive_fitness:
+                intent = new Intent(this, DriveFitnessActivity.class);
+                break;
             default:
                 throw new IllegalStateException("Handle all Menues from Drawer!");
         }
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
         mDrawerLayout.closeDrawer(mDrawerList);
     }
@@ -107,13 +118,13 @@ public abstract class BaseActivity extends Activity implements ListView.OnItemCl
             case 1:
                 return R.string.title_search;
             case 2:
-                return R.string.title_edit;
+                return R.string.title_bartour;
             case 3:
                 return R.string.title_drink;
             case 4:
                 return R.string.title_ranking;
             case 5:
-                return R.string.title_drive;
+                return R.string.title_drive_fitness;
         }
         throw new IllegalArgumentException("position");
     }

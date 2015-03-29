@@ -11,37 +11,45 @@
 
     <uses-feature
         android:glEsVersion="0x00020000"
-        android:required="true"/>
+        android:required="true" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-
-        <activity
-            android:name=".gui.HomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".gui.SearchActivity"
-            android:label="@string/title_search"
-            android:parentActivityName=".gui.HomeActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="ch.zhaw.bartout.gui.HomeActivity" />
-        </activity>
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_api_key"/>
+            android:value="@string/google_maps_api_key" />
+
+        <!-- Activities -->
+        <activity android:name=".gui.HomeActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".gui.SearchActivity"
+            android:label="@string/title_search" />
+        <activity
+            android:name=".gui.BartourActivity"
+            android:label="@string/title_bartour" />
+        <activity
+            android:name=".gui.DrinkActivity"
+            android:label="@string/title_drink" />
+        <activity
+            android:name=".gui.DriveFitnessActivity"
+            android:label="@string/title_drive_fitness" />
+        <activity
+            android:name=".gui.ChronicleActivity"
+            android:label="@string/title_chronicle" />
+        <activity
+            android:name=".gui.RankingActivity"
+            android:label="@string/title_ranking" />
     </application>
 
 </manifest>

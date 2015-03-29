@@ -7,16 +7,14 @@ import android.view.MenuItem;
 
 import ch.zhaw.bartout.R;
 
+public class ChronicleActivity extends BaseActivity {
 
-public class HomeActivity extends BaseActivity {
-
-    public HomeActivity() {
-        super(R.layout.activity_home);
+    public ChronicleActivity(){
+        super(R.layout.activity_chronicle);
     }
 
     @Override
-    protected int getNameRes() {
-        return R.string.title_home;
+    int getNameRes() {
+        return R.string.title_chronicle;
     }
-
 }

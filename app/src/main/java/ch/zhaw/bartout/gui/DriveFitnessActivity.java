@@ -7,16 +7,14 @@ import android.view.MenuItem;
 
 import ch.zhaw.bartout.R;
 
+public class DriveFitnessActivity extends BaseActivity {
 
-public class HomeActivity extends BaseActivity {
-
-    public HomeActivity() {
-        super(R.layout.activity_home);
+    public DriveFitnessActivity(){
+        super(R.layout.activity_drive_fitness);
     }
 
     @Override
-    protected int getNameRes() {
-        return R.string.title_home;
+    int getNameRes() {
+        return R.string.title_drive_fitness;
     }
-
 }

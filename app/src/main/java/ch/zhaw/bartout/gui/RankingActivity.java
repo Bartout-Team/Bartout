@@ -7,16 +7,14 @@ import android.view.MenuItem;
 
 import ch.zhaw.bartout.R;
 
+public class RankingActivity extends BaseActivity {
 
-public class HomeActivity extends BaseActivity {
-
-    public HomeActivity() {
-        super(R.layout.activity_home);
+    public RankingActivity(){
+        super(R.layout.activity_ranking);
     }
 
     @Override
-    protected int getNameRes() {
-        return R.string.title_home;
+    int getNameRes() {
+        return R.string.title_ranking;
     }
-
 }
