@@ -1,6 +1,8 @@
 package ch.zhaw.bartout.controller;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -31,7 +33,7 @@ public class HomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         listView = (ListView) findViewById(R.id.list_view);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.newBartourButton);
         fab.attachToListView(listView);
 
         BartoursAdapter adapter = new BartoursAdapter(
@@ -41,4 +43,7 @@ public class HomeActivity extends BaseActivity {
         listView.setAdapter(adapter);
     }
 
+    public void newBartourButtonOnClick(View view){
+        startActivity(new Intent(this, BartourActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
+    }
 }

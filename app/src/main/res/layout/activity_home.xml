@@ -16,7 +16,7 @@
             android:layout_height="match_parent" />
 
         <com.melnykov.fab.FloatingActionButton
-            android:id="@+id/fab"
+            android:id="@+id/newBartourButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
@@ -24,7 +24,8 @@
             android:src="@drawable/ic_dark_action_new"
             fab:fab_colorNormal="#4CAF50"
             fab:fab_colorPressed="#2E7D32"
-            fab:fab_colorRipple="#2E7D32" />
+            fab:fab_colorRipple="#43A047"
+            android:onClick="newBartourButtonOnClick" />
 
     </FrameLayout>
 

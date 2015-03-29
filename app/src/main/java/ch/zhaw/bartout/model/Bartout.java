@@ -28,6 +28,14 @@ public class Bartout {
         bartours.add(new Bartour().setName("First Tour").setEnd(end));
         bartours.add(new Bartour().setName("Second Tour").setEnd(end));
         bartours.add(new Bartour().setName("Third Tour").setEnd(end));
+        bartours.add(new Bartour().setName("Tour #1").setEnd(end));
+        bartours.add(new Bartour().setName("Tour #2").setEnd(end));
+        bartours.add(new Bartour().setName("Tour #3").setEnd(end));
+        bartours.add(new Bartour().setName("Tour #4").setEnd(end));
+        bartours.add(new Bartour().setName("Tour #5").setEnd(end));
+        bartours.add(new Bartour().setName("Tour #6").setEnd(end));
+        bartours.add(new Bartour().setName("Tour #7").setEnd(end));
+        bartours.add(new Bartour().setName("Tour #8").setEnd(end));
     }
 
     public ArrayList<Bartour> getBartours(){
