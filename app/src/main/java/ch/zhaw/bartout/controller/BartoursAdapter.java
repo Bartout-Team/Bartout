@@ -30,7 +30,7 @@ public class BartoursAdapter extends ArrayAdapter<Bartour> {
     public View getView(int position, View convertView, ViewGroup parent){
         Bartour bartour = getItem(position);
         if(convertView == null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.home_list_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.home_bartour_item, parent, false);
         }
         TextView textName = (TextView) convertView.findViewById(R.id.text_name);
         TextView textDate = (TextView) convertView.findViewById(R.id.text_date);
