@@ -1,7 +1,9 @@
 package ch.zhaw.bartout.model;
 
+
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
+
 
 /**
  * Created by srueg on 29.03.15.
@@ -9,14 +11,14 @@ import java.util.Date;
 public class Bartour {
 
     private String name;
-    private Date start;
-    private Date end;
     private ArrayList<User> users;
     private Ranking ranking;
     private Chronicle chronicle;
+    private Calendar start;
+    private Calendar end;
 
     public Bartour(){
-        start = new Date();
+        start = Calendar.getInstance();
     }
 
     public Bartour setName(String name) {
@@ -28,21 +30,29 @@ public class Bartour {
         return name;
     }
 
-    public Date getStart() {
+    public Calendar getStart() {
         return start;
     }
 
-    public Date getEnd() {
+    public Calendar getEnd() {
         return end;
     }
 
-
-    public void setEnd(Date end) {
+    public Bartour setEnd(Calendar end){
         this.end = end;
+        return this;
     }
 
     public ArrayList<User> getUsers() {
         return users;
+    }
+
+    public long getDuration(){
+        if(end != null) {
+            return (end.getTimeInMillis() / 1000) - (start.getTimeInMillis() / 1000);
+        }else{
+            return -1;
+        }
     }
 
 }

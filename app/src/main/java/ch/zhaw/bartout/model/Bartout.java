@@ -1,6 +1,8 @@
 package ch.zhaw.bartout.model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+
 
 /**
  * Created by srueg on 29.03.15.
@@ -21,9 +23,11 @@ public class Bartout {
 
     protected Bartout(){
         bartours = new ArrayList<>();
-        bartours.add(new Bartour().setName("First Tour"));
-        bartours.add(new Bartour().setName("Second Tour"));
-        bartours.add(new Bartour().setName("Third Tour"));
+        Calendar end = Calendar.getInstance();
+        end.add(Calendar.HOUR, 2);
+        bartours.add(new Bartour().setName("First Tour").setEnd(end));
+        bartours.add(new Bartour().setName("Second Tour").setEnd(end));
+        bartours.add(new Bartour().setName("Third Tour").setEnd(end));
     }
 
     public ArrayList<Bartour> getBartours(){
