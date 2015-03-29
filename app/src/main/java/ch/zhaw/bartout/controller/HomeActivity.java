@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.melnykov.fab.FloatingActionButton;
+
 import java.util.ArrayList;
 
 import ch.zhaw.bartout.R;
@@ -29,6 +31,8 @@ public class HomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         listView = (ListView) findViewById(R.id.list_view);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.attachToListView(listView);
 
         BartoursAdapter adapter = new BartoursAdapter(
                 this,
