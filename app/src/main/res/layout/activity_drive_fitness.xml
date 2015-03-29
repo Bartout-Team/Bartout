@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
-    tools:context="ch.zhaw.bartout.gui.DriveFitnessActivity">
+    tools:context="ch.zhaw.bartout.controller.DriveFitnessActivity">
 
     <TextView android:text="@string/title_drive_fitness" android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

@@ -1,4 +1,4 @@
-package ch.zhaw.bartout.domain;
+package ch.zhaw.bartout.model;
 
 import java.util.Date;
 

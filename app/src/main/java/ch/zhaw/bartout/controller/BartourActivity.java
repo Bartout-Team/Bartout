@@ -1,4 +1,4 @@
-package ch.zhaw.bartout.gui;
+package ch.zhaw.bartout.controller;
 
 import ch.zhaw.bartout.R;
 

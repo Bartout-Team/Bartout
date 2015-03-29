@@ -26,29 +26,29 @@
             android:value="@string/google_maps_api_key" />
 
         <!-- Activities -->
-        <activity android:name=".gui.HomeActivity" >
+        <activity android:name=".controller.HomeActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".gui.SearchActivity"
+            android:name=".controller.SearchActivity"
             android:label="@string/title_search" />
         <activity
-            android:name=".gui.BartourActivity"
+            android:name=".controller.BartourActivity"
             android:label="@string/title_bartour" />
         <activity
-            android:name=".gui.DrinkActivity"
+            android:name=".controller.DrinkActivity"
             android:label="@string/title_drink" />
         <activity
-            android:name=".gui.DriveFitnessActivity"
+            android:name=".controller.DriveFitnessActivity"
             android:label="@string/title_drive_fitness" />
         <activity
-            android:name=".gui.ChronicleActivity"
+            android:name=".controller.ChronicleActivity"
             android:label="@string/title_chronicle" />
         <activity
-            android:name=".gui.RankingActivity"
+            android:name=".controller.RankingActivity"
             android:label="@string/title_ranking" />
     </application>
 
