@@ -10,7 +10,7 @@ public class DrinkActivity extends BaseActivity {
     }
 
     @Override
-    int getNameRes() {
+    protected int getNameRes() {
         return R.string.title_drink;
     }
 }

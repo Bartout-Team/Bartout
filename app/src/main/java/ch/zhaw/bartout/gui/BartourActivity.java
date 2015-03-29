@@ -10,7 +10,7 @@ public class BartourActivity extends BaseActivity {
     }
 
     @Override
-    int getNameRes() {
+    protected int getNameRes() {
         return R.string.title_bartour;
     }
 }

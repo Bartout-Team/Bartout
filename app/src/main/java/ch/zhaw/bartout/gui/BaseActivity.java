@@ -174,5 +174,5 @@ public abstract class BaseActivity extends Activity implements ListView.OnItemCl
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-    abstract int getNameRes();
+    abstract protected int getNameRes();
 }
