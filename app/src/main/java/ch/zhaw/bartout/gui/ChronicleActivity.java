@@ -14,7 +14,7 @@ public class ChronicleActivity extends BaseActivity {
     }
 
     @Override
-    int getNameRes() {
+    protected int getNameRes() {
         return R.string.title_chronicle;
     }
 }

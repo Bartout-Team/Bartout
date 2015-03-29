@@ -41,12 +41,12 @@ public class SearchActivity extends BaseActivity implements OnMapReadyCallback {
     }
 
     @Override
-    public void onDestroy(){
+    protected void onDestroy(){
         super.onDestroy();
     }
 
     @Override
-    int getNameRes() {
+    protected int getNameRes() {
         return R.string.title_search;
     }
 
