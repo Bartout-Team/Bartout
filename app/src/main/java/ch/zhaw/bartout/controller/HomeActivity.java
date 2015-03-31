@@ -22,6 +22,7 @@ public class HomeActivity extends BaseActivity {
 
     private ListView listView;
     private Bartout bartout;
+    private Toast toast;
 
     public HomeActivity() {
         super(R.layout.activity_home);
@@ -42,7 +43,12 @@ public class HomeActivity extends BaseActivity {
         if(bartout.getActiveBartour() == null){
             startActivity(new Intent(this, BartourActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
         }else{
-            Toast.makeText(getApplicationContext(), getString(R.string.toast_bartout_acive), Toast.LENGTH_LONG).show();
+            if(toast == null){
+                Toast.makeText(getApplicationContext(), getString(R.string.toast_bartout_acive), Toast.LENGTH_LONG);
+            }
+            if(toast.getView().getWindowVisibility() != View.VISIBLE){
+                toast.show();
+            }
         }
     }
 
