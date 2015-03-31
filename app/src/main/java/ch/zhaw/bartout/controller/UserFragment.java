@@ -41,6 +41,7 @@ public class UserFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        getDialog().setTitle(getString(R.string.title_user));
         return inflater.inflate(R.layout.fragment_user, container, false);
     }
 
