@@ -1,10 +1,12 @@
 package ch.zhaw.bartout.controller;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
 
@@ -15,9 +17,12 @@ import ch.zhaw.bartout.model.Bartour;
 import ch.zhaw.bartout.model.Bartout;
 
 
+
 public class HomeActivity extends BaseActivity {
 
     private ListView listView;
+    private Bartout bartout;
+    private Toast toast;
 
     public HomeActivity() {
         super(R.layout.activity_home);
@@ -31,19 +36,37 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        listView = (ListView) findViewById(R.id.list_view);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.newBartourButton);
-        fab.attachToListView(listView);
-
-        BartoursAdapter adapter = new BartoursAdapter(
-                this,
-                Bartout.getInstance().getBartours()
-        );
-        listView.setAdapter(adapter);
+        bartout = Bartout.getInstance();
     }
 
     public void newBartourButtonOnClick(View view){
-        startActivity(new Intent(this, BartourActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
+        if(bartout.getActiveBartour() == null){
+            startActivity(new Intent(this, BartourActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
+        }else{
+            if(toast == null){
+                toast = Toast.makeText(getApplicationContext(), getString(R.string.toast_bartout_acive), Toast.LENGTH_LONG);
+            }
+            if(toast.getView().getWindowVisibility() != View.VISIBLE){
+                toast.show();
+            }
+        }
+    }
+
+    public void onResume() {
+        super.onResume();
+
+        listView = (ListView) findViewById(R.id.list_view);
+        BartoursAdapter adapter = new BartoursAdapter(
+                this,
+                bartout.getBartours()
+        );
+        listView.setAdapter(adapter);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.newBartourButton);
+        fab.attachToListView(listView);
+
+        if(bartout.getActiveBartour() != null){
+            fab.setColorNormal(Color.GRAY);
+        }
     }
 }

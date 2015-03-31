@@ -29,7 +29,7 @@ public class UserFragment extends DialogFragment {
 
     private OnFragmentInteractionListener mListener;
 
-    //Oberfl√§chenelemente
+    //Oberfl‰chenelemente
     private EditText usernameEdit;
     private RadioGroup geschlechtRadioGroup;
     private Button okButton;
@@ -52,6 +52,7 @@ public class UserFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        getDialog().setTitle(getString(R.string.title_user));
         View view = inflater.inflate(R.layout.fragment_user, container, false);
         usernameEdit = (EditText) view.findViewById(R.id.usernameEdit);
         geschlechtRadioGroup = (RadioGroup)view.findViewById(R.id.geschlechtRadioGroup);
