@@ -8,6 +8,11 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import ch.zhaw.bartout.R;
 
@@ -23,6 +28,12 @@ import ch.zhaw.bartout.R;
 public class UserFragment extends DialogFragment {
 
     private OnFragmentInteractionListener mListener;
+
+    //Oberflächenelemente
+    private EditText usernameEdit;
+    private RadioGroup geschlechtRadioGroup;
+    private Button okButton;
+    private Button abbrechenButton;
 
     public static UserFragment newInstance() {
         UserFragment fragment = new UserFragment();
@@ -41,7 +52,19 @@ public class UserFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_user, container, false);
+        View view = inflater.inflate(R.layout.fragment_user, container, false);
+        usernameEdit = (EditText) view.findViewById(R.id.usernameEdit);
+        geschlechtRadioGroup = (RadioGroup)view.findViewById(R.id.geschlechtRadioGroup);
+        okButton = (Button)view.findViewById(R.id.okButton);
+        abbrechenButton = (Button)view.findViewById(R.id.abbrechenButton);
+        geschlechtRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // checkedId is the RadioButton selected
+            }
+        });
+        return view;
     }
 
     @Override
@@ -76,4 +99,11 @@ public class UserFragment extends DialogFragment {
         public void onFragmentInteraction(Uri uri);
     }
 
+    public void userOkButtonOnClick(View view){
+
+    }
+
+    public void userCancelButtonOnClick(View view){
+
+    }
 }
