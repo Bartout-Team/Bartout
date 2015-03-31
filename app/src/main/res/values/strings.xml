@@ -19,6 +19,12 @@
 
     <string name="toast_bartout_acive">Es ist bereits eine Bartour aktiv. beenden Sie diese zuerst.</string>
 
+    <!-- activity_bartour Items -->
+    <string name="tour_name">Tour Name</string>
+    <string name="users">Mitglieder</string>
+    <string name="user_name">Name</string>
+    <string name="bartour_create">Bartour erstellen</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
