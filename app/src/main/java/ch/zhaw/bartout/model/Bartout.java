@@ -11,6 +11,11 @@ public class Bartout {
 
     // Singleton
     private static Bartout _instance;
+
+    /**
+     * Gets the singleton instance of Bartout
+     * @return singleton instance
+     */
     public static Bartout getInstance(){
         if(_instance == null){
             _instance = new Bartout();

@@ -47,6 +47,10 @@ public class Bartour {
         return users;
     }
 
+    /**
+     * Returns duration of Bartour or -1 if Bartour is not finish yet.
+     * @return Duration in seconds, -1 if Bartour is not finish yet.
+     */
     public long getDuration(){
         if(end != null) {
             return (end.getTimeInMillis() / 1000) - (start.getTimeInMillis() / 1000);
