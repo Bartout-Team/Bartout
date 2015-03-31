@@ -25,6 +25,7 @@ public class Bartout {
     // end Singleton
 
     private ArrayList<Bartour> bartours;
+    private Bartour activeBartour;
 
     protected Bartout(){
         bartours = new ArrayList<>();
@@ -41,10 +42,16 @@ public class Bartout {
         bartours.add(new Bartour().setName("Tour #6").setEnd(end));
         bartours.add(new Bartour().setName("Tour #7").setEnd(end));
         bartours.add(new Bartour().setName("Tour #8").setEnd(end));
+
+        activeBartour = bartours.get(0);
     }
 
     public ArrayList<Bartour> getBartours(){
         return bartours;
+    }
+
+    public Bartour getActiveBartour(){
+        return activeBartour;
     }
 
 }
