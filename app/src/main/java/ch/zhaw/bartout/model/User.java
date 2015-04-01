@@ -1,9 +1,11 @@
 package ch.zhaw.bartout.model;
 
+import java.io.Serializable;
+
 /**
  * Created by bwa on 29.03.2015.
  */
-public class User {
+public class User implements Serializable {
     private String name;
     private boolean man;
     private int weight;
