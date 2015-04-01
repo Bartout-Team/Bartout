@@ -15,6 +15,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import ch.zhaw.bartout.R;
+import ch.zhaw.bartout.model.Bartour;
+import ch.zhaw.bartout.model.User;
 
 
 /**
@@ -27,16 +29,22 @@ import ch.zhaw.bartout.R;
  */
 public class UserFragment extends DialogFragment {
 
-    private OnFragmentInteractionListener mListener;
+    private static final String ARG_USER = "user";
 
-    //Oberfl�chenelemente
+    private OnFragmentInteractionListener mListener;
+    private User user;
+
+    //Oberflächenelemente
     private EditText usernameEdit;
     private RadioGroup geschlechtRadioGroup;
     private Button okButton;
     private Button abbrechenButton;
 
-    public static UserFragment newInstance() {
+    public static UserFragment newInstance(User user) {
         UserFragment fragment = new UserFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_USER, user);
+        fragment.setArguments(args);
         return fragment;
     }
 
@@ -52,6 +60,7 @@ public class UserFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        user = (User) getArguments().getSerializable(ARG_USER);
         getDialog().setTitle(getString(R.string.title_user));
         View view = inflater.inflate(R.layout.fragment_user, container, false);
         usernameEdit = (EditText) view.findViewById(R.id.usernameEdit);

@@ -28,7 +28,7 @@ public class BartourActivity extends BaseActivity implements UserFragment.OnFrag
             ft.remove(prev);
         }
         ft.addToBackStack(null);
-        UserFragment newFragment = UserFragment.newInstance();
+        UserFragment newFragment = UserFragment.newInstance(null);
         newFragment.show(ft, "fragment_user");
     }
 
