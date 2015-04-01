@@ -43,7 +43,8 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/bartour_create"/>
+            android:text="@string/bartour_save"
+            android:onClick="saveBartour"/>
 
     </LinearLayout>
 

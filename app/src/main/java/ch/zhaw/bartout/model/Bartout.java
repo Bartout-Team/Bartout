@@ -54,4 +54,8 @@ public class Bartout {
         return activeBartour;
     }
 
+    public void addBartour(Bartour bartour) {
+        bartours.add(bartour);
+    }
+
 }

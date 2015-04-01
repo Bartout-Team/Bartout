@@ -33,4 +33,9 @@ public class BartourActivity extends BaseActivity implements UserFragment.OnFrag
     public void onFragmentInteraction(Uri uri) {
 
     }
+
+    public void saveBartour(View view) {
+
+    }
+
 }
