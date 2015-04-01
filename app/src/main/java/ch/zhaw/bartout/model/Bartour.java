@@ -18,6 +18,9 @@ public class Bartour {
     private Calendar end;
 
     public Bartour(){
+        users = new ArrayList<>();
+        users.add(new User().setName("First User"));
+        users.add(new User().setName("Second User"));
         start = Calendar.getInstance();
     }
 
@@ -45,6 +48,10 @@ public class Bartour {
 
     public ArrayList<User> getUsers() {
         return users;
+    }
+
+    public void addUser(User user) {
+        users.add(user);
     }
 
     /**

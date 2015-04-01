@@ -58,6 +58,13 @@
             android:layout_toEndOf="@+id/user_name"
             android:id="@+id/button" />
 
+        <ListView
+            android:id="@+id/list_users"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/button"
+            android:layout_below="@+id/imageButton" />
+
     </RelativeLayout>
 
     <include layout="@layout/navigation_drawer" />
