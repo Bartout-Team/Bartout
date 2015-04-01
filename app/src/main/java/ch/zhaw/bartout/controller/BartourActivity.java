@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.view.View;
 
 import ch.zhaw.bartout.R;
+import ch.zhaw.bartout.model.User;
 
 public class BartourActivity extends BaseActivity implements UserFragment.OnFragmentInteractionListener {
 
@@ -30,7 +31,7 @@ public class BartourActivity extends BaseActivity implements UserFragment.OnFrag
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void onClose(User user) {
 
     }
 }
