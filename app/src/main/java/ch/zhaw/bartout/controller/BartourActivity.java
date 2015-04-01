@@ -4,10 +4,13 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.view.View;
+import android.widget.EditText;
 
 import ch.zhaw.bartout.R;
+import ch.zhaw.bartout.model.Bartour;
 
 public class BartourActivity extends BaseActivity implements UserFragment.OnFragmentInteractionListener {
+    private Bartour bartour;
 
     public BartourActivity() {
         super(R.layout.activity_bartour);
@@ -34,7 +37,9 @@ public class BartourActivity extends BaseActivity implements UserFragment.OnFrag
 
     }
 
-    public void saveBartour(View view) {
+    public void saveBartourButtonOnClick(View view) {
+        EditText editText = (EditText) findViewById(R.id.tour_name);
+        bartour.setName(editText.getText().toString());
 
     }
 
