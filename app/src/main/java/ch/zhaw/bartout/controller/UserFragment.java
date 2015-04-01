@@ -99,10 +99,10 @@ public class UserFragment extends DialogFragment {
     }
 
     public void userOkButtonOnClick(View view){
-
+        mListener.onClose(user);
     }
 
     public void userCancelButtonOnClick(View view){
-
+        mListener.onClose(null);
     }
 }
