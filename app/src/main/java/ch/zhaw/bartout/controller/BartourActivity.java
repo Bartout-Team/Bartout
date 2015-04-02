@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import ch.zhaw.bartout.R;
 import ch.zhaw.bartout.model.Bartout;
@@ -86,6 +89,14 @@ public class BartourActivity extends BaseActivity implements UserFragment.OnFrag
     }
 
     public void saveBartourButtonOnClick(View view) {
+        if(editTextName.getText().toString().trim().isEmpty()){
+            editTextName.setError(getString(R.string.error_empty));
+            return;
+        }
+        if(bartour.getUsers().isEmpty()){
+            ((TextView)findViewById(R.id.textView)).setError(getString(R.string.error_no_users));
+            return;
+        }
         bartour.setName(editTextName.getText().toString());
         if(isNew){
             Bartout.getInstance().addBartour(bartour);

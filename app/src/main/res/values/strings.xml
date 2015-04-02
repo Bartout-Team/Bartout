@@ -26,5 +26,7 @@
     <string name="bartour_save">Bartour speichern</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="error_empty">Das Feld darf nicht leer sein.</string>
+    <string name="error_no_users">Es muss mindestens ein Benutzer geben.</string>
 
 </resources>
