@@ -15,6 +15,8 @@ public class BartourActivity extends BaseActivity implements UserFragment.OnFrag
     private Bartour bartour;
     private ListView listView;
 
+    private static final String USER_FRAGMENT_LABEL = "fragment_user";
+
     public BartourActivity() {
         super(R.layout.activity_bartour);
         bartour = new Bartour();
@@ -26,21 +28,27 @@ public class BartourActivity extends BaseActivity implements UserFragment.OnFrag
     }
 
     public void addUserButtonOnClick(View view){
+        showUserFragment(null);
+    }
+
+    private void showUserFragment(User user){
         FragmentTransaction ft = getFragmentManager().beginTransaction();
-        Fragment prev = getFragmentManager().findFragmentByTag("fragment_user");
+        Fragment prev = getFragmentManager().findFragmentByTag(USER_FRAGMENT_LABEL);
         if(prev != null){
             ft.remove(prev);
         }
         ft.addToBackStack(null);
-        UserFragment newFragment = UserFragment.newInstance(null);
-        newFragment.show(ft, "fragment_user");
+        UserFragment newFragment = UserFragment.newInstance(user);
+        newFragment.show(ft, USER_FRAGMENT_LABEL);
     }
 
     @Override
     public void onClose(User user) {
         getFragmentManager().popBackStackImmediate();
         if(user != null) {
-            bartour.addUser(user);
+            if(!bartour.getUsers().contains(user)){
+                bartour.addUser(user);
+            }
         }
     }
 
@@ -58,6 +66,14 @@ public class BartourActivity extends BaseActivity implements UserFragment.OnFrag
         EditText editText = (EditText) findViewById(R.id.tour_name);
         bartour.setName(editText.getText().toString());
 
+    }
+
+    public void deleteUser(User user){
+        bartour.getUsers().remove(user);
+    }
+
+    public void editUser(User user){
+        showUserFragment(user);
     }
 
 }

@@ -9,7 +9,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="25sp"
-        android:text="Bartour #1"
+        android:text="User #1"
+        android:paddingTop="10dp" />
+    <ImageButton
+        android:id="@+id/imageButtonDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_action_delete"
+        android:layout_alignParentRight="true"
         />
+    <ImageButton
+        android:id="@+id/imageButtonEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_action_edit"
+        android:layout_toLeftOf="@+id/imageButtonDelete"/>
 
 </RelativeLayout>

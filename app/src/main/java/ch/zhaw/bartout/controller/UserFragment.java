@@ -2,11 +2,13 @@ package ch.zhaw.bartout.controller;
 
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -29,6 +31,7 @@ public class UserFragment extends DialogFragment implements View.OnClickListener
 
     private OnFragmentInteractionListener listener;
     private User user;
+    private Activity attachedActivity;
 
     // GUI Elements
     private EditText usernameEdit;
@@ -68,7 +71,7 @@ public class UserFragment extends DialogFragment implements View.OnClickListener
             user = new User();
         }else{
             usernameEdit.setText(user.getName());
-            userWeightEdit.setText(user.getWeight());
+            userWeightEdit.setText(Integer.toString(user.getWeight()));
         }
 
         okButton.setOnClickListener(this);
@@ -87,6 +90,7 @@ public class UserFragment extends DialogFragment implements View.OnClickListener
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        attachedActivity = activity;
         try {
             listener = (OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
@@ -113,6 +117,8 @@ public class UserFragment extends DialogFragment implements View.OnClickListener
                 listener.onClose(user);
                 break;
         }
+        InputMethodManager imm = (InputMethodManager) attachedActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(attachedActivity.getCurrentFocus().getWindowToken(), 0);
     }
 
     public interface OnFragmentInteractionListener {
