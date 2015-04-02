@@ -1,18 +1,14 @@
 package ch.zhaw.bartout.controller;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
-
-import java.util.ArrayList;
 
 import ch.zhaw.bartout.R;
 import ch.zhaw.bartout.model.Bartour;
@@ -48,7 +44,7 @@ public class HomeActivity extends BaseActivity {
             startActivity(intent);
         }else{
             if(toast == null){
-                toast = Toast.makeText(getApplicationContext(), getString(R.string.toast_bartout_acive), Toast.LENGTH_LONG);
+                toast = Toast.makeText(getApplicationContext(), getString(R.string.toast_bartout_active), Toast.LENGTH_LONG);
             }
             if(toast.getView().getWindowVisibility() != View.VISIBLE){
                 toast.show();

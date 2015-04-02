@@ -96,6 +96,8 @@ public class BartourActivity extends BaseActivity implements UserFragment.OnFrag
         if(bartour.getUsers().isEmpty()){
             ((TextView)findViewById(R.id.textView)).setError(getString(R.string.error_no_users));
             return;
+        } else {
+            ((TextView)findViewById(R.id.textView)).setError(null);
         }
         bartour.setName(editTextName.getText().toString());
         if(isNew){
