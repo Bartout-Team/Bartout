@@ -5,6 +5,8 @@ import android.app.DialogFragment;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +39,9 @@ public class UserFragment extends DialogFragment {
     //Oberflächenelemente
     private EditText usernameEdit;
     private RadioGroup geschlechtRadioGroup;
+    private RadioButton manRadioButton;
+    private RadioButton womannRadioButton;
+    private EditText weightEditText;
     private Button okButton;
     private Button abbrechenButton;
 
@@ -61,12 +66,33 @@ public class UserFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         user = (User) getArguments().getSerializable(ARG_USER);
+        // if the user is null, its a new User
+        if (user==null){
+            user = new User();
+        }
         getDialog().setTitle(getString(R.string.title_user));
         View view = inflater.inflate(R.layout.fragment_user, container, false);
-        usernameEdit = (EditText) view.findViewById(R.id.usernameEdit);
-        geschlechtRadioGroup = (RadioGroup)view.findViewById(R.id.geschlechtRadioGroup);
-        okButton = (Button)view.findViewById(R.id.userOkButton);
-        abbrechenButton = (Button)view.findViewById(R.id.userOkButton);
+
+        initializeGuiVariables(view);
+        initializeGuiElements();
+        initializeListeners();
+
+        return view;
+    }
+
+    private void initializeListeners() {
+        usernameEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                user.setName(s.toString());
+            }
+        });
         geschlechtRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             @Override
@@ -74,7 +100,26 @@ public class UserFragment extends DialogFragment {
                 // checkedId is the RadioButton selected
             }
         });
-        return view;
+    }
+
+    private void initializeGuiVariables(View view) {
+        usernameEdit = (EditText) view.findViewById(R.id.usernameEdit);
+        geschlechtRadioGroup = (RadioGroup)view.findViewById(R.id.geschlechtRadioGroup);
+        manRadioButton = (RadioButton)view.findViewById(R.id.user_man);
+        womannRadioButton = (RadioButton)view.findViewById(R.id.user_woman);
+        weightEditText = (EditText)view.findViewById(R.id.weightEditText);
+        okButton = (Button)view.findViewById(R.id.userOkButton);
+        abbrechenButton = (Button)view.findViewById(R.id.userOkButton);
+    }
+
+    private void initializeGuiElements() {
+        usernameEdit.setText(user.getName());
+        if (user.isMan()){
+            geschlechtRadioGroup.check(R.id.user_man);
+        }else{
+            geschlechtRadioGroup.check(R.id.user_woman);
+        }
+        weightEditText.setText(Integer.toString(user.getWeight()));
     }
 
     @Override
@@ -105,4 +150,7 @@ public class UserFragment extends DialogFragment {
     public void userCancelButtonOnClick(View view){
         mListener.onClose(null);
     }
+
+
+
 }
