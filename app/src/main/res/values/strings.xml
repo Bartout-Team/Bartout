@@ -17,7 +17,7 @@
 
     <string name="action_settings">Settings</string>
 
-    <string name="toast_bartout_acive">Es ist bereits eine Bartour aktiv. beenden Sie diese zuerst.</string>
+    <string name="toast_bartout_acive">Es ist bereits eine Bartour aktiv. Beenden Sie diese zuerst.</string>
 
     <!-- activity_bartour Items -->
     <string name="tour_name">Tour Name</string>

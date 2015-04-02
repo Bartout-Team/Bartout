@@ -2,7 +2,6 @@ package ch.zhaw.bartout.controller;
 
 import android.app.Activity;
 import android.app.DialogFragment;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,12 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import ch.zhaw.bartout.R;
-import ch.zhaw.bartout.model.Bartour;
 import ch.zhaw.bartout.model.User;
 
 
@@ -27,18 +23,16 @@ import ch.zhaw.bartout.model.User;
  * Use the {@link UserFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UserFragment extends DialogFragment {
+public class UserFragment extends DialogFragment implements View.OnClickListener {
 
     private static final String ARG_USER = "user";
 
-    private OnFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener listener;
     private User user;
 
-    //Oberflächenelemente
+    // GUI Elements
     private EditText usernameEdit;
-    private RadioGroup geschlechtRadioGroup;
-    private Button okButton;
-    private Button abbrechenButton;
+    private EditText userWeightEdit;
 
     public static UserFragment newInstance(User user) {
         UserFragment fragment = new UserFragment();
@@ -61,12 +55,25 @@ public class UserFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         user = (User) getArguments().getSerializable(ARG_USER);
+
         getDialog().setTitle(getString(R.string.title_user));
         View view = inflater.inflate(R.layout.fragment_user, container, false);
         usernameEdit = (EditText) view.findViewById(R.id.usernameEdit);
-        geschlechtRadioGroup = (RadioGroup)view.findViewById(R.id.geschlechtRadioGroup);
-        okButton = (Button)view.findViewById(R.id.userOkButton);
-        abbrechenButton = (Button)view.findViewById(R.id.userOkButton);
+        userWeightEdit = (EditText) view.findViewById(R.id.userWeightEdit);
+        RadioGroup geschlechtRadioGroup = (RadioGroup)view.findViewById(R.id.geschlechtRadioGroup);
+        Button okButton = (Button)view.findViewById(R.id.userOkButton);
+        Button abbrechenButton = (Button)view.findViewById(R.id.userCancelButton);
+
+        if(user == null){
+            user = new User();
+        }else{
+            usernameEdit.setText(user.getName());
+            userWeightEdit.setText(user.getWeight());
+        }
+
+        okButton.setOnClickListener(this);
+        abbrechenButton.setOnClickListener(this);
+
         geschlechtRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             @Override
@@ -81,7 +88,7 @@ public class UserFragment extends DialogFragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (OnFragmentInteractionListener) activity;
+            listener = (OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -91,18 +98,24 @@ public class UserFragment extends DialogFragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        listener = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.userCancelButton:
+                listener.onClose(null);
+                break;
+            case R.id.userOkButton:
+                user.setName(usernameEdit.getText().toString());
+                user.setWeight(Integer.parseInt(userWeightEdit.getText().toString()));
+                listener.onClose(user);
+                break;
+        }
     }
 
     public interface OnFragmentInteractionListener {
         public void onClose(User user);
-    }
-
-    public void userOkButtonOnClick(View view){
-        mListener.onClose(user);
-    }
-
-    public void userCancelButtonOnClick(View view){
-        mListener.onClose(null);
     }
 }

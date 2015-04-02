@@ -38,10 +38,10 @@ public class BartourActivity extends BaseActivity implements UserFragment.OnFrag
 
     @Override
     public void onClose(User user) {
+        getFragmentManager().popBackStackImmediate();
         if(user != null) {
             bartour.addUser(user);
         }
-
     }
 
     public void onResume() {
