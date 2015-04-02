@@ -2,24 +2,52 @@ package ch.zhaw.bartout.controller;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.net.Uri;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import ch.zhaw.bartout.R;
+import ch.zhaw.bartout.model.Bartout;
 import ch.zhaw.bartout.model.User;
 import ch.zhaw.bartout.model.Bartour;
 
 public class BartourActivity extends BaseActivity implements UserFragment.OnFragmentInteractionListener {
     private Bartour bartour;
     private ListView listView;
+    private boolean isNew;
 
     private static final String USER_FRAGMENT_LABEL = "fragment_user";
 
+    // GUI Elements
+    private EditText editTextName;
+
+    public static final int BARTOUR_ACTIVITY_REQUEST_CODE = 1;
+
     public BartourActivity() {
         super(R.layout.activity_bartour);
-        bartour = new Bartour();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        editTextName = (EditText) findViewById(R.id.tour_name);
+
+        bartour = Bartout.getInstance().getActiveBartour();
+        if(bartour == null){
+            isNew = true;
+            bartour = new Bartour();
+        }
+        listView = (ListView) findViewById(R.id.list_users);
+        UsersAdapter adapter = new UsersAdapter(
+                this,
+                bartour.getUsers()
+        );
+        listView.setAdapter(adapter);
+        editTextName.setText(bartour.getName());
     }
 
     @Override
@@ -48,28 +76,27 @@ public class BartourActivity extends BaseActivity implements UserFragment.OnFrag
         if(user != null) {
             if(!bartour.getUsers().contains(user)){
                 bartour.addUser(user);
+                ((BaseAdapter)listView.getAdapter()).notifyDataSetChanged();
             }
         }
     }
 
     public void onResume() {
         super.onResume();
-        listView = (ListView) findViewById(R.id.list_users);
-        UsersAdapter adapter = new UsersAdapter(
-                this,
-                bartour.getUsers()
-        );
-        listView.setAdapter(adapter);
     }
 
     public void saveBartourButtonOnClick(View view) {
-        EditText editText = (EditText) findViewById(R.id.tour_name);
-        bartour.setName(editText.getText().toString());
-
+        bartour.setName(editTextName.getText().toString());
+        if(isNew){
+            Bartout.getInstance().addBartour(bartour);
+        }
+        finishActivity(BARTOUR_ACTIVITY_REQUEST_CODE);
+        finish();
     }
 
     public void deleteUser(User user){
         bartour.getUsers().remove(user);
+        ((BaseAdapter)listView.getAdapter()).notifyDataSetChanged();
     }
 
     public void editUser(User user){

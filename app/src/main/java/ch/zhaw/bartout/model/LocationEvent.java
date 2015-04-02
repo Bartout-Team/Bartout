@@ -2,6 +2,8 @@ package ch.zhaw.bartout.model;
 
 import android.location.Location;
 
+import java.io.Serializable;
+
 /**
  * Created by Nico on 31.03.2015.
  */

@@ -1,5 +1,6 @@
 package ch.zhaw.bartout.controller;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -41,7 +42,9 @@ public class HomeActivity extends BaseActivity {
 
     public void newBartourButtonOnClick(View view){
         if(bartout.getActiveBartour() == null){
-            startActivity(new Intent(this, BartourActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
+            Intent intent = new Intent(this, BartourActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivityForResult(intent, BartourActivity.BARTOUR_ACTIVITY_REQUEST_CODE);
         }else{
             if(toast == null){
                 toast = Toast.makeText(getApplicationContext(), getString(R.string.toast_bartout_acive), Toast.LENGTH_LONG);

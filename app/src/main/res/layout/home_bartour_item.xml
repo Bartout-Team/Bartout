@@ -29,4 +29,11 @@
         android:layout_alignParentRight="true"
         android:paddingTop="8dp"
         android:paddingRight="10dp"/>
+    <ImageView
+        android:id="@+id/image_active"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_action_replay"
+        android:layout_alignBottom="@+id/text_date"
+        android:layout_alignEnd="@+id/text_duration" />
 </RelativeLayout>
