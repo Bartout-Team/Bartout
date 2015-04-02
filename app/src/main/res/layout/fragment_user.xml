@@ -10,7 +10,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
+            android:inputType="textPersonName|textCapWords"
             android:hint="Name"
             android:ems="10"
             android:id="@+id/usernameEdit"
@@ -49,8 +49,7 @@
         android:id="@+id/userOkButton"
         android:layout_below="@+id/weightEditText"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:onClick="userOkButtonOnClick"/>
+        android:layout_alignParentStart="true"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -59,7 +58,6 @@
         android:id="@+id/userCancelButton"
         android:layout_below="@+id/weightEditText"
         android:layout_toRightOf="@+id/userOkButton"
-        android:layout_toEndOf="@+id/userOkButton"
-        android:onClick="userCancelButtonOnClick"/>
+        android:layout_toEndOf="@+id/userOkButton"/>
 
 </RelativeLayout>

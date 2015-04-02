@@ -12,23 +12,26 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import ch.zhaw.bartout.R;
+import ch.zhaw.bartout.model.Bartout;
 
 /**
  * Created by srueg on 24.03.15.
  */
-public abstract class BaseActivity extends Activity implements ListView.OnItemClickListener{
+public abstract class BaseActivity extends Activity{
 
     private final int mLayoutId;
     private final boolean mHomeAsUp;
 
-    private ListView mDrawerList;
-    private DrawerLayout mDrawerLayout;
-    private ActionBarDrawerToggle mDrawerToggle;
-    private String[] mMenuItems;
+    private ListView drawerList;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle drawerToggle;
+    private ArrayList<String> menuItems = new ArrayList<>();
 
     public BaseActivity(int layoutId){
         this(layoutId, true);
@@ -44,15 +47,10 @@ public abstract class BaseActivity extends Activity implements ListView.OnItemCl
         super.onCreate(savedInstanceState);
         setContentView(mLayoutId);
         getActionBar().setDisplayHomeAsUpEnabled(mHomeAsUp);
-        //getActionBar().setHomeButtonEnabled(true);
         setTitle(getString(getNameRes()));
 
-        mMenuItems = new String[getResources().getInteger(R.integer.drawer_item_count)];
-        for(int i=0; i<mMenuItems.length; i++){
-            mMenuItems[i] = getString(getMenuResId(i));
-        }
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close){
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close){
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
                 invalidateOptionsMenu();
@@ -65,17 +63,52 @@ public abstract class BaseActivity extends Activity implements ListView.OnItemCl
                 getActionBar().setTitle(R.string.app_name);
             }
         };
-        mDrawerToggle.syncState();
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        mDrawerList.setAdapter(new ArrayAdapter<>(this, R.layout.drawer_list_item, android.R.id.text1, mMenuItems));
-        mDrawerList.setOnItemClickListener(this);
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        drawerToggle.syncState();
+        drawerList = (ListView) findViewById(R.id.left_drawer);
+        drawerList.setAdapter(new ArrayAdapter<>(this, R.layout.drawer_list_item, android.R.id.text1, menuItems));
+        drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View view, int position, long id) {
+                String menuItem = ((TextView)view).getText().toString();
+                Intent intent;
+
+                if(menuItem.equals(getString(R.string.title_home))){
+                    intent = new Intent(BaseActivity.this, HomeActivity.class);
+                }else if(menuItem.equals(getString(R.string.title_search))){
+                    intent = new Intent(BaseActivity.this, SearchActivity.class);
+                }else if(menuItem.equals(getString(R.string.title_bartour))){
+                    intent = new Intent(BaseActivity.this, BartourActivity.class);
+                }else if(menuItem.equals(getString(R.string.title_drink))){
+                    intent = new Intent(BaseActivity.this, DrinkActivity.class);
+                }else if(menuItem.equals(getString(R.string.title_ranking))){
+                    intent = new Intent(BaseActivity.this, RankingActivity.class);
+                }else if(menuItem.equals(getString(R.string.title_drive_fitness))){
+                    intent = new Intent(BaseActivity.this, DriveFitnessActivity.class);
+                }else {
+                    throw new IllegalStateException("Handle all Menues from Drawer!");
+                }
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+                drawerLayout.closeDrawer(drawerList);
+            }
+        });
+        drawerLayout.setDrawerListener(drawerToggle);
     }
 
     @Override
     public void onResume(){
         super.onResume();
-        mDrawerList.setItemChecked(Arrays.asList(mMenuItems).indexOf(getString(getNameRes())), true);
+        menuItems.clear();
+        menuItems.add(getString(R.string.title_home));
+        menuItems.add(getString(R.string.title_search));
+        // Other menu items are only displayed when a bartour is active.
+        if(Bartout.getInstance().getActiveBartour() != null){
+            menuItems.add(getString(R.string.title_bartour));
+            menuItems.add(getString(R.string.title_drink));
+            menuItems.add(getString(R.string.title_ranking));
+            menuItems.add(getString(R.string.title_drive_fitness));
+        }
+        drawerList.setItemChecked(menuItems.indexOf(getString(getNameRes())), true);
     }
 
     @Override
@@ -85,64 +118,15 @@ public abstract class BaseActivity extends Activity implements ListView.OnItemCl
     }
 
     @Override
-    public void onItemClick(AdapterView parent, View view, int position, long id) {
-        int menuItem = getMenuResId(position);
-        Intent intent;
-        switch(menuItem){
-            case R.string.title_home:
-                intent = new Intent(this, HomeActivity.class);
-                break;
-            case R.string.title_search:
-                intent = new Intent(this, SearchActivity.class);
-                break;
-            case  R.string.title_bartour:
-                intent = new Intent(this, BartourActivity.class);
-                break;
-            case R.string.title_drink:
-                intent = new Intent(this, DrinkActivity.class);
-                break;
-            case R.string.title_ranking:
-                intent = new Intent(this, RankingActivity.class);
-                break;
-            case R.string.title_drive_fitness:
-                intent = new Intent(this, DriveFitnessActivity.class);
-                break;
-            default:
-                throw new IllegalStateException("Handle all Menues from Drawer!");
-        }
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        startActivity(intent);
-        mDrawerLayout.closeDrawer(mDrawerList);
-    }
-
-    private int getMenuResId(int position){
-        switch (position){
-            case 0:
-                return R.string.title_home;
-            case 1:
-                return R.string.title_search;
-            case 2:
-                return R.string.title_bartour;
-            case 3:
-                return R.string.title_drink;
-            case 4:
-                return R.string.title_ranking;
-            case 5:
-                return R.string.title_drive_fitness;
-        }
-        throw new IllegalArgumentException("position");
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
         switch (item.getItemId()) {
             case android.R.id.home:
-                if (mDrawerLayout.isDrawerOpen(mDrawerList)) {
-                    mDrawerLayout.closeDrawer(mDrawerList);
+                if (drawerLayout.isDrawerOpen(drawerList)) {
+                    drawerLayout.closeDrawer(drawerList);
                 } else {
-                    mDrawerLayout.openDrawer(mDrawerList);
+                    drawerLayout.openDrawer(drawerList);
                 }
                 break;
             case R.id.action_settings:
@@ -155,7 +139,7 @@ public abstract class BaseActivity extends Activity implements ListView.OnItemCl
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+        boolean drawerOpen = drawerLayout.isDrawerOpen(drawerList);
         menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
@@ -163,13 +147,13 @@ public abstract class BaseActivity extends Activity implements ListView.OnItemCl
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        mDrawerToggle.syncState();
+        drawerToggle.syncState();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        mDrawerToggle.onConfigurationChanged(newConfig);
+        drawerToggle.onConfigurationChanged(newConfig);
     }
 
     abstract protected int getNameRes();

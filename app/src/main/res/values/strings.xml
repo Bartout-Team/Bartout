@@ -17,7 +17,7 @@
 
     <string name="action_settings">Settings</string>
 
-    <string name="toast_bartout_acive">Es ist bereits eine Bartour aktiv. beenden Sie diese zuerst.</string>
+    <string name="toast_bartout_acive">Es ist bereits eine Bartour aktiv. Beenden Sie diese zuerst.</string>
 
     <!-- activity_bartour Items -->
     <string name="tour_name">Tour Name</string>
@@ -26,5 +26,7 @@
     <string name="bartour_save">Bartour speichern</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="error_empty">Das Feld darf nicht leer sein.</string>
+    <string name="error_no_users">Es muss mindestens ein Benutzer geben.</string>
 
 </resources>

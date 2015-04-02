@@ -1,5 +1,6 @@
 package ch.zhaw.bartout.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -7,7 +8,7 @@ import java.util.Calendar;
 /**
  * Created by srueg on 29.03.15.
  */
-public class Bartout {
+public class Bartout implements Serializable {
 
     // Singleton
     private static Bartout _instance;
@@ -31,19 +32,17 @@ public class Bartout {
         bartours = new ArrayList<>();
         Calendar end = Calendar.getInstance();
         end.add(Calendar.HOUR, 2);
-        bartours.add(new Bartour().setName("First Tour").setEnd(end));
-        bartours.add(new Bartour().setName("Second Tour").setEnd(end));
-        bartours.add(new Bartour().setName("Third Tour").setEnd(end));
-        bartours.add(new Bartour().setName("Tour #1").setEnd(end));
-        bartours.add(new Bartour().setName("Tour #2").setEnd(end));
-        bartours.add(new Bartour().setName("Tour #3").setEnd(end));
-        bartours.add(new Bartour().setName("Tour #4").setEnd(end));
-        bartours.add(new Bartour().setName("Tour #5").setEnd(end));
-        bartours.add(new Bartour().setName("Tour #6").setEnd(end));
-        bartours.add(new Bartour().setName("Tour #7").setEnd(end));
-        bartours.add(new Bartour().setName("Tour #8").setEnd(end));
 
-        activeBartour = bartours.get(0);
+        addBartour(new Bartour().setName("First Tour").setEnd(end));
+        addBartour(new Bartour().setName("Second Tour").setEnd(end));
+        addBartour(new Bartour().setName("Third Tour").setEnd(end));
+        activeBartour = null;
+        //addBartour(new Bartour().setName("Active Tour"));
+
+        for(Bartour tour : bartours){
+            tour.addUser(new User().setName("First User"));
+            tour.addUser(new User().setName("Second User"));
+        }
     }
 
     public ArrayList<Bartour> getBartours(){
@@ -56,6 +55,13 @@ public class Bartout {
 
     public void addBartour(Bartour bartour) {
         bartours.add(bartour);
+        activeBartour = bartour;
+        activeBartour.setOnFinishedListener(new Bartour.OnFinishedListener() {
+            @Override
+            public void OnFinished() {
+                activeBartour = null;
+            }
+        });
     }
 
 }

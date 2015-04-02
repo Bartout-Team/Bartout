@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -35,6 +36,10 @@ public class BartoursAdapter extends ArrayAdapter<Bartour> {
         TextView textName = (TextView) convertView.findViewById(R.id.text_name);
         TextView textDate = (TextView) convertView.findViewById(R.id.text_date);
         TextView textDuration = (TextView) convertView.findViewById(R.id.text_duration);
+        ImageView imageActive = (ImageView) convertView.findViewById(R.id.image_active);
+        if(!bartour.getIsActive()){
+            imageActive.setVisibility(View.INVISIBLE);
+        }
         textName.setText(bartour.getName());
         textDate.setText(dateFormat.format(bartour.getStart().getTime()));
         long duration = bartour.getDuration();
