@@ -23,7 +23,7 @@ import ch.zhaw.bartout.model.Bartout;
 /**
  * Created by srueg on 24.03.15.
  */
-public abstract class BaseActivity extends Activity implements ListView.OnItemClickListener{
+public abstract class BaseActivity extends Activity{
 
     private final int mLayoutId;
     private final boolean mHomeAsUp;
@@ -47,7 +47,6 @@ public abstract class BaseActivity extends Activity implements ListView.OnItemCl
         super.onCreate(savedInstanceState);
         setContentView(mLayoutId);
         getActionBar().setDisplayHomeAsUpEnabled(mHomeAsUp);
-        //getActionBar().setHomeButtonEnabled(true);
         setTitle(getString(getNameRes()));
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -67,7 +66,32 @@ public abstract class BaseActivity extends Activity implements ListView.OnItemCl
         drawerToggle.syncState();
         drawerList = (ListView) findViewById(R.id.left_drawer);
         drawerList.setAdapter(new ArrayAdapter<>(this, R.layout.drawer_list_item, android.R.id.text1, menuItems));
-        drawerList.setOnItemClickListener(this);
+        drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View view, int position, long id) {
+                String menuItem = ((TextView)view).getText().toString();
+                Intent intent;
+
+                if(menuItem.equals(getString(R.string.title_home))){
+                    intent = new Intent(BaseActivity.this, HomeActivity.class);
+                }else if(menuItem.equals(getString(R.string.title_search))){
+                    intent = new Intent(BaseActivity.this, SearchActivity.class);
+                }else if(menuItem.equals(getString(R.string.title_bartour))){
+                    intent = new Intent(BaseActivity.this, BartourActivity.class);
+                }else if(menuItem.equals(getString(R.string.title_drink))){
+                    intent = new Intent(BaseActivity.this, DrinkActivity.class);
+                }else if(menuItem.equals(getString(R.string.title_ranking))){
+                    intent = new Intent(BaseActivity.this, RankingActivity.class);
+                }else if(menuItem.equals(getString(R.string.title_drive_fitness))){
+                    intent = new Intent(BaseActivity.this, DriveFitnessActivity.class);
+                }else {
+                    throw new IllegalStateException("Handle all Menues from Drawer!");
+                }
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+                drawerLayout.closeDrawer(drawerList);
+            }
+        });
         drawerLayout.setDrawerListener(drawerToggle);
     }
 
@@ -92,73 +116,6 @@ public abstract class BaseActivity extends Activity implements ListView.OnItemCl
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
-    @Override
-    public void onItemClick(AdapterView parent, View view, int position, long id) {
-        String menuItem = ((TextView)view).getText().toString();
-        Intent intent;
-
-        if(menuItem.equals(getString(R.string.title_home))){
-            intent = new Intent(this, HomeActivity.class);
-        }else if(menuItem.equals(getString(R.string.title_search))){
-            intent = new Intent(this, SearchActivity.class);
-        }else if(menuItem.equals(getString(R.string.title_bartour))){
-            intent = new Intent(this, BartourActivity.class);
-        }else if(menuItem.equals(getString(R.string.title_drink))){
-            intent = new Intent(this, DrinkActivity.class);
-        }else if(menuItem.equals(getString(R.string.title_ranking))){
-            intent = new Intent(this, RankingActivity.class);
-        }else if(menuItem.equals(getString(R.string.title_drive_fitness))){
-            intent = new Intent(this, DriveFitnessActivity.class);
-        }else {
-            throw new IllegalStateException("Handle all Menues from Drawer!");
-        }
-
-        /*switch(menuItem){
-            case R.string.title_home:
-                intent = new Intent(this, HomeActivity.class);
-                break;
-            case R.string.title_search:
-                intent = new Intent(this, SearchActivity.class);
-                break;
-            case  R.string.title_bartour:
-                intent = new Intent(this, BartourActivity.class);
-                break;
-            case R.string.title_drink:
-                intent = new Intent(this, DrinkActivity.class);
-                break;
-            case R.string.title_ranking:
-                intent = new Intent(this, RankingActivity.class);
-                break;
-            case R.string.title_drive_fitness:
-                intent = new Intent(this, DriveFitnessActivity.class);
-                break;
-            default:
-                throw new IllegalStateException("Handle all Menues from Drawer!");
-        }*/
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        startActivity(intent);
-        drawerLayout.closeDrawer(drawerList);
-    }
-
-    /*
-    private int getMenuResId(int position){
-        switch (position){
-            case 0:
-                return R.string.title_home;
-            case 1:
-                return R.string.title_search;
-            case 2:
-                return R.string.title_bartour;
-            case 3:
-                return R.string.title_drink;
-            case 4:
-                return R.string.title_ranking;
-            case 5:
-                return R.string.title_drive_fitness;
-        }
-        throw new IllegalArgumentException("position");
-    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

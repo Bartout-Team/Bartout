@@ -37,7 +37,7 @@ public class BartoursAdapter extends ArrayAdapter<Bartour> {
         TextView textDate = (TextView) convertView.findViewById(R.id.text_date);
         TextView textDuration = (TextView) convertView.findViewById(R.id.text_duration);
         ImageView imageActive = (ImageView) convertView.findViewById(R.id.image_active);
-        if(bartour.getEnd() != null){
+        if(!bartour.getIsActive()){
             imageActive.setVisibility(View.INVISIBLE);
         }
         textName.setText(bartour.getName());

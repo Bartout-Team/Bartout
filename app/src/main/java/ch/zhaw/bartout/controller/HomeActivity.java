@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -44,7 +45,7 @@ public class HomeActivity extends BaseActivity {
         if(bartout.getActiveBartour() == null){
             Intent intent = new Intent(this, BartourActivity.class)
                     .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            startActivityForResult(intent, BartourActivity.BARTOUR_ACTIVITY_REQUEST_CODE);
+            startActivity(intent);
         }else{
             if(toast == null){
                 toast = Toast.makeText(getApplicationContext(), getString(R.string.toast_bartout_acive), Toast.LENGTH_LONG);
@@ -64,6 +65,20 @@ public class HomeActivity extends BaseActivity {
                 bartout.getBartours()
         );
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Bartour bartour = (Bartour) listView.getItemAtPosition(position);
+                if(!bartour.getIsActive()){
+                    Intent intent = new Intent(HomeActivity.this, ChronicleActivity.class);
+                    Bundle b = new Bundle();
+                    b.putSerializable(ChronicleActivity.CHRONICLE_EXTRA_BARTOUR, bartour);
+                    intent.putExtras(b);
+                    startActivity(intent);
+                }
+            }
+        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.newBartourButton);
         fab.attachToListView(listView);

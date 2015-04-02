@@ -100,9 +100,9 @@ public class BartourActivity extends BaseActivity implements UserFragment.OnFrag
         bartour.setName(editTextName.getText().toString());
         if(isNew){
             Bartout.getInstance().addBartour(bartour);
+            finish();
         }
-        finishActivity(BARTOUR_ACTIVITY_REQUEST_CODE);
-        finish();
+
     }
 
     public void deleteUser(User user){

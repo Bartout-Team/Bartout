@@ -70,6 +70,10 @@ public class Bartour implements Serializable {
         }
     }
 
+    public boolean getIsActive(){
+        return end == null;
+    }
+
     public void setOnFinishedListener(OnFinishedListener finishedListener){
         this.finishedListener = finishedListener;
     }
