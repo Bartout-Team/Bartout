@@ -15,57 +15,55 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/tour_name"
+            android:textSize="25sp"
+            android:textStyle="bold"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:inputType="textPersonName|textCapWords"/>
+            android:inputType="textPersonName|textCapWords" />
 
         <TextView android:text="@string/users"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="@dimen/abc_text_size_headline_material"
+            android:id="@+id/users"
             android:layout_below="@+id/tour_name"
-            android:layout_toRightOf="@+id/user_name"
-            android:layout_toEndOf="@+id/user_name"
-            android:layout_marginTop="58dp"
-            android:id="@+id/textView"
-            />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="32dp" />
 
-
-        <EditText android:id="@+id/user_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="@string/user_name" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_dark_action_new"
             android:onClick="addUserButtonOnClick"
-            android:id="@+id/imageButton"
-            android:layout_below="@+id/textView"
-            android:layout_toRightOf="@+id/user_name"
-            android:layout_toEndOf="@+id/user_name" />
+            android:id="@+id/addUserButton"
+            android:layout_alignBottom="@+id/users"
+            android:layout_toRightOf="@+id/users"
+            android:layout_toEndOf="@+id/users"
+            android:layout_marginLeft="27dp"
+            android:layout_marginStart="27dp" />
 
+        <ListView
+            android:id="@+id/list_users"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/saveButton"
+            android:layout_below="@+id/users" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/bartour_save"
             android:onClick="saveBartourButtonOnClick"
+            android:id="@+id/saveButton"
+            android:layout_marginBottom="36dp"
             android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/user_name"
-            android:layout_toEndOf="@+id/user_name"
-            android:id="@+id/button" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
-        <ListView
-            android:id="@+id/list_users"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/button"
-            android:layout_below="@+id/imageButton" />
 
     </RelativeLayout>
 

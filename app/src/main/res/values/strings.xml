@@ -29,4 +29,8 @@
     <string name="error_empty">Das Feld darf nicht leer sein.</string>
     <string name="error_no_users">Es muss mindestens einen Benutzer geben.</string>
 
+    <!-- DriveFitnessAdapter Items -->
+    <string name="ok">OK!</string>
+    <string name="no">NO!</string>
+
 </resources>

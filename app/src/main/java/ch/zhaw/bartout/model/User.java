@@ -11,6 +11,10 @@ public class User implements Serializable {
     private int weight;
     private UserStatus status;
 
+    public User() {
+        status = new UserStatus();
+    }
+
 
     public String getName() {
         return name;

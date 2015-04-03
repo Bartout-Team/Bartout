@@ -2,15 +2,12 @@ package ch.zhaw.bartout.controller;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import ch.zhaw.bartout.R;
 import ch.zhaw.bartout.model.Bartout;
@@ -94,10 +91,10 @@ public class BartourActivity extends BaseActivity implements UserFragment.OnFrag
             return;
         }
         if(bartour.getUsers().isEmpty()){
-            ((TextView)findViewById(R.id.textView)).setError(getString(R.string.error_no_users));
+            ((TextView)findViewById(R.id.users)).setError(getString(R.string.error_no_users));
             return;
         } else {
-            ((TextView)findViewById(R.id.textView)).setError(null);
+            ((TextView)findViewById(R.id.users)).setError(null);
         }
         bartour.setName(editTextName.getText().toString());
         if(isNew){
