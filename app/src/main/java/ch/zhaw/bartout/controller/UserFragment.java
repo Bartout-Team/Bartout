@@ -8,9 +8,10 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import ch.zhaw.bartout.R;
@@ -33,9 +34,14 @@ public class UserFragment extends DialogFragment implements View.OnClickListener
     private User user;
     private Activity attachedActivity;
 
-    // GUI Elements
+    //Oberflächenelemente
     private EditText usernameEdit;
-    private EditText userWeightEdit;
+    private RadioGroup geschlechtRadioGroup;
+    private RadioButton manRadioButton;
+    private RadioButton womannRadioButton;
+    private EditText weightEditText;
+    private Button okButton;
+    private Button abbrechenButton;
 
     public static UserFragment newInstance(User user) {
         UserFragment fragment = new UserFragment();
@@ -58,33 +64,42 @@ public class UserFragment extends DialogFragment implements View.OnClickListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         user = (User) getArguments().getSerializable(ARG_USER);
-
+        // if the user is null, its a new User
+        if (user==null){
+            user = new User();
+        }
         getDialog().setTitle(getString(R.string.title_user));
         View view = inflater.inflate(R.layout.fragment_user, container, false);
-        usernameEdit = (EditText) view.findViewById(R.id.usernameEdit);
-        userWeightEdit = (EditText) view.findViewById(R.id.userWeightEdit);
-        RadioGroup geschlechtRadioGroup = (RadioGroup)view.findViewById(R.id.geschlechtRadioGroup);
-        Button okButton = (Button)view.findViewById(R.id.userOkButton);
-        Button abbrechenButton = (Button)view.findViewById(R.id.userCancelButton);
 
-        if(user == null){
-            user = new User();
-        }else{
-            usernameEdit.setText(user.getName());
-            userWeightEdit.setText(Integer.toString(user.getWeight()));
-        }
+        initializeGuiVariables(view);
+        initializeGuiElements();
+        initializeListeners();
 
+        return view;
+    }
+
+    private void initializeListeners() {
         okButton.setOnClickListener(this);
         abbrechenButton.setOnClickListener(this);
+    }
 
-        geschlechtRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-        {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                // checkedId is the RadioButton selected
-            }
-        });
-        return view;
+    private void initializeGuiVariables(View view) {
+        usernameEdit = (EditText) view.findViewById(R.id.usernameEdit);
+        geschlechtRadioGroup = (RadioGroup)view.findViewById(R.id.geschlechtRadioGroup);
+        manRadioButton = (RadioButton)view.findViewById(R.id.user_man);
+        weightEditText = (EditText)view.findViewById(R.id.weightEditText);
+        okButton = (Button)view.findViewById(R.id.userOkButton);
+        abbrechenButton = (Button)view.findViewById(R.id.userOkButton);
+    }
+
+    private void initializeGuiElements() {
+        usernameEdit.setText(user.getName());
+        if (user.isMan()){
+            geschlechtRadioGroup.check(R.id.user_man);
+        }else{
+            geschlechtRadioGroup.check(R.id.user_woman);
+        }
+        weightEditText.setText(Integer.toString(user.getWeight()));
     }
 
     @Override
@@ -113,7 +128,8 @@ public class UserFragment extends DialogFragment implements View.OnClickListener
                 break;
             case R.id.userOkButton:
                 user.setName(usernameEdit.getText().toString());
-                user.setWeight(Integer.parseInt(userWeightEdit.getText().toString()));
+                user.setWeight(Integer.parseInt(weightEditText.getText().toString()));
+                user.setMan(manRadioButton.isChecked());
                 listener.onClose(user);
                 break;
         }
@@ -121,7 +137,9 @@ public class UserFragment extends DialogFragment implements View.OnClickListener
         imm.hideSoftInputFromWindow(attachedActivity.getCurrentFocus().getWindowToken(), 0);
     }
 
+
     public interface OnFragmentInteractionListener {
         public void onClose(User user);
     }
+
 }
