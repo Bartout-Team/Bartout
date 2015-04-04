@@ -1,12 +1,14 @@
 package ch.zhaw.bartout.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by bwa on 29.03.2015.
  */
 public class UserStatus implements Serializable {
 
+    private ArrayList<Consumption> consumptions;
 
     public boolean fitToDrive() {
         return false;
