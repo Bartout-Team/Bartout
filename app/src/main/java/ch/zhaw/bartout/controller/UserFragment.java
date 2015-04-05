@@ -89,7 +89,7 @@ public class UserFragment extends DialogFragment implements View.OnClickListener
         manRadioButton = (RadioButton)view.findViewById(R.id.user_man);
         weightEditText = (EditText)view.findViewById(R.id.weightEditText);
         okButton = (Button)view.findViewById(R.id.userOkButton);
-        abbrechenButton = (Button)view.findViewById(R.id.userOkButton);
+        abbrechenButton = (Button)view.findViewById(R.id.userCancelButton);
     }
 
     private void initializeGuiElements() {
@@ -127,14 +127,34 @@ public class UserFragment extends DialogFragment implements View.OnClickListener
                 listener.onClose(null);
                 break;
             case R.id.userOkButton:
-                user.setName(usernameEdit.getText().toString());
-                user.setWeight(Integer.parseInt(weightEditText.getText().toString()));
-                user.setMan(manRadioButton.isChecked());
-                listener.onClose(user);
+                if(isValidInput()){
+                    user.setName(usernameEdit.getText().toString());
+                    user.setWeight(Integer.parseInt(weightEditText.getText().toString()));
+                    user.setMan(manRadioButton.isChecked());
+                    listener.onClose(user);
+                }else{
+                    return;
+                }
                 break;
         }
         InputMethodManager imm = (InputMethodManager) attachedActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(attachedActivity.getCurrentFocus().getWindowToken(), 0);
+    }
+
+    private boolean isValidInput() {
+        boolean validInput = true;
+        if (usernameEdit.length()==0){
+            usernameEdit.setError(getString(R.string.error_empty));
+            usernameEdit.requestFocus();
+            validInput = false;
+        }
+        if (weightEditText.length()==0 || weightEditText.getText().toString().equals("0")){
+            weightEditText.requestFocus();
+            weightEditText.requestFocus();
+            weightEditText.setError(getString(R.string.error_zero));
+            validInput = false;
+        }
+        return validInput;
     }
 
 
