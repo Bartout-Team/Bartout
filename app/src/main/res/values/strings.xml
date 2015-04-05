@@ -32,5 +32,6 @@
     <!-- DriveFitnessAdapter Items -->
     <string name="ok">OK!</string>
     <string name="no">NO!</string>
+    <string name="error_zero">Die Zahl darf nicht 0 sein</string>
 
 </resources>
