@@ -79,6 +79,10 @@ public class Bartour implements Serializable {
         this.finishedListener = finishedListener;
     }
 
+    public Ranking getRanking() {
+        return ranking;
+    }
+
     interface OnFinishedListener{
         public void OnFinished();
     }

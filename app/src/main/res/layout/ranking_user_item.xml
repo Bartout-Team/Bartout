@@ -1,0 +1,24 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:padding="10dp">
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:text="#. User #"
+        />
+
+    <TextView
+        android:id="@+id/user_alcohol_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1.7‰"
+        android:textSize="20sp"
+        android:layout_alignParentRight="true"
+        android:paddingTop="8dp"
+        android:paddingRight="10dp"/>
+</RelativeLayout>

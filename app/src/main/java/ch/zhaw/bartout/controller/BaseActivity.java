@@ -82,6 +82,9 @@ public abstract class BaseActivity extends Activity{
                     intent = new Intent(BaseActivity.this, DrinkActivity.class);
                 }else if(menuItem.equals(getString(R.string.title_ranking))){
                     intent = new Intent(BaseActivity.this, RankingActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(RankingActivity.EXTRA_RANKING, Bartout.getInstance().getActiveBartour().getRanking());
+                    intent.putExtras(bundle);
                 }else if(menuItem.equals(getString(R.string.title_drive_fitness))){
                     intent = new Intent(BaseActivity.this, DriveFitnessActivity.class);
                 }else {
