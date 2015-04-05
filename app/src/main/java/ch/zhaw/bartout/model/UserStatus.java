@@ -7,8 +7,12 @@ import java.util.ArrayList;
  * Created by bwa on 29.03.2015.
  */
 public class UserStatus implements Serializable {
-
+    private double legalAlcoholLimit;
     private ArrayList<Consumption> consumptions;
+
+    public UserStatus() {
+        legalAlcoholLimit = 0.5;
+    }
 
     public boolean fitToDrive() {
         return false;
@@ -23,6 +27,6 @@ public class UserStatus implements Serializable {
      * @return duration in seconds
      */
     public long fitToDriveDuration() {
-        return (long) (getAlcoholLevel() / 0.15 * 60 * 60);
+        return (long) ((getAlcoholLevel()-legalAlcoholLimit)/0.15*60*60);
     }
 }
