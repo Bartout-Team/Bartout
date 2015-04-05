@@ -23,6 +23,6 @@ public class UserStatus implements Serializable {
      * @return duration in seconds
      */
     public long fitToDriveDuration() {
-        return 45000;
+        return (long) (getAlcoholLevel() / 0.15 * 60 * 60);
     }
 }
