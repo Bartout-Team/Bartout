@@ -23,6 +23,7 @@ public class Bartour implements Serializable {
         users = new ArrayList<>();
         start = Calendar.getInstance();
         end = null;
+        ranking = new Ranking(users);
     }
 
     public Bartour setName(String name) {
