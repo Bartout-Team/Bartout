@@ -35,5 +35,6 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_action_replay"
         android:layout_alignBottom="@+id/text_date"
-        android:layout_alignEnd="@+id/text_duration" />
+        android:layout_alignEnd="@+id/text_duration"
+        android:layout_alignRight="@+id/text_duration" />
 </RelativeLayout>

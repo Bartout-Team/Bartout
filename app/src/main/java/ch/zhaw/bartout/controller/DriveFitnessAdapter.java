@@ -43,10 +43,10 @@ public class DriveFitnessAdapter extends ArrayAdapter<User> {
             fitToDrive.setText(R.string.no);
         }
         name.setText(user.getName());
-        alcoholLevel.setText(user.getStatus().getAlcoholLevel()+ "‰ ");
+        alcoholLevel.setText(user.getStatus().getAlcoholLevel()+ "‰");
         long fitToDriveDuration = user.getStatus().fitToDriveDuration();
         if(fitToDriveDuration != 0) {
-            textFitToDriveDuration.setText(fitToDriveDuration / 60 / 60 + "h ");
+            textFitToDriveDuration.setText("in " + fitToDriveDuration / 60 / 60 + "h");
         } else {
             textFitToDriveDuration.setText("");
         }
