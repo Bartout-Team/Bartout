@@ -17,14 +17,19 @@ public class Ranking implements Serializable {
         this.users = users;
     }
 
-    public ArrayList<User> getRanking(){
-        ArrayList<User> orderedUsers = new ArrayList<User>(users);
-        Collections.sort(users,new Comparator<User>() {
-            @Override
-            public int compare(User user1, User user2) {
-                return Double.compare(user1.getStatus().getAlcoholLevel(),user2.getStatus().getAlcoholLevel());
+    public ArrayList<RankingUser> getRanking(){
+        ArrayList<RankingUser> orderedUsers = new ArrayList();
+        double highestAlcoholLevel = 0;
+        for (User user: users){
+            if (highestAlcoholLevel<user.getStatus().getAlcoholLevel()){
+                highestAlcoholLevel = user.getStatus().getAlcoholLevel();
             }
-        });
+            orderedUsers.add(new RankingUser(user));
+        }
+        for(RankingUser user: orderedUsers){
+            user.setAlcoholLevelInPercent(user.getUser().getStatus().getAlcoholLevel()/highestAlcoholLevel);
+        }
+        Collections.sort(orderedUsers);
         return orderedUsers;
     }
 }
