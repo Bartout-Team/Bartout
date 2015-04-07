@@ -66,7 +66,9 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Bartour bartour = (Bartour) listView.getItemAtPosition(position);
-                if(!bartour.getIsActive()){
+                if (bartour.getIsActive()) {
+                    startActivity(getString(R.string.title_search));
+                } else {
                     Intent intent = new Intent(HomeActivity.this, ChronicleActivity.class);
                     Bundle b = new Bundle();
                     b.putSerializable(ChronicleActivity.CHRONICLE_EXTRA_BARTOUR, bartour);

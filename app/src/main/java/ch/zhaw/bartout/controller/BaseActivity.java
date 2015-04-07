@@ -70,29 +70,33 @@ public abstract class BaseActivity extends Activity{
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
                 String menuItem = ((TextView)view).getText().toString();
-                Intent intent;
-
-                if(menuItem.equals(getString(R.string.title_home))){
-                    intent = new Intent(BaseActivity.this, HomeActivity.class);
-                }else if(menuItem.equals(getString(R.string.title_search))){
-                    intent = new Intent(BaseActivity.this, SearchActivity.class);
-                }else if(menuItem.equals(getString(R.string.title_bartour))){
-                    intent = new Intent(BaseActivity.this, BartourActivity.class);
-                }else if(menuItem.equals(getString(R.string.title_drink))){
-                    intent = new Intent(BaseActivity.this, DrinkActivity.class);
-                }else if(menuItem.equals(getString(R.string.title_ranking))){
-                    intent = new Intent(BaseActivity.this, RankingActivity.class);
-                }else if(menuItem.equals(getString(R.string.title_drive_fitness))){
-                    intent = new Intent(BaseActivity.this, DriveFitnessActivity.class);
-                }else {
-                    throw new IllegalStateException("Handle all Menues from Drawer!");
-                }
-                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent);
+                startActivity(menuItem);
                 drawerLayout.closeDrawer(drawerList);
             }
         });
         drawerLayout.setDrawerListener(drawerToggle);
+    }
+
+    protected void startActivity(String name){
+        Intent intent;
+
+        if(name.equals(getString(R.string.title_home))){
+            intent = new Intent(BaseActivity.this, HomeActivity.class);
+        }else if(name.equals(getString(R.string.title_search))){
+            intent = new Intent(BaseActivity.this, SearchActivity.class);
+        }else if(name.equals(getString(R.string.title_bartour))){
+            intent = new Intent(BaseActivity.this, BartourActivity.class);
+        }else if(name.equals(getString(R.string.title_drink))){
+            intent = new Intent(BaseActivity.this, DrinkActivity.class);
+        }else if(name.equals(getString(R.string.title_ranking))){
+            intent = new Intent(BaseActivity.this, RankingActivity.class);
+        }else if(name.equals(getString(R.string.title_drive_fitness))){
+            intent = new Intent(BaseActivity.this, DriveFitnessActivity.class);
+        }else {
+            throw new IllegalStateException("Unknown Activity!");
+        }
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
     }
 
     @Override
