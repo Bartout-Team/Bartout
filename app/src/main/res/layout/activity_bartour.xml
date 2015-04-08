@@ -54,15 +54,23 @@
             android:layout_below="@+id/users" />
 
         <Button
+            android:id="@+id/stopButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stopBartour_text"
+            android:layout_below="@+id/list_users"
+            android:layout_alignParentLeft="true"
+            android:onClick="stopButtonOnClick"/>
+        <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/bartour_save"
             android:onClick="saveBartourButtonOnClick"
             android:id="@+id/saveButton"
-            android:layout_marginBottom="36dp"
+            android:layout_marginBottom="33dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_toRightOf="@+id/stopButton"
+            android:layout_toEndOf="@+id/stopButton" />
 
 
     </RelativeLayout>
