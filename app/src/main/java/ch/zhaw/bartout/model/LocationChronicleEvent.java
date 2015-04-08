@@ -2,12 +2,10 @@ package ch.zhaw.bartout.model;
 
 import android.location.Location;
 
-import java.io.Serializable;
-
 /**
  * Created by Nico on 31.03.2015.
  */
-public abstract class LocationEvent extends Event {
+public abstract class LocationChronicleEvent extends ChronicleEvent {
 
     private String locationName;
     private Location location;

@@ -7,14 +7,14 @@ import java.util.ArrayList;
  * Created by bwa on 29.03.2015.
  */
 public class Chronicle implements Serializable {
-    private ArrayList<Event> events;
+    private ArrayList<ChronicleEvent> chronicleEvents;
 
     public Chronicle() {
 
     }
 
-    public ArrayList<Event> getEvents() {
-        return events;
+    public ArrayList<ChronicleEvent> getChronicleEvents() {
+        return chronicleEvents;
     }
 
 }

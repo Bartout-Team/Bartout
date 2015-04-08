@@ -3,7 +3,7 @@ package ch.zhaw.bartout.model;
 /**
  * Created by Nico on 31.03.2015.
  */
-public class UserStatusEvent extends UserEvent {
+public class UserStatusChronicleEvent extends UserChronicleEvent {
 
     private UserStatus status;
 

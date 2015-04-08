@@ -1,11 +1,9 @@
 package ch.zhaw.bartout.model;
 
-import java.io.Serializable;
-
 /**
  * Created by Nico on 31.03.2015.
  */
-public class EstablishmentLocationEvent extends LocationEvent {
+public class EstablishmentLocationChronicleEvent extends LocationChronicleEvent {
     private String type;
 
     public String getType() {   return type;   }
