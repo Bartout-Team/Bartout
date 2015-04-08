@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import ch.zhaw.bartout.R;
 import ch.zhaw.bartout.model.Bartour;
@@ -23,7 +24,7 @@ public class BartoursAdapter extends ArrayAdapter<Bartour> {
 
     private DateFormat dateFormat = SimpleDateFormat.getDateInstance();
 
-    public BartoursAdapter(Context context, ArrayList<Bartour> bartours){
+    public BartoursAdapter(Context context, List<Bartour> bartours){
         super(context, 0, bartours);
     }
 

@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ch.zhaw.bartout.R;
 import ch.zhaw.bartout.model.User;
@@ -18,7 +19,7 @@ import ch.zhaw.bartout.model.User;
  */
 public class UsersAdapter extends ArrayAdapter<User> {
 
-    public UsersAdapter(Context context, ArrayList<User> bartours){
+    public UsersAdapter(Context context, List<User> bartours){
         super(context, 0, bartours);
     }
 

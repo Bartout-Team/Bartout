@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ch.zhaw.bartout.R;
 import ch.zhaw.bartout.model.RankingUser;
@@ -20,7 +21,7 @@ import ch.zhaw.bartout.model.User;
  */
 public class RankingAdapter  extends ArrayAdapter<RankingUser> {
 
-    public RankingAdapter(Context context, ArrayList<RankingUser> users){
+    public RankingAdapter(Context context, List<RankingUser> users){
         super(context, 0, users);
     }
 

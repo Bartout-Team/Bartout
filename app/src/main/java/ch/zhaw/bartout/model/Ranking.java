@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 
 /**
@@ -11,14 +12,14 @@ import java.util.Comparator;
  */
 public class Ranking implements Serializable {
 
-    private ArrayList<User> users;
+    private List<User> users;
 
-    public Ranking(ArrayList<User> users){
+    public Ranking(List<User> users){
         this.users = users;
     }
 
-    public ArrayList<RankingUser> getRanking(){
-        ArrayList<RankingUser> orderedUsers = new ArrayList();
+    public List<RankingUser> getRanking(){
+        List<RankingUser> orderedUsers = new ArrayList();
         double highestAlcoholLevel = 0;
         for (User user: users){
             if (highestAlcoholLevel<user.getStatus().getAlcoholLevel()){

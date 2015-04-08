@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import ch.zhaw.bartout.R;
 import ch.zhaw.bartout.model.User;
@@ -21,7 +22,7 @@ import ch.zhaw.bartout.model.User;
 public class DriveFitnessAdapter extends ArrayAdapter<User> {
     private DateFormat dateFormat = SimpleDateFormat.getDateInstance();
 
-    public DriveFitnessAdapter(Context context, ArrayList<User> users){
+    public DriveFitnessAdapter(Context context, List<User> users){
         super(context, 0, users);
     }
 

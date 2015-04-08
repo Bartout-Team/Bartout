@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import ch.zhaw.bartout.R;
 import ch.zhaw.bartout.model.Bartout;
@@ -31,7 +32,7 @@ public abstract class BaseActivity extends Activity{
     private ListView drawerList;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
-    private ArrayList<String> menuItems = new ArrayList<>();
+    private List<String> menuItems = new ArrayList<>();
 
     public BaseActivity(int layoutId){
         this(layoutId, true);
