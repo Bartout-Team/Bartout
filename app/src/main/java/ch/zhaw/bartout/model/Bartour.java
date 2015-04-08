@@ -4,6 +4,7 @@ package ch.zhaw.bartout.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 
 /**
@@ -12,7 +13,7 @@ import java.util.Calendar;
 public class Bartour implements Serializable {
 
     private String name;
-    private ArrayList<User> users;
+    private List<User> users;
     private Ranking ranking;
     private Chronicle chronicle;
     private Calendar start;
@@ -20,7 +21,7 @@ public class Bartour implements Serializable {
     private transient OnFinishedListener finishedListener;
 
     public Bartour(){
-        users = new ArrayList<>();
+        users = new ArrayList<User>();
         start = Calendar.getInstance();
         end = null;
         ranking = new Ranking(users);
@@ -51,7 +52,7 @@ public class Bartour implements Serializable {
         return this;
     }
 
-    public ArrayList<User> getUsers() {
+    public List<User> getUsers() {
         return users;
     }
 

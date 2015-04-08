@@ -3,6 +3,7 @@ package ch.zhaw.bartout.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 
 /**
@@ -25,11 +26,11 @@ public class Bartout implements Serializable {
     }
     // end Singleton
 
-    private ArrayList<Bartour> bartours;
+    private List<Bartour> bartours;
     private Bartour activeBartour;
 
     protected Bartout(){
-        bartours = new ArrayList<>();
+        bartours = new ArrayList<Bartour>();
         Calendar end = Calendar.getInstance();
         end.add(Calendar.HOUR, 2);
 
@@ -45,7 +46,7 @@ public class Bartout implements Serializable {
         }
     }
 
-    public ArrayList<Bartour> getBartours(){
+    public List<Bartour> getBartours(){
         return bartours;
     }
 

@@ -2,13 +2,14 @@ package ch.zhaw.bartout.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by bwa on 29.03.2015.
  */
 public class UserStatus implements Serializable {
     private double legalAlcoholLimit;
-    private ArrayList<Consumption> consumptions;
+    private List<Consumption> consumptions;
 
     public UserStatus() {
         legalAlcoholLimit = 0.5;
