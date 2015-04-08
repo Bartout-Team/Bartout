@@ -47,7 +47,10 @@ public abstract class BaseActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(mLayoutId);
-        getActionBar().setDisplayHomeAsUpEnabled(mHomeAsUp);
+        android.app.ActionBar actionBar = getActionBar();
+        if(actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(mHomeAsUp);
+        }
         setTitle(getString(getNameRes()));
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -117,26 +120,16 @@ public abstract class BaseActivity extends Activity{
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                if (drawerLayout.isDrawerOpen(drawerList)) {
-                    drawerLayout.closeDrawer(drawerList);
-                } else {
-                    drawerLayout.openDrawer(drawerList);
-                }
-                break;
-            case R.id.action_settings:
+        if(item.getItemId() == android.R.id.home) {
 
-                break;
+            if (drawerLayout.isDrawerOpen(drawerList)) {
+                drawerLayout.closeDrawer(drawerList);
+            } else {
+                drawerLayout.openDrawer(drawerList);
+            }
         }
 
         return super.onOptionsItemSelected(item);
@@ -144,8 +137,6 @@ public abstract class BaseActivity extends Activity{
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        boolean drawerOpen = drawerLayout.isDrawerOpen(drawerList);
-        menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
 
