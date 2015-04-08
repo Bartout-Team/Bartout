@@ -65,7 +65,7 @@ public class UserFragment extends DialogFragment implements View.OnClickListener
                              Bundle savedInstanceState) {
         user = (User) getArguments().getSerializable(ARG_USER);
         // if the user is null, its a new User
-        if (user==null){
+        if (user == null) {
             user = new User();
         }
         getDialog().setTitle(getString(R.string.title_user));
@@ -85,21 +85,23 @@ public class UserFragment extends DialogFragment implements View.OnClickListener
 
     private void initializeGuiVariables(View view) {
         usernameEdit = (EditText) view.findViewById(R.id.usernameEdit);
-        geschlechtRadioGroup = (RadioGroup)view.findViewById(R.id.geschlechtRadioGroup);
-        manRadioButton = (RadioButton)view.findViewById(R.id.user_man);
-        weightEditText = (EditText)view.findViewById(R.id.weightEditText);
-        okButton = (Button)view.findViewById(R.id.userOkButton);
-        abbrechenButton = (Button)view.findViewById(R.id.userCancelButton);
+        geschlechtRadioGroup = (RadioGroup) view.findViewById(R.id.geschlechtRadioGroup);
+        manRadioButton = (RadioButton) view.findViewById(R.id.user_man);
+        weightEditText = (EditText) view.findViewById(R.id.weightEditText);
+        okButton = (Button) view.findViewById(R.id.userOkButton);
+        abbrechenButton = (Button) view.findViewById(R.id.userCancelButton);
     }
 
     private void initializeGuiElements() {
         usernameEdit.setText(user.getName());
-        if (user.isMan()){
+        if (user.isMan()) {
             geschlechtRadioGroup.check(R.id.user_man);
-        }else{
+        } else {
             geschlechtRadioGroup.check(R.id.user_woman);
         }
-        weightEditText.setText(Integer.toString(user.getWeight()));
+        if (user.getWeight() != 0) {
+            weightEditText.setText(Integer.toString(user.getWeight()));
+        }
     }
 
     @Override
@@ -122,17 +124,17 @@ public class UserFragment extends DialogFragment implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.userCancelButton:
                 listener.onClose(null);
                 break;
             case R.id.userOkButton:
-                if(isValidInput()){
+                if (isValidInput()) {
                     user.setName(usernameEdit.getText().toString());
                     user.setWeight(Integer.parseInt(weightEditText.getText().toString()));
                     user.setMan(manRadioButton.isChecked());
                     listener.onClose(user);
-                }else{
+                } else {
                     return;
                 }
                 break;
@@ -143,12 +145,12 @@ public class UserFragment extends DialogFragment implements View.OnClickListener
 
     private boolean isValidInput() {
         boolean validInput = true;
-        if (usernameEdit.length()==0){
+        if (usernameEdit.length() == 0) {
             usernameEdit.setError(getString(R.string.error_empty));
             usernameEdit.requestFocus();
             validInput = false;
         }
-        if (weightEditText.length()==0 || weightEditText.getText().toString().equals("0")){
+        if (weightEditText.length() == 0 || weightEditText.getText().toString().equals("0")) {
             weightEditText.requestFocus();
             weightEditText.requestFocus();
             weightEditText.setError(getString(R.string.error_zero));
