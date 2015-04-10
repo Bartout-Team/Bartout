@@ -8,6 +8,7 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.view.inputmethod.InputMethodManager;
@@ -102,6 +103,10 @@ public class UserFragment extends DialogFragment implements View.OnClickListener
         if (user.getWeight() != 0) {
             weightEditText.setText(Integer.toString(user.getWeight()));
         }
+        // Show soft keyboard automatically
+        usernameEdit.requestFocus();
+        getDialog().getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
     }
 
     @Override
