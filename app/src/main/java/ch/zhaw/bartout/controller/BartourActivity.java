@@ -5,9 +5,12 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.Calendar;
 
 import ch.zhaw.bartout.R;
 import ch.zhaw.bartout.model.Bartout;
@@ -48,6 +51,13 @@ public class BartourActivity extends BaseActivity implements UserFragment.OnFrag
         );
         listView.setAdapter(adapter);
         editTextName.setText(bartour.getName());
+
+        Button stopButton = (Button) findViewById(R.id.stopButton);
+        if(isNew){
+            stopButton.setText(getString(R.string.cancel_text));
+        }else{
+            stopButton.setText(getString(R.string.stopBartour_text));
+        }
     }
 
     @Override
@@ -102,6 +112,15 @@ public class BartourActivity extends BaseActivity implements UserFragment.OnFrag
             finish();
         }
 
+    }
+
+    public void stopButtonOnClick(View view){
+        if(isNew){
+            finish();
+        }else {
+            bartour.setEnd(Calendar.getInstance());
+            startActivity(getString(R.string.title_home));
+        }
     }
 
     public void deleteUser(User user){
