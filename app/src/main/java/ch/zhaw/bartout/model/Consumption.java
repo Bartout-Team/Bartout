@@ -34,4 +34,5 @@ public class Consumption {
     public Calendar getConsumptionTime(){
         return consumptionTime;
     }
+
 }
