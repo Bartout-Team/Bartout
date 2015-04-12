@@ -26,7 +26,11 @@ public class UserStatus implements Serializable {
     }
 
     public boolean fitToDrive() {
-        return false;
+        if(fitToDriveDuration() == 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public double getAlcoholLevel() {
@@ -69,6 +73,8 @@ public class UserStatus implements Serializable {
      * @return duration in seconds
      */
     public long fitToDriveDuration() {
-        return (long) ((getAlcoholLevel()-legalAlcoholLimit)/alcoholBreakDown*60*60);
+        long fitToDriveDuration = (long) ((getAlcoholLevel()-legalAlcoholLimit)/alcoholBreakDown*60*60);
+        if(fitToDriveDuration < 0) fitToDriveDuration = 0;
+        return fitToDriveDuration;
     }
 }
