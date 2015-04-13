@@ -4,6 +4,7 @@ package ch.zhaw.bartout.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -53,11 +54,18 @@ public class Bartour implements Serializable {
     }
 
     public List<User> getUsers() {
-        return users;
+        return Collections.unmodifiableList(users);
     }
 
     public void addUser(User user) {
         users.add(user);
+        ranking.updateRanking();
+    }
+
+    public boolean removeUser(User user) {
+        boolean b = users.remove(user);
+        ranking.updateRanking();
+        return b;
     }
 
     /**

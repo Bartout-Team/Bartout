@@ -1,8 +1,11 @@
 package ch.zhaw.bartout.model;
 
+import org.apache.http.impl.ConnSupport;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -75,5 +78,17 @@ public class UserStatus implements Serializable {
         long fitToDriveDuration = (long) ((getAlcoholLevel()-legalAlcoholLimit)/alcoholBreakDown*60*60);
         if(fitToDriveDuration < 0) fitToDriveDuration = 0;
         return fitToDriveDuration;
+    }
+
+    public void addConsumption(Consumption consumption){
+        consumptions.add(consumption);
+    }
+
+    public boolean removeConsumption(Consumption consumption){
+        return consumptions.remove(consumption);
+    }
+
+    public List<Consumption> getConsumptions(){
+        return Collections.unmodifiableList(consumptions);
     }
 }

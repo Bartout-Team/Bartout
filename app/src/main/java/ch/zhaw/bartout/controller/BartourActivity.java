@@ -123,7 +123,7 @@ public class BartourActivity extends BaseActivity implements UserFragment.OnFrag
     }
 
     public void deleteUser(User user){
-        bartour.getUsers().remove(user);
+        bartour.removeUser(user);
         ((BaseAdapter)listView.getAdapter()).notifyDataSetChanged();
     }
 

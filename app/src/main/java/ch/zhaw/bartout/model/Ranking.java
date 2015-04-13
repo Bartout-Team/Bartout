@@ -13,13 +13,15 @@ import java.util.List;
 public class Ranking implements Serializable {
 
     private List<User> users;
+    private List<RankingUser> orderedUsers;
 
     public Ranking(List<User> users){
         this.users = users;
+        this.orderedUsers = new ArrayList<>();
     }
 
-    public List<RankingUser> getRanking(){
-        List<RankingUser> orderedUsers = new ArrayList();
+    public void updateRanking(){
+        orderedUsers.clear();
         double highestAlcoholLevel = 0;
         for (User user: users){
             if (highestAlcoholLevel<user.getStatus().getAlcoholLevel()){
@@ -31,6 +33,10 @@ public class Ranking implements Serializable {
             user.setAlcoholLevelInPercent(user.getUser().getStatus().getAlcoholLevel()/highestAlcoholLevel);
         }
         Collections.sort(orderedUsers);
+    }
+
+    public List<RankingUser> getRanking(){
+        updateRanking();
         return orderedUsers;
     }
 }

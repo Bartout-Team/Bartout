@@ -3,6 +3,8 @@ package ch.zhaw.bartout.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -47,7 +49,7 @@ public class Bartout implements Serializable {
     }
 
     public List<Bartour> getBartours(){
-        return bartours;
+        return Collections.unmodifiableList(bartours);
     }
 
     public Bartour getActiveBartour(){
@@ -63,6 +65,10 @@ public class Bartout implements Serializable {
                 activeBartour = null;
             }
         });
+    }
+
+    public boolean removeBartour(Bartour bartour){
+        return bartours.remove(bartour);
     }
 
 }
