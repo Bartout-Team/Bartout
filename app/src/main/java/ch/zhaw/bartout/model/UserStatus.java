@@ -37,7 +37,6 @@ public class UserStatus implements Serializable {
         Calendar now = Calendar.getInstance();
         double alcoholVolume = 0;
         for(Consumption consumption : consumptions){
-            //Annahme Volume in Mililiter, AlcoholStrength in % 0.05 = 5%
             double pureAlcoholInMl = consumption.getVolume() * consumption.getAlcoholicStrength();
             double pureAlcoholInG = pureAlcoholInMl*alcoholWeight;
             double reductionFactor;

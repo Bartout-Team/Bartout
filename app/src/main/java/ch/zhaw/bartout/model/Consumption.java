@@ -23,14 +23,23 @@ public class Consumption {
         return beverage;
     }
 
+    /**
+     * @return returns volume in ml
+     */
     public double getVolume () {
         return volume;
     }
 
+    /**
+     * @return returns alcoholic strength in percent (ex. 5% = 0.05)
+     */
     public double getAlcoholicStrength() {
         return alcoholicStrength;
     }
 
+    /**
+     * @return returns the date and time when the beverage was drunken
+     */
     public Calendar getConsumptionTime(){
         return consumptionTime;
     }
