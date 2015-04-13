@@ -47,7 +47,7 @@ public class BartoursAdapter extends ArrayAdapter<Bartour> {
         textDate.setText(dateFormat.format(bartour.getStart().getTime()));
         long duration = bartour.getDuration();
         if(duration != -1) {
-            textDuration.setText(duration / 60 / 60 + "h ");
+            textDuration.setText(duration / 60 / 60 + "h " + duration/60 % 60 + "'");
         }
         return convertView;
     }

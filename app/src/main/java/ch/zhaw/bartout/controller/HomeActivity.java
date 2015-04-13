@@ -3,7 +3,11 @@ package ch.zhaw.bartout.controller;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -16,11 +20,12 @@ import ch.zhaw.bartout.model.Bartout;
 
 
 
-public class HomeActivity extends BaseActivity {
+public class HomeActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     private ListView listView;
     private Bartout bartout;
     private Toast toast;
+    private ActionMode selectionMode;
 
     public HomeActivity() {
         super(R.layout.activity_home);
@@ -62,26 +67,39 @@ public class HomeActivity extends BaseActivity {
         );
         listView.setAdapter(adapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Bartour bartour = (Bartour) listView.getItemAtPosition(position);
-                if (bartour.getIsActive()) {
-                    startActivity(getString(R.string.title_search));
-                } else {
-                    Intent intent = new Intent(HomeActivity.this, ChronicleActivity.class);
-                    Bundle b = new Bundle();
-                    b.putSerializable(ChronicleActivity.CHRONICLE_EXTRA_BARTOUR, bartour);
-                    intent.putExtras(b);
-                    startActivity(intent);
-                }
-            }
-        });
-
+        listView.setOnItemClickListener(this);
+        listView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE_MODAL);
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                return false;
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                if(selectionMode != null) return false;
+
+                listView.setItemChecked(position, true);
+                listView.setOnItemClickListener(null);
+                selectionMode = startActionMode(new ActionMode.Callback() {
+                    @Override
+                    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onDestroyActionMode(ActionMode mode) {
+                        selectionMode = null;
+                        listView.setItemChecked(position, false);
+                        listView.setOnItemClickListener(HomeActivity.this);
+                    }
+                });
+                return true;
             }
         });
 
@@ -90,6 +108,20 @@ public class HomeActivity extends BaseActivity {
 
         if(bartout.getActiveBartour() != null){
             fab.setColorNormal(Color.GRAY);
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Bartour bartour = (Bartour) listView.getItemAtPosition(position);
+        if (bartour.getIsActive()) {
+            startActivity(getString(R.string.title_search));
+        } else {
+            Intent intent = new Intent(HomeActivity.this, ChronicleActivity.class);
+            Bundle b = new Bundle();
+            b.putSerializable(ChronicleActivity.CHRONICLE_EXTRA_BARTOUR, bartour);
+            intent.putExtras(b);
+            startActivity(intent);
         }
     }
 }
