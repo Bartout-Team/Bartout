@@ -1,6 +1,7 @@
 package ch.zhaw.bartout.controller;
 
 import android.os.Bundle;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import ch.zhaw.bartout.R;
@@ -10,6 +11,7 @@ import ch.zhaw.bartout.model.Bartout;
 public class DriveFitnessActivity extends BaseActivity {
     private Bartour bartour;
     private ListView listView;
+    private DriveFitnessAdapter adapter;
 
     public DriveFitnessActivity(){
         super(R.layout.activity_drive_fitness);
@@ -22,7 +24,7 @@ public class DriveFitnessActivity extends BaseActivity {
         bartour = Bartout.getInstance().getActiveBartour();
 
         listView = (ListView) findViewById(R.id.list_drive_fitness);
-        DriveFitnessAdapter adapter = new DriveFitnessAdapter(
+        adapter = new DriveFitnessAdapter(
                 this,
                 bartour.getUsers()
         );
@@ -36,6 +38,7 @@ public class DriveFitnessActivity extends BaseActivity {
 
     public void onResume() {
         super.onResume();
+        adapter.notifyDataSetChanged();
     }
 
 }

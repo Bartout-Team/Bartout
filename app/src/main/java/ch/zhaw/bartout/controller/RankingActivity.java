@@ -1,6 +1,7 @@
 package ch.zhaw.bartout.controller;
 
 import android.os.Bundle;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ public class RankingActivity extends BaseActivity {
 
     private Ranking ranking;
     private ListView listView;
+    private RankingAdapter adapter;
 
     public RankingActivity(){
         super(R.layout.activity_ranking);
@@ -23,11 +25,17 @@ public class RankingActivity extends BaseActivity {
 
         ranking = Bartout.getInstance().getActiveBartour().getRanking();
         listView = (ListView) findViewById(R.id.list_view);
-        RankingAdapter adapter = new RankingAdapter(
+        adapter = new RankingAdapter(
                 this,
                 ranking.getRanking()
         );
         listView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
     }
 
     @Override
