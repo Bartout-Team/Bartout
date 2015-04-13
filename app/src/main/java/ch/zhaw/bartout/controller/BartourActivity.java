@@ -109,8 +109,8 @@ public class BartourActivity extends BaseActivity implements UserFragment.OnFrag
         bartour.setName(editTextName.getText().toString());
         if(isNew){
             Bartout.getInstance().addBartour(bartour);
-            finish();
         }
+        finish();
     }
 
     public void stopButtonOnClick(View view){
