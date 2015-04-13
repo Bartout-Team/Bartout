@@ -86,8 +86,8 @@ public class BartourActivity extends BaseActivity implements UserFragment.OnFrag
         if(user != null) {
             if(!bartour.getUsers().contains(user)){
                 bartour.addUser(user);
-                ((BaseAdapter)listView.getAdapter()).notifyDataSetChanged();
             }
+            ((BaseAdapter)listView.getAdapter()).notifyDataSetChanged();
         }
     }
 
@@ -111,7 +111,6 @@ public class BartourActivity extends BaseActivity implements UserFragment.OnFrag
             Bartout.getInstance().addBartour(bartour);
             finish();
         }
-
     }
 
     public void stopButtonOnClick(View view){
