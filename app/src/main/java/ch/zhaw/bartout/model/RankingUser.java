@@ -1,11 +1,13 @@
 package ch.zhaw.bartout.model;
 
+import java.io.Serializable;
+
 /**
  * Created by serge on 06.04.2015.
  * Wrapper for the User class
  * This class adds the functionality, of alcoholLevel in percent (only needed on the ranking)
  */
-public class RankingUser implements Comparable<RankingUser> {
+public class RankingUser implements Comparable<RankingUser>, Serializable {
     private User user;
     private double alcoholLevelInPercent;
 
