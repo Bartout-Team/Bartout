@@ -13,8 +13,7 @@ import java.util.List;
  */
 public class UserStatus implements Serializable {
     //Todo: isMan und weight müssen noch abgefüllt werden?!
-    private boolean isMan;
-    private int weight;
+    private User user;
     private double legalAlcoholLimit;
     private List<Consumption> consumptions;
     final double alcoholWeight = 0.81;
@@ -23,7 +22,8 @@ public class UserStatus implements Serializable {
     final double resorptionDeficit = 0.2;
     final double alcoholBreakDown = 0.15;
 
-    public UserStatus() {
+    public UserStatus(User user) {
+        this.user = user;
         legalAlcoholLimit = 0.5;
         consumptions = new ArrayList<Consumption>();
     }
@@ -43,12 +43,12 @@ public class UserStatus implements Serializable {
             double pureAlcoholInMl = consumption.getVolume() * consumption.getAlcoholicStrength();
             double pureAlcoholInG = pureAlcoholInMl*alcoholWeight;
             double reductionFactor;
-            if(isMan){
+            if(user.isMan()){
                 reductionFactor = reductionFactorMen;
             }else{
                 reductionFactor = reductionFactorWomen;
             }
-            double reducedWeightOfUser = reductionFactor*weight;
+            double reducedWeightOfUser = reductionFactor*user.getWeight();
             double bloodAlcoholContent = pureAlcoholInG/reducedWeightOfUser;
             double alocholVolume = bloodAlcoholContent-bloodAlcoholContent*resorptionDeficit;
             Calendar startTime = consumption.getConsumptionTime();

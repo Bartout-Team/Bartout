@@ -12,7 +12,7 @@ public class User implements Serializable {
     private UserStatus status;
 
     public User() {
-        status = new UserStatus();
+        status = new UserStatus(this);
     }
 
 
