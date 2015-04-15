@@ -31,7 +31,7 @@ public abstract class BaseActivity extends Activity{
     private ListView drawerList;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
-    private List<String> menuItems = new ArrayList<>();
+    private List<String> menuItems = new ArrayList<String>();
 
     public BaseActivity(int layoutId){
         this(layoutId, true);

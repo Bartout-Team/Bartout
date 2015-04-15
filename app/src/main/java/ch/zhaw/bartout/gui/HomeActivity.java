@@ -26,6 +26,7 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemClic
     private Bartout bartout;
     private Toast toast;
     private ActionMode selectionMode;
+    private BartoursAdapter bartoursAdapter;
 
     public HomeActivity() {
         super(R.layout.activity_home);
@@ -61,11 +62,11 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemClic
         super.onResume();
 
         listView = (ListView) findViewById(R.id.list_view);
-        BartoursAdapter adapter = new BartoursAdapter(
+        bartoursAdapter = new BartoursAdapter(
                 this,
                 bartout.getBartours()
         );
-        listView.setAdapter(adapter);
+        listView.setAdapter(bartoursAdapter);
 
         listView.setOnItemClickListener(this);
         listView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE_MODAL);

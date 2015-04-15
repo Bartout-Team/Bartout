@@ -21,6 +21,7 @@ public class BartourActivity extends BaseActivity implements UserFragment.OnFrag
     private Bartour bartour;
     private ListView listView;
     private boolean isNew;
+    private UsersAdapter usersAdapter;
 
     private static final String USER_FRAGMENT_LABEL = "fragment_user";
 
@@ -45,11 +46,11 @@ public class BartourActivity extends BaseActivity implements UserFragment.OnFrag
             bartour = new Bartour();
         }
         listView = (ListView) findViewById(R.id.list_users);
-        UsersAdapter adapter = new UsersAdapter(
+        usersAdapter = new UsersAdapter(
                 this,
                 bartour.getUsers()
         );
-        listView.setAdapter(adapter);
+        listView.setAdapter(usersAdapter);
         editTextName.setText(bartour.getName());
 
         Button stopButton = (Button) findViewById(R.id.stopButton);
