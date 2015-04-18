@@ -7,20 +7,24 @@ import java.util.Calendar;
  */
 public class Consumption {
 
+    private String name;
     private double alcoholicStrength;
     private double volume;
-    private Beverage beverage;
     private Calendar consumptionTime;
 
-    public Consumption(Beverage beverage) {
-        this.beverage = beverage;
-        alcoholicStrength = beverage.getAlcoholicStrength();
-        volume = beverage.getVolume();
-        consumptionTime = Calendar.getInstance();
-    }
+    public Consumption(){}
 
-    public Beverage getBeverage() {
-        return beverage;
+    /**
+     * Creates a new Consumption
+     * @param name name of consumption
+     * @param alcoholicStrength alcoholic strength of consumption in percent (5% => 0.05)
+     * @param volume volume of consumption in dl
+     */
+    public Consumption(String name, double alcoholicStrength, double volume) {
+        this.name = name;
+        this.alcoholicStrength = alcoholicStrength;
+        this.volume = volume;
+        this.consumptionTime = Calendar.getInstance();
     }
 
     /**
@@ -42,6 +46,14 @@ public class Consumption {
      */
     public Calendar getConsumptionTime(){
         return consumptionTime;
+    }
+
+    /**
+     *
+     * @return returns the name of the consumption
+     */
+    public String getName(){
+        return name;
     }
 
 }
