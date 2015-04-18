@@ -17,7 +17,7 @@ public class Consumption {
     /**
      * Creates a new Consumption
      * @param name name of consumption
-     * @param alcoholicStrength alcoholic strength of consumption in percent (5% => 0.05)
+     * @param alcoholicStrength alcoholic strength of consumption in percent (decimal: 5% => 0.05)
      * @param volume volume of consumption in dl
      */
     public Consumption(String name, double alcoholicStrength, double volume) {
