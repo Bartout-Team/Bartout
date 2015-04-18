@@ -52,7 +52,7 @@ public class BartourActivity extends BaseActivity implements UserFragment.OnFrag
         listView.setAdapter(adapter);
         editTextName.setText(bartour.getName());
 
-        Button stopButton = (Button) findViewById(R.id.stopButton);
+        Button stopButton = (Button) findViewById(R.id.buttonCoctailStrong);
         if(isNew){
             stopButton.setText(getString(R.string.cancel_text));
         }else{

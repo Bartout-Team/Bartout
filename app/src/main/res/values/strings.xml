@@ -34,5 +34,16 @@
     <string name="error_zero">Die Zahl darf nicht 0 sein</string>
     <string name="cancel_text">Abbrechen</string>
     <string name="stopBartour_text">Bartour beenden</string>
+    <string name="buttonBeerLarge_text">grosses Bier</string>
+    <string name="buttonBeerSmall_text">Stange Bier</string>
+    <string name="buttonWine_text">Wein</string>
+    <string name="buttonCoctailStrong_text">starker Drink</string>
+    <string name="buttonOtherBeverage_text">Anderes Getränk</string>
+    <string name="buttonCoctailSoft_text">schwacher Drink</string>
+    <string name="buttonShot_text">Shot</string>
+    <string name="editTextBeverageName_default"><![CDATA[<Getränkename>]]></string>
+    <string name="textViewBeverageVolume">Grösse in Litern:</string>
+    <string name="textViewAlcoholicStrength">Alkoholgehalt in % Vol.:</string>
+    <string name="buttonDrink_text">trinken</string>
 
 </resources>

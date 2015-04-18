@@ -54,7 +54,7 @@
             android:layout_below="@+id/users" />
 
         <Button
-            android:id="@+id/stopButton"
+            android:id="@+id/buttonCoctailStrong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/stopBartour_text"
@@ -69,8 +69,8 @@
             android:id="@+id/saveButton"
             android:layout_marginBottom="33dp"
             android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/stopButton"
-            android:layout_toEndOf="@+id/stopButton" />
+            android:layout_toRightOf="@+id/buttonCoctailStrong"
+            android:layout_toEndOf="@+id/buttonCoctailStrong" />
 
 
     </RelativeLayout>
