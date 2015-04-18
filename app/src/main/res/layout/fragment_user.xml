@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
     android:layout_height="match_parent"
-	tools:context="ch.zhaw.bartout.controller.UserFragment"
+	tools:context="ch.zhaw.bartout.gui.UserFragment"
     android:tag="fragment_user"
     android:paddingLeft="16dp"
     android:paddingRight="16dp">
