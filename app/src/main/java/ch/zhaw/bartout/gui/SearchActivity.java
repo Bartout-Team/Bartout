@@ -1,5 +1,6 @@
 package ch.zhaw.bartout.gui;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.location.Criteria;
 import android.location.Location;
@@ -18,7 +19,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +34,7 @@ public class SearchActivity extends BaseActivity {
     private GoogleMap map;
     private LocationManager locationManager;
     private Map<MarkerOptions, Place> places = new HashMap<MarkerOptions, Place>();
+    private BarDetailsFragment detailsFragment = new BarDetailsFragment();
 
     public SearchActivity() {
         super(R.layout.activity_search);
@@ -68,9 +69,9 @@ public class SearchActivity extends BaseActivity {
                     @Override
                     public boolean onMarkerClick(Marker marker) {
                         //marker.showInfoWindow();
-                        if(places.containsKey(marker)){
-                            showDetails(places.get(marker));
-                        }
+                        //if (places.keySet(). (marker)) {
+                        showDetails(places.get(marker));
+                        //    }
                         return true;
                     }
                 });
@@ -88,7 +89,7 @@ public class SearchActivity extends BaseActivity {
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
     }
 
@@ -107,28 +108,30 @@ public class SearchActivity extends BaseActivity {
 
     /**
      * Button locateMe
+     *
      * @param view
      */
-    public void locateMeOnClick(View view){
+    public void locateMeOnClick(View view) {
         showLocation(getCurrentLocation());
     }
 
-    private void showLocation(Location location){
+    private void showLocation(Location location) {
         float zoomLevel = map.getCameraPosition().zoom;
-        if(zoomLevel < 12) zoomLevel = 15;
+        if (zoomLevel < 12) zoomLevel = 15;
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), zoomLevel));
     }
 
-    private Location getCurrentLocation(){
+    private Location getCurrentLocation() {
         Location loc = locationManager.getLastKnownLocation(locationManager.getBestProvider(new Criteria(), true));
         return loc;
     }
 
     /**
      * Button filter
+     *
      * @param view
      */
-    public void filterOnClick(View view){
+    public void filterOnClick(View view) {
         map.clear();
         SearchFilterFragment filterFragment = SearchFilterFragment.newInstance(filter);
         filterFragment.attatch(new SearchFilterFragment.NoticeDialogListener() {
@@ -167,7 +170,23 @@ public class SearchActivity extends BaseActivity {
         }.execute(loc);
     }
 
-    private void showDetails(Place place){
+    private void showDetails(Place place) {
+        Fragment f = getFragmentManager().findFragmentById(R.id.fragmentDetails);
+        if (f.isVisible()) {
+            getFragmentManager().beginTransaction()
+                    .hide(f)
+                    .commit();
+        } else {
+            getFragmentManager().beginTransaction()
+                    .show(f)
+                    .commit();
+        }
+    }
 
+    public void testOnClick(View view) {
+        Fragment f = getFragmentManager().findFragmentById(R.id.fragmentDetails);
+        getFragmentManager().beginTransaction()
+                .hide(f)
+                .commit();
     }
 }

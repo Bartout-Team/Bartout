@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|bottom"
                 android:layout_marginRight="16dp"
-                android:layout_marginBottom="40dp"
+                android:layout_marginBottom="35dp"
                 android:src="@drawable/ic_action_locate"
                 fab:fab_colorNormal="#4CAF50"
                 fab:fab_colorPressed="#2E7D32"
@@ -59,7 +59,8 @@
             android:name="ch.zhaw.bartout.gui.BarDetailsFragment"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:visibility="gone" />
 
     </RelativeLayout>
 

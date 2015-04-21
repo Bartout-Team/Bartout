@@ -13,10 +13,11 @@
         android:layout_gravity="right|top"
         android:layout_marginTop="0dp"
         android:layout_marginRight="16dp"
-        android:src="@drawable/ic_action_locate"
+        android:src="@drawable/ic_action_directions"
         fab:fab_colorNormal="#4CAF50"
         fab:fab_colorPressed="#2E7D32"
-        fab:fab_colorRipple="#43A047" />
+        fab:fab_colorRipple="#43A047"
+        android:onClick="testOnClick" />
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="120dp"
