@@ -1,6 +1,10 @@
 package ch.zhaw.bartout.gui;
 
+import android.content.Context;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +17,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
+import java.util.Objects;
 
 import ch.zhaw.bartout.R;
 import se.walkercrou.places.GooglePlaces;
@@ -20,11 +25,11 @@ import se.walkercrou.places.Param;
 import se.walkercrou.places.Place;
 
 
-public class SearchActivity extends BaseActivity implements OnMapReadyCallback {
+public class SearchActivity extends BaseActivity {
+    private static String PIPE_CHAR = "%7C";
 
     private GoogleMap mMap;
-
-    private static String PIPE_CHAR = "%7C";
+    private LocationManager locationManager;
 
     public SearchActivity() {
         super(R.layout.activity_search);
@@ -35,7 +40,21 @@ public class SearchActivity extends BaseActivity implements OnMapReadyCallback {
         super.onCreate(savedInstanceState);
 
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        mapFragment.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                mMap = googleMap;
+                mMap.setMyLocationEnabled(true);
+                mMap.getUiSettings().setTiltGesturesEnabled(false);
+                mMap.getUiSettings().setMyLocationButtonEnabled(false);
+                mMap.getUiSettings().setMapToolbarEnabled(false);
+
+                Location location = getCurrentLocation();
+                showLocation(location);
+                searchPlaces(location);
+            }
+        });
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     }
 
     @Override
@@ -48,18 +67,6 @@ public class SearchActivity extends BaseActivity implements OnMapReadyCallback {
         return R.string.title_search;
     }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        mMap.setMyLocationEnabled(true);
-        mMap.getUiSettings().setMyLocationButtonEnabled(true);
-        mMap.getUiSettings().setMapToolbarEnabled(false);
-    }
-
-    /**
-     * Button SetMark
-     * @param view
-     */
     public void setMark(View view) {
         Location loc = mMap.getMyLocation();
         if(loc == null) {
@@ -79,35 +86,39 @@ public class SearchActivity extends BaseActivity implements OnMapReadyCallback {
      * @param view
      */
     public void locateMeOnClick(View view){
-        Location loc = mMap.getMyLocation();
-        if(loc == null) {
-            loc = new Location("");
-            loc.setLatitude(47.3777494);
-            loc.setLongitude(8.532601);
-        }
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(loc.getLatitude(), loc.getLongitude()), 15));
+        showLocation(getCurrentLocation());
+    }
+
+    private void showLocation(Location location){
+        float zoomLevel = mMap.getCameraPosition().zoom;
+        if(zoomLevel < 12) zoomLevel = 15;
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), zoomLevel));
+    }
+
+    private Location getCurrentLocation(){
+        Location loc = locationManager.getLastKnownLocation(locationManager.getBestProvider(new Criteria(), true));
+        return loc;
     }
 
     /**
-     * Button SearchPlaces
+     * Button filter
      * @param view
      */
-    public void searchPlaces(View view) {
+    public void filterOnClick(View view){
+
+    }
+
+    private void searchPlaces(Location loc) {
         mMap.clear();
-        Location loc = mMap.getMyLocation();
-        if(loc == null) {
-            loc = new Location("");
-            loc.setLatitude(47.3777494);
-            loc.setLongitude(8.532601);
-        }
-        new AsyncTask<Location, Void, Void>() {
+        new AsyncTask<Object, Void, Void>() {
             private List<Place> mPlaces;
 
             @Override
-            protected Void doInBackground(Location... params) {
+            protected Void doInBackground(Object... params) {
                 GooglePlaces client = new GooglePlaces(getString(R.string.google_places_api_key));
-                Location myPosition = params[0];
-                mPlaces = client.getNearbyPlacesRankedByDistance(myPosition.getLatitude(), myPosition.getLongitude(), Param.name("types").value("bar"+PIPE_CHAR+"restaurant"));
+                Location myPosition = (Location) params[0];
+                String filter = (String) params[1];
+                mPlaces = client.getNearbyPlacesRankedByDistance(myPosition.getLatitude(), myPosition.getLongitude(), Param.name("types").value(filter));
                 return null;
             }
 
@@ -120,6 +131,6 @@ public class SearchActivity extends BaseActivity implements OnMapReadyCallback {
                     mMap.addMarker(markerOptions);
                 }
             }
-        }.execute(loc);
+        }.execute(loc, "bar"+PIPE_CHAR+"restaurant");
     }
 }
