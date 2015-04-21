@@ -32,6 +32,7 @@
     <string name="ok">OK!</string>
     <string name="no">NO!</string>
     <string name="error_zero">Die Zahl darf nicht 0 sein</string>
+    <string name="ok_text">Ok</string>
     <string name="cancel_text">Abbrechen</string>
     <string name="stopBartour_text">Bartour beenden</string>
     <string name="buttonBeerLarge_text">grosses Bier</string>
@@ -46,5 +47,20 @@
     <string name="textViewAlcoholicStrength">Alkoholgehalt in % Vol.:</string>
     <string name="buttonDrink_text">trinken</string>
     <string name="search_from_here">Von hier suchen</string>
+    <string name="search_filter_bar">Bar</string>
+    <string name="search_filter_bar_name">bar</string>
+    <string name="search_filter_restaurant">Restaurant</string>
+    <string name="search_filter_restaurant_name">restaurant</string>
+    <string name="search_filter_food">Essen</string>
+    <string name="search_filter_food_name">food</string>
+    <string name="search_filter_club">Club</string>
+    <string name="search_filter_club_name">night_club</string>
+    <string name="title_search_filter">Filtern</string>
+    <array name="search_filters">
+        <item>Bar</item>
+        <item>Restaurant</item>
+        <item>Essen</item>
+        <item>Club</item>
+    </array>
 
 </resources>

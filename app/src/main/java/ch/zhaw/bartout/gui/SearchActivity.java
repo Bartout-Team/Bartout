@@ -1,9 +1,9 @@
 package ch.zhaw.bartout.gui;
 
+import android.app.DialogFragment;
 import android.content.Context;
 import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,7 +19,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
-import java.util.Objects;
 
 import ch.zhaw.bartout.R;
 import se.walkercrou.places.GooglePlaces;
@@ -28,9 +27,8 @@ import se.walkercrou.places.Place;
 
 
 public class SearchActivity extends BaseActivity {
-    private static String PIPE_CHAR = "%7C";
-
-    private GoogleMap mMap;
+    private String filter = "bar";
+    private GoogleMap map;
     private LocationManager locationManager;
 
     public SearchActivity() {
@@ -45,14 +43,14 @@ public class SearchActivity extends BaseActivity {
         mapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
-                mMap = googleMap;
-                mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
+                map = googleMap;
+                map.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
                     @Override
                     public void onCameraChange(CameraPosition cameraPosition) {
                         setMark(cameraPosition.target, "Me");
                     }
                 });
-                mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+                map.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
                     @Override
                     public void onMapLongClick(LatLng latLng) {
                         setMark(latLng, getString(R.string.search_from_here));
@@ -62,17 +60,17 @@ public class SearchActivity extends BaseActivity {
                         searchPlaces(loc);
                     }
                 });
-                mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(Marker marker) {
                         marker.showInfoWindow();
                         return true;
                     }
                 });
-                mMap.setMyLocationEnabled(true);
-                mMap.getUiSettings().setTiltGesturesEnabled(false);
-                mMap.getUiSettings().setMyLocationButtonEnabled(false);
-                mMap.getUiSettings().setMapToolbarEnabled(false);
+                map.setMyLocationEnabled(true);
+                map.getUiSettings().setTiltGesturesEnabled(false);
+                map.getUiSettings().setMyLocationButtonEnabled(false);
+                map.getUiSettings().setMapToolbarEnabled(false);
 
                 Location location = getCurrentLocation();
                 showLocation(location);
@@ -96,7 +94,7 @@ public class SearchActivity extends BaseActivity {
         MarkerOptions marker = new MarkerOptions()
                 .position(location)
                 .title(title);
-        mMap.addMarker(marker);
+        map.addMarker(marker);
         return marker;
     }
 
@@ -109,9 +107,9 @@ public class SearchActivity extends BaseActivity {
     }
 
     private void showLocation(Location location){
-        float zoomLevel = mMap.getCameraPosition().zoom;
+        float zoomLevel = map.getCameraPosition().zoom;
         if(zoomLevel < 12) zoomLevel = 15;
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), zoomLevel));
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), zoomLevel));
     }
 
     private Location getCurrentLocation(){
@@ -124,19 +122,26 @@ public class SearchActivity extends BaseActivity {
      * @param view
      */
     public void filterOnClick(View view){
-        mMap.clear();
+        map.clear();
+        SearchFilterFragment filterFragment = SearchFilterFragment.newInstance(filter);
+        filterFragment.attatch(new SearchFilterFragment.NoticeDialogListener() {
+            @Override
+            public void onDialogPositiveClick(String filter) {
+                SearchActivity.this.filter = filter;
+            }
+        });
+        filterFragment.show(getFragmentManager(), "searchFilter");
     }
 
     private void searchPlaces(Location loc) {
-        new AsyncTask<Object, Void, Void>() {
+        new AsyncTask<Location, Void, Void>() {
             private List<Place> mPlaces;
 
             @Override
-            protected Void doInBackground(Object... params) {
+            protected Void doInBackground(Location... params) {
                 GooglePlaces client = new GooglePlaces(getString(R.string.google_places_api_key));
-                Location myPosition = (Location) params[0];
-                String filter = (String) params[1];
-                mPlaces = client.getNearbyPlacesRankedByDistance(myPosition.getLatitude(), myPosition.getLongitude(), Param.name("types").value(filter));
+                Location myPosition = params[0];
+                mPlaces = client.getNearbyPlacesRankedByDistance(myPosition.getLatitude(), myPosition.getLongitude(), Param.name("types").value(SearchActivity.this.filter));
                 return null;
             }
 
@@ -146,9 +151,9 @@ public class SearchActivity extends BaseActivity {
                     markerOptions.title(p.getName().toString())
                             .position(new LatLng(p.getLatitude(), p.getLongitude()))
                             .snippet(p.getTypes().toString());
-                    mMap.addMarker(markerOptions);
+                    map.addMarker(markerOptions);
                 }
             }
-        }.execute(loc, "bar");
+        }.execute(loc);
     }
 }
