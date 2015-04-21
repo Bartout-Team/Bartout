@@ -75,6 +75,20 @@ public class SearchActivity extends BaseActivity implements OnMapReadyCallback {
     }
 
     /**
+     * Button locateMe
+     * @param view
+     */
+    public void locateMeOnClick(View view){
+        Location loc = mMap.getMyLocation();
+        if(loc == null) {
+            loc = new Location("");
+            loc.setLatitude(47.3777494);
+            loc.setLongitude(8.532601);
+        }
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(loc.getLatitude(), loc.getLongitude()), 15));
+    }
+
+    /**
      * Button SearchPlaces
      * @param view
      */
