@@ -13,6 +13,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -150,7 +151,8 @@ public class SearchActivity extends BaseActivity {
                     MarkerOptions markerOptions = new MarkerOptions();
                     markerOptions.title(p.getName().toString())
                             .position(new LatLng(p.getLatitude(), p.getLongitude()))
-                            .snippet(p.getTypes().toString());
+                            .snippet(p.getTypes().toString())
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_action_beer_pin));
                     map.addMarker(markerOptions);
                 }
             }
