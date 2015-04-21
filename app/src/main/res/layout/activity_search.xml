@@ -6,22 +6,23 @@
     android:id="@id/drawer_layout"
     tools:context="ch.zhaw.bartout.gui.HomeActivity">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_height="fill_parent"
-        android:layout_width="fill_parent"
-        tools:context="ch.zhaw.mapsprototype.MapsActivity"
-        android:orientation="vertical">
+        android:layout_width="fill_parent">
 
         <FrameLayout
+            android:id="@+id/layoutMap"
+            android:layout_above="@+id/fragmentDetails"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="-28dp">
+
             <fragment xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/map"
                 android:name="com.google.android.gms.maps.MapFragment"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_gravity="fill"
                 />
 
             <com.melnykov.fab.FloatingActionButton
@@ -42,7 +43,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|bottom"
-                android:layout_margin="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="40dp"
                 android:src="@drawable/ic_action_locate"
                 fab:fab_colorNormal="#4CAF50"
                 fab:fab_colorPressed="#2E7D32"
@@ -51,22 +53,15 @@
 
         </FrameLayout>
 
-
-        <!-- <LinearLayout
+        <fragment android:id="@+id/fragmentDetails"
             android:layout_width="fill_parent"
-            android:layout_height="150dp">
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Set Mark"
-                android:onClick="setMark"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Search Places API Client"
-                android:onClick="searchPlaces"/>
-        </LinearLayout> -->
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:name="ch.zhaw.bartout.gui.BarDetailsFragment"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </RelativeLayout>
 
     <include layout="@layout/navigation_drawer" />
 

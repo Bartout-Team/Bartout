@@ -1,6 +1,5 @@
 package ch.zhaw.bartout.gui;
 
-import android.app.DialogFragment;
 import android.content.Context;
 import android.location.Criteria;
 import android.location.Location;
@@ -19,7 +18,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import ch.zhaw.bartout.R;
 import se.walkercrou.places.GooglePlaces;
@@ -31,6 +33,7 @@ public class SearchActivity extends BaseActivity {
     private String filter = "bar";
     private GoogleMap map;
     private LocationManager locationManager;
+    private Map<MarkerOptions, Place> places = new HashMap<MarkerOptions, Place>();
 
     public SearchActivity() {
         super(R.layout.activity_search);
@@ -64,7 +67,10 @@ public class SearchActivity extends BaseActivity {
                 map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(Marker marker) {
-                        marker.showInfoWindow();
+                        //marker.showInfoWindow();
+                        if(places.containsKey(marker)){
+                            showDetails(places.get(marker));
+                        }
                         return true;
                     }
                 });
@@ -135,27 +141,33 @@ public class SearchActivity extends BaseActivity {
     }
 
     private void searchPlaces(Location loc) {
-        new AsyncTask<Location, Void, Void>() {
-            private List<Place> mPlaces;
+        AsyncTask<Location, Void, Void> types = new AsyncTask<Location, Void, Void>() {
+            private List<Place> places;
 
             @Override
             protected Void doInBackground(Location... params) {
                 GooglePlaces client = new GooglePlaces(getString(R.string.google_places_api_key));
                 Location myPosition = params[0];
-                mPlaces = client.getNearbyPlacesRankedByDistance(myPosition.getLatitude(), myPosition.getLongitude(), Param.name("types").value(SearchActivity.this.filter));
+                places = client.getNearbyPlacesRankedByDistance(myPosition.getLatitude(), myPosition.getLongitude(), Param.name("types").value(SearchActivity.this.filter));
                 return null;
             }
 
             protected void onPostExecute(Void result) {
-                for (se.walkercrou.places.Place p : mPlaces) {
-                    MarkerOptions markerOptions = new MarkerOptions();
-                    markerOptions.title(p.getName().toString())
-                            .position(new LatLng(p.getLatitude(), p.getLongitude()))
-                            .snippet(p.getTypes().toString())
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_action_beer_pin));
-                    map.addMarker(markerOptions);
+                for (Place place : places) {
+                    if (!SearchActivity.this.places.containsValue(place)) {
+                        MarkerOptions markerOptions = new MarkerOptions();
+                        markerOptions.title(place.getName().toString())
+                                .position(new LatLng(place.getLatitude(), place.getLongitude()))
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_action_beer_pin));
+                        SearchActivity.this.places.put(markerOptions, place);
+                        map.addMarker(markerOptions);
+                    }
                 }
             }
         }.execute(loc);
+    }
+
+    private void showDetails(Place place){
+
     }
 }
