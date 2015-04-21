@@ -13,7 +13,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
@@ -44,6 +46,29 @@ public class SearchActivity extends BaseActivity {
             @Override
             public void onMapReady(GoogleMap googleMap) {
                 mMap = googleMap;
+                mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
+                    @Override
+                    public void onCameraChange(CameraPosition cameraPosition) {
+                        setMark(cameraPosition.target, "Me");
+                    }
+                });
+                mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+                    @Override
+                    public void onMapLongClick(LatLng latLng) {
+                        setMark(latLng, getString(R.string.search_from_here));
+                        Location loc = new Location("");
+                        loc.setLatitude(latLng.latitude);
+                        loc.setLongitude(latLng.longitude);
+                        searchPlaces(loc);
+                    }
+                });
+                mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+                        marker.showInfoWindow();
+                        return true;
+                    }
+                });
                 mMap.setMyLocationEnabled(true);
                 mMap.getUiSettings().setTiltGesturesEnabled(false);
                 mMap.getUiSettings().setMyLocationButtonEnabled(false);
@@ -67,18 +92,12 @@ public class SearchActivity extends BaseActivity {
         return R.string.title_search;
     }
 
-    public void setMark(View view) {
-        Location loc = mMap.getMyLocation();
-        if(loc == null) {
-            loc = new Location("");
-            loc.setLatitude(47.3777494);
-            loc.setLongitude(8.532601);
-        }
+    private MarkerOptions setMark(LatLng location, String title) {
         MarkerOptions marker = new MarkerOptions()
-                .position(new LatLng(loc.getLatitude(), loc.getLongitude()))
-                .title("Mark");
+                .position(location)
+                .title(title);
         mMap.addMarker(marker);
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(), 15));
+        return marker;
     }
 
     /**
@@ -105,11 +124,10 @@ public class SearchActivity extends BaseActivity {
      * @param view
      */
     public void filterOnClick(View view){
-
+        mMap.clear();
     }
 
     private void searchPlaces(Location loc) {
-        mMap.clear();
         new AsyncTask<Object, Void, Void>() {
             private List<Place> mPlaces;
 
@@ -131,6 +149,6 @@ public class SearchActivity extends BaseActivity {
                     mMap.addMarker(markerOptions);
                 }
             }
-        }.execute(loc, "bar"+PIPE_CHAR+"restaurant");
+        }.execute(loc, "bar");
     }
 }
