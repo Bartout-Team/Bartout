@@ -1,5 +1,6 @@
 package ch.zhaw.bartout.gui;
 
+import android.app.ActionBar;
 import android.app.Fragment;
 import android.content.Context;
 import android.location.Criteria;
@@ -8,6 +9,9 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -30,11 +34,13 @@ import se.walkercrou.places.Place;
 
 
 public class SearchActivity extends BaseActivity {
+    private static final String BAR_DETAILS_TAG = "BARDETIALS_TAG";
+
     private String filter = "bar";
     private GoogleMap map;
     private LocationManager locationManager;
-    private Map<MarkerOptions, Place> places = new HashMap<MarkerOptions, Place>();
-    private BarDetailsFragment detailsFragment = new BarDetailsFragment();
+    private Map<LatLng, Place> places = new HashMap<LatLng, Place>();
+    private BarDetailsFragment detailsFragment;
 
     public SearchActivity() {
         super(R.layout.activity_search);
@@ -68,11 +74,16 @@ public class SearchActivity extends BaseActivity {
                 map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(Marker marker) {
-                        //marker.showInfoWindow();
-                        //if (places.keySet(). (marker)) {
-                        showDetails(places.get(marker));
-                        //    }
+                        if (places.containsKey(marker.getPosition())) {
+                            showDetails(places.get(marker.getPosition()));
+                        }
                         return true;
+                    }
+                });
+                map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                    @Override
+                    public void onMapClick(LatLng latLng) {
+                        hideDetails();
                     }
                 });
                 map.setMyLocationEnabled(true);
@@ -162,7 +173,7 @@ public class SearchActivity extends BaseActivity {
                         markerOptions.title(place.getName().toString())
                                 .position(new LatLng(place.getLatitude(), place.getLongitude()))
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_action_beer_pin));
-                        SearchActivity.this.places.put(markerOptions, place);
+                        SearchActivity.this.places.put(markerOptions.getPosition(), place);
                         map.addMarker(markerOptions);
                     }
                 }
@@ -170,23 +181,30 @@ public class SearchActivity extends BaseActivity {
         }.execute(loc);
     }
 
-    private void showDetails(Place place) {
-        Fragment f = getFragmentManager().findFragmentById(R.id.fragmentDetails);
-        if (f.isVisible()) {
+    private void hideDetails() {
+        Fragment f = getFragmentManager().findFragmentByTag(BAR_DETAILS_TAG);
+        if (f != null) {
             getFragmentManager().beginTransaction()
-                    .hide(f)
-                    .commit();
-        } else {
-            getFragmentManager().beginTransaction()
-                    .show(f)
+                    .remove(f)
                     .commit();
         }
     }
 
-    public void testOnClick(View view) {
-        Fragment f = getFragmentManager().findFragmentById(R.id.fragmentDetails);
+    private void showDetails(Place place) {
+        hideDetails();
+        Fragment f = BarDetailsFragment.getNewInstance(place.getName());
+
         getFragmentManager().beginTransaction()
-                .hide(f)
+                .add(R.id.relLayout, f, BAR_DETAILS_TAG)
                 .commit();
+        /*
+        android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:name="ch.zhaw.bartout.gui.BarDetailsFragment"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:visibility="gone" />
+         */
     }
 }
