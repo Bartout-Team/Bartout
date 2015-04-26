@@ -5,9 +5,12 @@ package ch.zhaw.bartout.domain;
  */
 public class UserParticipationChronicleEvent extends UserChronicleEvent {
 
-    private boolean isNewUser;
+    public UserParticipationChronicleEvent(User user, boolean isNewUser){
+        super(user);
+        this.isNewUser=isNewUser;
+    }
 
-    public void setNewUser(boolean isNewUser) { this.isNewUser = isNewUser; }
+    private boolean isNewUser;
 
     public boolean isNewUser() {    return isNewUser;   }
 }
