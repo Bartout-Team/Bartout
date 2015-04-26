@@ -6,24 +6,6 @@
     tools:context="ch.zhaw.bartout.gui.BarDetailsFragment"
     android:background="@android:color/transparent">
 
-    <com.melnykov.fab.FloatingActionButton
-        android:id="@+id/checkinButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|top"
-        android:layout_marginTop="0dp"
-        android:layout_marginRight="16dp"
-        android:src="@drawable/ic_action_accept"
-        fab:fab_colorNormal="@android:color/holo_green_dark"/>
-    <com.melnykov.fab.FloatingActionButton
-        android:id="@+id/navigateButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|top"
-        android:layout_marginTop="70dp"
-        android:layout_marginRight="16dp"
-        android:src="@drawable/ic_action_directions"
-        fab:fab_colorNormal="@android:color/holo_orange_light" />
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
@@ -45,5 +27,26 @@
             android:textSize="16dp"
             android:layout_margin="5dp"/>
     </LinearLayout>
+
+
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/checkInButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|top"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="16dp"
+        android:onClick="checkInOnClick"
+        android:src="@drawable/ic_action_accept"
+        fab:fab_colorNormal="@android:color/holo_green_dark"/>
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/navigateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|top"
+        android:layout_marginTop="70dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/ic_action_directions"
+        fab:fab_colorNormal="@android:color/holo_orange_light" />
 
 </FrameLayout>

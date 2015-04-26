@@ -8,6 +8,7 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -218,6 +219,8 @@ public class SearchActivity extends BaseActivity {
             locationChronicleEvent.setLocationName(selectedPlace.getName());
             locationChronicleEvent.setLocation(selectedPlace.getLatitude(), selectedPlace.getLongitude());
             bartour.getChronicle().addEvent(locationChronicleEvent);
+            Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.toast_location_check_in), Toast.LENGTH_LONG);
+            toast.show();
         }
     }
 }

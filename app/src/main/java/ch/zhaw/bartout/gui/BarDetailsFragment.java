@@ -53,7 +53,7 @@ public class BarDetailsFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_bar_details, container, false);
 
         FloatingActionButton navigateButton = (FloatingActionButton) view.findViewById(R.id.navigateButton);
-        FloatingActionButton checkinButton = (FloatingActionButton) view.findViewById(R.id.checkinButton);
+        FloatingActionButton checkInButton = (FloatingActionButton) view.findViewById(R.id.checkInButton);
 
         navigateButton.setOnClickListener(new View.OnClickListener() {
             @Override
