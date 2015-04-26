@@ -24,17 +24,25 @@ import java.util.List;
 import java.util.Map;
 
 import ch.zhaw.bartout.R;
+import ch.zhaw.bartout.domain.ATMLocationChronicleEvent;
+import ch.zhaw.bartout.domain.Bartour;
+import ch.zhaw.bartout.domain.Bartout;
+import ch.zhaw.bartout.domain.ChronicleEvent;
+import ch.zhaw.bartout.domain.EstablishmentLocationChronicleEvent;
+import ch.zhaw.bartout.domain.LocationChronicleEvent;
 import se.walkercrou.places.GooglePlaces;
 import se.walkercrou.places.Param;
 import se.walkercrou.places.Place;
 
 
 public class SearchActivity extends BaseActivity {
+    private Bartour bartour;
     private String filter = "bar";
     private GoogleMap map;
     private LocationManager locationManager;
     private Map<MarkerOptions, Place> places = new HashMap<MarkerOptions, Place>();
     private BarDetailsFragment detailsFragment = new BarDetailsFragment();
+    private Place selectedPlace;
 
     public SearchActivity() {
         super(R.layout.activity_search);
@@ -43,6 +51,7 @@ public class SearchActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        bartour = Bartout.getInstance().getActiveBartour();
 
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(new OnMapReadyCallback() {
@@ -171,6 +180,7 @@ public class SearchActivity extends BaseActivity {
     }
 
     private void showDetails(Place place) {
+        selectedPlace = place;
         Fragment f = getFragmentManager().findFragmentById(R.id.fragmentDetails);
         if (f.isVisible()) {
             getFragmentManager().beginTransaction()
@@ -188,5 +198,20 @@ public class SearchActivity extends BaseActivity {
         getFragmentManager().beginTransaction()
                 .hide(f)
                 .commit();
+    }
+
+    public void checkInOnClick(View view) {
+        if(bartour != null){
+            LocationChronicleEvent locationChronicleEvent;
+            if(selectedPlace.getTypes().toString().contains("ATM")) {
+                locationChronicleEvent = new ATMLocationChronicleEvent();
+            } else {
+                locationChronicleEvent = new EstablishmentLocationChronicleEvent();
+                ((EstablishmentLocationChronicleEvent)locationChronicleEvent).setType(selectedPlace.getTypes().toString());
+            }
+            locationChronicleEvent.setLocationName(selectedPlace.getName());
+            locationChronicleEvent.setLocation(selectedPlace.getLatitude(), selectedPlace.getLongitude());
+            bartour.getChronicle().addEvent(locationChronicleEvent);
+        }
     }
 }

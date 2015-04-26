@@ -16,6 +16,10 @@ public abstract class LocationChronicleEvent extends ChronicleEvent {
 
     public void setLocationName(String locationName) {  this.locationName = locationName;   }
 
-    public void setLocation(Location location) {    this.location = location;   }
+    public void setLocation(double latitude, double longitude) {
+        location = new Location("LocationChronicleEvent");
+        location.setLatitude(latitude);
+        location.setLongitude(longitude);
+    }
 
 }

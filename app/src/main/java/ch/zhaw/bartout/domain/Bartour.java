@@ -26,6 +26,7 @@ public class Bartour implements Serializable {
         start = Calendar.getInstance();
         end = null;
         ranking = new Ranking(users);
+        chronicle = new Chronicle();
     }
 
     public Bartour setName(String name) {
@@ -90,6 +91,10 @@ public class Bartour implements Serializable {
 
     public Ranking getRanking() {
         return ranking;
+    }
+
+    public Chronicle getChronicle() {
+        return chronicle;
     }
 
     interface OnFinishedListener{

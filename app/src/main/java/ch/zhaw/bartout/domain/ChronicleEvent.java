@@ -1,6 +1,7 @@
 package ch.zhaw.bartout.domain;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -8,13 +9,13 @@ import java.util.Date;
  */
 public abstract class ChronicleEvent implements Serializable {
 
-    private Date moment;
+    private Calendar moment;
 
     public ChronicleEvent() {
-
+        moment = Calendar.getInstance();
     }
 
-    public Date getMoment() {
+    public Calendar getMoment() {
         return moment;
     }
 }
