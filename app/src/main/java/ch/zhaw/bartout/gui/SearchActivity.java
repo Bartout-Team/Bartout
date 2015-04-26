@@ -24,17 +24,19 @@ import java.util.List;
 import java.util.Map;
 
 import ch.zhaw.bartout.R;
+import ch.zhaw.bartout.domain.Establishment;
 import se.walkercrou.places.GooglePlaces;
 import se.walkercrou.places.Param;
 import se.walkercrou.places.Place;
 
 
 public class SearchActivity extends BaseActivity {
+    private static final String BAR_DETAILS_TAG = "BARDETIALS_TAG";
+
     private String filter = "bar";
     private GoogleMap map;
     private LocationManager locationManager;
-    private Map<MarkerOptions, Place> places = new HashMap<MarkerOptions, Place>();
-    private BarDetailsFragment detailsFragment = new BarDetailsFragment();
+    private Map<LatLng, Place> places = new HashMap<LatLng, Place>();
 
     public SearchActivity() {
         super(R.layout.activity_search);
@@ -52,7 +54,7 @@ public class SearchActivity extends BaseActivity {
                 map.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
                     @Override
                     public void onCameraChange(CameraPosition cameraPosition) {
-                        setMark(cameraPosition.target, "Me");
+
                     }
                 });
                 map.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
@@ -68,11 +70,16 @@ public class SearchActivity extends BaseActivity {
                 map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(Marker marker) {
-                        //marker.showInfoWindow();
-                        //if (places.keySet(). (marker)) {
-                        showDetails(places.get(marker));
-                        //    }
+                        if (places.containsKey(marker.getPosition())) {
+                            showDetails(places.get(marker.getPosition()));
+                        }
                         return true;
+                    }
+                });
+                map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                    @Override
+                    public void onMapClick(LatLng latLng) {
+                        hideDetails();
                     }
                 });
                 map.setMyLocationEnabled(true);
@@ -138,6 +145,7 @@ public class SearchActivity extends BaseActivity {
             @Override
             public void onDialogPositiveClick(String filter) {
                 SearchActivity.this.filter = filter;
+                searchPlaces(getCurrentLocation());
             }
         });
         filterFragment.show(getFragmentManager(), "searchFilter");
@@ -162,7 +170,7 @@ public class SearchActivity extends BaseActivity {
                         markerOptions.title(place.getName().toString())
                                 .position(new LatLng(place.getLatitude(), place.getLongitude()))
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_action_beer_pin));
-                        SearchActivity.this.places.put(markerOptions, place);
+                        SearchActivity.this.places.put(markerOptions.getPosition(), place);
                         map.addMarker(markerOptions);
                     }
                 }
@@ -170,23 +178,21 @@ public class SearchActivity extends BaseActivity {
         }.execute(loc);
     }
 
-    private void showDetails(Place place) {
-        Fragment f = getFragmentManager().findFragmentById(R.id.fragmentDetails);
-        if (f.isVisible()) {
+    private void hideDetails() {
+        Fragment f = getFragmentManager().findFragmentByTag(BAR_DETAILS_TAG);
+        if (f != null) {
             getFragmentManager().beginTransaction()
-                    .hide(f)
-                    .commit();
-        } else {
-            getFragmentManager().beginTransaction()
-                    .show(f)
+                    .remove(f)
                     .commit();
         }
     }
 
-    public void testOnClick(View view) {
-        Fragment f = getFragmentManager().findFragmentById(R.id.fragmentDetails);
+    private void showDetails(Place place) {
+        hideDetails();
+        Fragment f = BarDetailsFragment.getNewInstance(new Establishment(place));
+
         getFragmentManager().beginTransaction()
-                .hide(f)
+                .add(R.id.relLayout, f, BAR_DETAILS_TAG)
                 .commit();
     }
 }
