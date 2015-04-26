@@ -58,14 +58,20 @@ public class Bartour implements Serializable {
         return Collections.unmodifiableList(users);
     }
 
+    /**
+     * Fügt den Benutzer der Benutzerliste hinzu und updatet die Klasse Ranking
+     * @param user
+     */
     public void addUser(User user) {
         users.add(user);
         ranking.updateRanking();
+        addUserParticipationChronicleEvent(user.copy(),true);
     }
 
     public boolean removeUser(User user) {
         boolean b = users.remove(user);
         ranking.updateRanking();
+        addUserParticipationChronicleEvent(user.copy(),false);
         return b;
     }
 
@@ -93,8 +99,12 @@ public class Bartour implements Serializable {
         return ranking;
     }
 
-    public Chronicle getChronicle() {
+    public Chronicle getChronicle(){
         return chronicle;
+    }
+
+    private void addUserParticipationChronicleEvent(User user, boolean isNewUser){
+        chronicle.addEvent(new UserParticipationChronicleEvent(user,isNewUser));
     }
 
     interface OnFinishedListener{

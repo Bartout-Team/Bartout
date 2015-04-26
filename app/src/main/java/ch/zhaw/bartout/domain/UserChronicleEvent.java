@@ -5,9 +5,13 @@ package ch.zhaw.bartout.domain;
  */
 public abstract class UserChronicleEvent extends ChronicleEvent {
 
+    public UserChronicleEvent(User user){
+        super();
+        this.user = user;
+    }
+
     private User user;
 
     public User getUser() { return user;    }
 
-    public void setUser(User user) {    this.user = user;   }
 }

@@ -22,4 +22,7 @@ public class Chronicle implements Serializable {
         return chronicleEvents;
     }
 
+    public static Chronicle getActiveChronicle(){
+        return Bartout.getInstance().getActiveBartour().getChronicle();
+    }
 }

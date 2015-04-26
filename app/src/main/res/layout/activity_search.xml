@@ -7,6 +7,7 @@
     tools:context="ch.zhaw.bartout.gui.HomeActivity">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/relLayout"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_height="fill_parent"
         android:layout_width="fill_parent">
@@ -31,9 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|bottom"
                 android:src="@drawable/ic_action_search"
-                fab:fab_colorNormal="#4CAF50"
-                fab:fab_colorPressed="#2E7D32"
-                fab:fab_colorRipple="#43A047"
+                fab:fab_colorNormal="@android:color/holo_red_light"
                 android:onClick="filterOnClick"
                 android:layout_marginBottom="100dp"
                 android:layout_marginRight="16dp" />
@@ -46,13 +45,12 @@
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="35dp"
                 android:src="@drawable/ic_action_locate"
-                fab:fab_colorNormal="#4CAF50"
-                fab:fab_colorPressed="#2E7D32"
-                fab:fab_colorRipple="#43A047"
+                fab:fab_colorNormal="@android:color/holo_blue_light"
                 android:onClick="locateMeOnClick" />
 
         </FrameLayout>
 
+        <!--
         <fragment android:id="@+id/fragmentDetails"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -61,6 +59,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:visibility="gone" />
+        -->
 
     </RelativeLayout>
 
