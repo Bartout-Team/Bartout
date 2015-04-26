@@ -5,6 +5,11 @@ package ch.zhaw.bartout.domain;
  */
 public class UserStatusChronicleEvent extends UserChronicleEvent {
 
+    public UserStatusChronicleEvent(User user){
+        super(user);
+        status = user.getStatus();
+    }
+
     private UserStatus status;
 
     public void setStatus(UserStatus status) {  this.status = status;   }

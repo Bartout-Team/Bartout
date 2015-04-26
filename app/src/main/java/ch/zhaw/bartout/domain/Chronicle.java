@@ -22,10 +22,7 @@ public class Chronicle implements Serializable {
         return chronicleEvents;
     }
 
-    /***
-     * updatet die Liste, baut alles nochmals auf und sortiert nach Datum
-     */
-    public void updateChronicleEvents(){
-
+    public static Chronicle getActiveChronicle(){
+        return Bartout.getInstance().getActiveBartour().getChronicle();
     }
 }
