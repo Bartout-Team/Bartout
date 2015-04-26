@@ -10,15 +10,14 @@ import java.util.List;
  * Created by bwa on 29.03.2015.
  */
 public class UserStatus implements Serializable {
-    //Todo: isMan und weight müssen noch abgefüllt werden?!
     private User user;
     private double legalAlcoholLimit;
     private List<Consumption> consumptions;
-    final double alcoholWeight = 0.81;
-    final double reductionFactorWomen = 0.6;
-    final double reductionFactorMen = 0.7;
-    final double resorptionDeficit = 0.2;
-    final double alcoholBreakDown = 0.15;
+    private final double alcoholWeight = 0.81;
+    private final double reductionFactorWomen = 0.6;
+    private final double reductionFactorMen = 0.7;
+    private final double resorptionDeficit = 0.2;
+    private final double alcoholBreakDown = 0.15;
 
     public UserStatus(User user) {
         this.user = user;
