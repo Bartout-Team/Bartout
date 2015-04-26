@@ -1,6 +1,7 @@
 package ch.zhaw.bartout.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,7 +11,11 @@ public class Chronicle implements Serializable {
     private List<ChronicleEvent> chronicleEvents;
 
     public Chronicle() {
+        chronicleEvents = new ArrayList<ChronicleEvent>();
+    }
 
+    public void addEvent(ChronicleEvent event) {
+        chronicleEvents.add(event);
     }
 
     public List<ChronicleEvent> getChronicleEvents() {
