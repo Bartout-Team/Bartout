@@ -16,7 +16,7 @@
         android:src="@drawable/ic_action_accept"
         fab:fab_colorNormal="@android:color/holo_green_dark"/>
     <com.melnykov.fab.FloatingActionButton
-        android:id="@+id/locateMeButton"
+        android:id="@+id/navigateButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right|top"

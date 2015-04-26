@@ -2,6 +2,8 @@ package ch.zhaw.bartout.domain;
 
 import android.location.Location;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -18,6 +20,8 @@ public class Establishment implements Serializable {
     private String name;
     private String address;
     private String type;
+    private double latitude;
+    private double longitude;
 
     public Establishment() {
     }
@@ -27,6 +31,8 @@ public class Establishment implements Serializable {
         name = place.getName();
         address = place.getAddress();
         type = getType(place.getTypes());
+        latitude = place.getLatitude();
+        longitude = place.getLongitude();
     }
 
     private String getType(List<String> gTypes) {
@@ -70,22 +76,6 @@ public class Establishment implements Serializable {
         this.address = address;
     }
 
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    public String getOpeningHours() {
-        return openingHours;
-    }
-
-    public void setOpeningHours(String openingHours) {
-        this.openingHours = openingHours;
-    }
-
     public String getType() {
         return type;
     }
@@ -94,7 +84,19 @@ public class Establishment implements Serializable {
         this.type = type;
     }
 
-    private Location location;
-    private String openingHours;
+    public double getLatitude(){
+        return latitude;
+    }
 
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
 }
