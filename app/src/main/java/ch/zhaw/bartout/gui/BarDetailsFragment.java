@@ -12,31 +12,24 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ch.zhaw.bartout.R;
+import ch.zhaw.bartout.domain.Establishment;
 import se.walkercrou.places.GooglePlaces;
 import se.walkercrou.places.Place;
 
 
 public class BarDetailsFragment extends Fragment {
 
-    public static String ARGUMENT_PLACE_JSON = "Argument_Place_Json";
+    public static String ARGUMENT_PLACE_JSON = "Argument_Establishment";
 
-    public static BarDetailsFragment getNewInstance(Place place){
+    public static BarDetailsFragment getNewInstance(Establishment establishment){
         BarDetailsFragment f = new BarDetailsFragment();
         Bundle b = new Bundle();
-        b.putString(BarDetailsFragment.ARGUMENT_PLACE_JSON, place.getJson().toString());
+        b.putSerializable(BarDetailsFragment.ARGUMENT_PLACE_JSON, establishment);
         f.setArguments(b);
         return f;
     }
 
-    public static BarDetailsFragment getNewInstance(String placeId){
-        BarDetailsFragment f = new BarDetailsFragment();
-        Bundle b = new Bundle();
-        b.putString(BarDetailsFragment.ARGUMENT_PLACE_JSON, placeId);
-        f.setArguments(b);
-        return f;
-    }
-
-    private Place place;
+    private Establishment establishment;
     GooglePlaces client;
 
     public BarDetailsFragment() {
@@ -56,8 +49,8 @@ public class BarDetailsFragment extends Fragment {
         super.onStart();
         Bundle b = getArguments();
         if(b != null) {
-            String placeJson = b.getString(ARGUMENT_PLACE_JSON);
-
+            Establishment est = (Establishment) b.getSerializable(ARGUMENT_PLACE_JSON);
+            establishment = est;
             RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             p.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
             p.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
@@ -66,7 +59,10 @@ public class BarDetailsFragment extends Fragment {
             getView().setLayoutParams(p);
 
             TextView textViewBarName = (TextView) getView().findViewById(R.id.textViewBarName);
-            textViewBarName.setText(placeJson);
+            textViewBarName.setText(establishment.getName());
+
+            TextView textViewType = (TextView) getView().findViewById(R.id.textViewType);
+            textViewType.setText(establishment.getType());
         }
     }
 

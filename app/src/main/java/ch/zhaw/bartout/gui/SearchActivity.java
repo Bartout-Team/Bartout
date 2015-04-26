@@ -1,6 +1,5 @@
 package ch.zhaw.bartout.gui;
 
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.content.Context;
 import android.location.Criteria;
@@ -9,9 +8,6 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -28,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 import ch.zhaw.bartout.R;
+import ch.zhaw.bartout.domain.Establishment;
 import se.walkercrou.places.GooglePlaces;
 import se.walkercrou.places.Param;
 import se.walkercrou.places.Place;
@@ -40,7 +37,6 @@ public class SearchActivity extends BaseActivity {
     private GoogleMap map;
     private LocationManager locationManager;
     private Map<LatLng, Place> places = new HashMap<LatLng, Place>();
-    private BarDetailsFragment detailsFragment;
 
     public SearchActivity() {
         super(R.layout.activity_search);
@@ -58,7 +54,7 @@ public class SearchActivity extends BaseActivity {
                 map.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
                     @Override
                     public void onCameraChange(CameraPosition cameraPosition) {
-                        setMark(cameraPosition.target, "Me");
+
                     }
                 });
                 map.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
@@ -149,6 +145,7 @@ public class SearchActivity extends BaseActivity {
             @Override
             public void onDialogPositiveClick(String filter) {
                 SearchActivity.this.filter = filter;
+                searchPlaces(getCurrentLocation());
             }
         });
         filterFragment.show(getFragmentManager(), "searchFilter");
@@ -192,19 +189,10 @@ public class SearchActivity extends BaseActivity {
 
     private void showDetails(Place place) {
         hideDetails();
-        Fragment f = BarDetailsFragment.getNewInstance(place.getName());
+        Fragment f = BarDetailsFragment.getNewInstance(new Establishment(place));
 
         getFragmentManager().beginTransaction()
                 .add(R.id.relLayout, f, BAR_DETAILS_TAG)
                 .commit();
-        /*
-        android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:name="ch.zhaw.bartout.gui.BarDetailsFragment"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:visibility="gone" />
-         */
     }
 }

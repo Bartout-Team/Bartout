@@ -25,6 +25,7 @@
         android:src="@drawable/ic_action_directions"
         fab:fab_colorNormal="@android:color/holo_orange_light" />
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="120dp"
         android:layout_marginTop="28dp"
@@ -35,6 +36,13 @@
             android:id="@+id/textViewBarName"
             android:text="Kennedy's"
             android:textSize="24dp"
+            android:layout_margin="5dp"/>
+        <TextView
+            android:id="@+id/textViewType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Restaurant"
+            android:textSize="16dp"
             android:layout_margin="5dp"/>
     </LinearLayout>
 
