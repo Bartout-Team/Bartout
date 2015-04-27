@@ -42,6 +42,9 @@
             android:name=".gui.DrinkActivity"
             android:label="@string/title_drink" />
         <activity
+            android:name=".gui.DrinkBeverageActivity"
+            android:label="@string/title_drink_beverage" />
+        <activity
             android:name=".gui.DriveFitnessActivity"
             android:label="@string/title_drive_fitness" />
         <activity

@@ -56,6 +56,7 @@
     <string name="search_filter_club">Club</string>
     <string name="search_filter_club_name">night_club</string>
     <string name="title_search_filter">Filtern</string>
+    <string name="title_drink_beverage">trinken</string>
     <array name="search_filters">
         <item>Bar</item>
         <item>Restaurant</item>
