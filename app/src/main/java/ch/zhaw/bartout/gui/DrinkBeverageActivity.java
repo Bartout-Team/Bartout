@@ -13,9 +13,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DrinkBeverageActivity extends BaseActivity {
 
+    public static final String DRINK_BEVERAGE_CONTENT = "DRINK_BEVERAGE_CONTENT";
     private String beverageName;
     private Double beverageVolume;
     private Double beverageAlcoholicStrength;
@@ -27,7 +29,12 @@ public class DrinkBeverageActivity extends BaseActivity {
     private ListView listViewUsers;
 
     private Bartour bartour;
-    private ArrayList<User> users = new ArrayList<User>();
+    private List<User> users = new ArrayList<User>();
+
+    //Keys
+    private String beverageNameKey = "beverageNameKey";
+    private String beverageVolumeKey = "beverageVolumeKey";
+    private String beverageAlcoholicKey = "beverageAlcoholicKey";
 
     public DrinkBeverageActivity() {super(R.layout.activity_drink_beverage);}
 
@@ -39,6 +46,11 @@ public class DrinkBeverageActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        android.content.Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+        beverageName = b.getString(beverageNameKey);
+        beverageVolume = b.getDouble(beverageVolumeKey);
+        beverageAlcoholicStrength = b.getDouble(beverageAlcoholicKey);
 
         bartour = Bartout.getInstance().getActiveBartour();
         users = bartour.getUsers();
@@ -53,6 +65,8 @@ public class DrinkBeverageActivity extends BaseActivity {
 
         listViewUsers = (ListView) findViewById(R.id.listViewDrinkUsers);
 
+        UserBeverageAdapter userBeverageAdapter = new UserBeverageAdapter(this, users);
+        listViewUsers.setAdapter(userBeverageAdapter);
 
     }
 
@@ -68,15 +82,4 @@ public class DrinkBeverageActivity extends BaseActivity {
 
     }
 
-    public void setBeverageName(String beverageName) {
-        this.beverageName = beverageName;
-    }
-
-    public void setBeverageVolume(Double beverageVolume) {
-        this.beverageVolume = beverageVolume;
-    }
-
-    public void setBeverageAlcoholicStrength(Double beverageAlcoholicStrength) {
-        this.beverageAlcoholicStrength = beverageAlcoholicStrength;
-    }
 }

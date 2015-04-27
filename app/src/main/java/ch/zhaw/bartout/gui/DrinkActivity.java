@@ -1,6 +1,7 @@
 package ch.zhaw.bartout.gui;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -16,6 +17,11 @@ public class DrinkActivity extends BaseActivity {
     private String beverageName;
     private Double beverageVolume;
     private Double beverageAlcoholic;
+
+    //Keys
+    private String beverageNameKey = "beverageNameKey";
+    private String beverageVolumeKey = "beverageVolumeKey";
+    private String beverageAlcoholicKey = "beverageAlcoholicKey";
 
 
 
@@ -43,12 +49,11 @@ public class DrinkActivity extends BaseActivity {
 
     public void buttonBierLargeOnClick(View view) {
 
-        bartour = Bartout.getInstance().getActiveBartour();
-
         beverageName = "Bier gross";
         beverageVolume = 0.5;
         beverageAlcoholic = 5.0;
 
+        toDrinkBeverageActivity();
 
     }
 
@@ -58,6 +63,8 @@ public class DrinkActivity extends BaseActivity {
         beverageVolume = 0.3;
         beverageAlcoholic = 5.0;
 
+        toDrinkBeverageActivity();
+
     }
 
     public void buttonWineOnClick(View view) {
@@ -65,6 +72,8 @@ public class DrinkActivity extends BaseActivity {
         beverageName = "Glas Wein";
         beverageVolume = 0.1;
         beverageAlcoholic = 14.0;
+
+        toDrinkBeverageActivity();
 
     }
 
@@ -74,6 +83,8 @@ public class DrinkActivity extends BaseActivity {
         beverageVolume = 0.1;
         beverageAlcoholic = 12.0;
 
+        toDrinkBeverageActivity();
+
     }
 
     public void buttonCoctailSoftOnClick(View view) {
@@ -81,6 +92,8 @@ public class DrinkActivity extends BaseActivity {
         beverageName = "Coctail schwach";
         beverageVolume = 0.2;
         beverageAlcoholic = 5.0;
+
+        toDrinkBeverageActivity();
 
     }
 
@@ -90,6 +103,8 @@ public class DrinkActivity extends BaseActivity {
         beverageVolume = 0.2;
         beverageAlcoholic = 40.0;
 
+        toDrinkBeverageActivity();
+
     }
 
     public void buttonOtherBeverageOnClick(View view) {
@@ -98,7 +113,21 @@ public class DrinkActivity extends BaseActivity {
         beverageVolume = 0.0;
         beverageAlcoholic = 0.0;
 
+        toDrinkBeverageActivity();
+
     }
+
+private void toDrinkBeverageActivity(){
+
+    Intent intent = new Intent(this, DrinkBeverageActivity.class);
+    Bundle b = new Bundle();
+    b.putSerializable(DrinkBeverageActivity.DRINK_BEVERAGE_CONTENT, bartour);
+    intent.putExtras(b);
+    b.putString(beverageNameKey, beverageName);
+    b.putDouble(beverageVolumeKey, beverageVolume);
+    b.putDouble(beverageAlcoholicKey, beverageAlcoholic);
+    startActivity(intent);
+}
 
 
 }
