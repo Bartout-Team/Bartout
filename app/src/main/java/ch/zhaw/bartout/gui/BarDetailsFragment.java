@@ -3,35 +3,40 @@ package ch.zhaw.bartout.gui;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
 
 import ch.zhaw.bartout.R;
-import ch.zhaw.bartout.domain.Establishment;
+import ch.zhaw.bartout.domain.Bartour;
+import ch.zhaw.bartout.domain.Bartout;
+import ch.zhaw.bartout.domain.EstablishmentLocationChronicleEvent;
+import ch.zhaw.bartout.domain.LocationChronicleEvent;
 import se.walkercrou.places.GooglePlaces;
 
 
 public class BarDetailsFragment extends Fragment {
 
-    public static String ARGUMENT_PLACE_JSON = "Argument_Establishment";
+    public static String ARGUMENT_PLACE_JSON = "Argument_LocationChronicleEvent";
 
-    public static BarDetailsFragment getNewInstance(Establishment establishment) {
+    public static BarDetailsFragment getNewInstance(LocationChronicleEvent locationChronicleEvent) {
         BarDetailsFragment f = new BarDetailsFragment();
         Bundle b = new Bundle();
-        b.putSerializable(BarDetailsFragment.ARGUMENT_PLACE_JSON, establishment);
+        b.putSerializable(BarDetailsFragment.ARGUMENT_PLACE_JSON, locationChronicleEvent);
         f.setArguments(b);
         return f;
     }
 
-    private Establishment establishment;
+    private LocationChronicleEvent locationChronicleEvent;
+    private Bartour bartour;
     GooglePlaces client;
 
     public BarDetailsFragment() {
@@ -41,7 +46,7 @@ public class BarDetailsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        bartour = Bartout.getInstance().getActiveBartour();
 
     }
 
@@ -60,11 +65,30 @@ public class BarDetailsFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
                         Uri.parse("http://maps.google.com/maps?daddr=" +
-                                establishment.getLatitude() + "," +
-                                establishment.getLongitude()));
+                                locationChronicleEvent.getLatitude() + "," +
+                                locationChronicleEvent.getLongitude()));
                 startActivity(intent);
             }
         });
+
+        checkInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(bartour != null){
+                    bartour.getChronicle().addEvent(locationChronicleEvent);
+                    Toast toast = Toast.makeText(getActivity().getApplicationContext(), getString(R.string.toast_location_check_in_success), Toast.LENGTH_LONG);
+                    toast.show();
+                } else {
+                    Toast toast = Toast.makeText(getActivity().getApplicationContext(), getString(R.string.toast_location_check_in_fail), Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            }
+        });
+
+
+        if(bartour == null) {
+            checkInButton.setColorNormal(Color.GRAY);
+        }
 
         return view;
     }
@@ -74,8 +98,8 @@ public class BarDetailsFragment extends Fragment {
         super.onStart();
         Bundle b = getArguments();
         if (b != null) {
-            Establishment est = (Establishment) b.getSerializable(ARGUMENT_PLACE_JSON);
-            establishment = est;
+            LocationChronicleEvent loc = (LocationChronicleEvent) b.getSerializable(ARGUMENT_PLACE_JSON);
+            locationChronicleEvent = loc;
             RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             p.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
             p.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
@@ -84,10 +108,12 @@ public class BarDetailsFragment extends Fragment {
             getView().setLayoutParams(p);
 
             TextView textViewBarName = (TextView) getView().findViewById(R.id.textViewBarName);
-            textViewBarName.setText(establishment.getName());
+            textViewBarName.setText(locationChronicleEvent.getLocationName());
 
             TextView textViewType = (TextView) getView().findViewById(R.id.textViewType);
-            textViewType.setText(establishment.getType());
+            if(locationChronicleEvent instanceof EstablishmentLocationChronicleEvent) {
+                textViewType.setText(((EstablishmentLocationChronicleEvent)locationChronicleEvent).getType());
+            }
         }
     }
 
