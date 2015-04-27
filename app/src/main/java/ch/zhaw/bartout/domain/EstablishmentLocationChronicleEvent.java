@@ -13,6 +13,11 @@ public class EstablishmentLocationChronicleEvent extends LocationChronicleEvent 
 
     public EstablishmentLocationChronicleEvent() {}
 
+    @Override
+    public String getDisplayName() {
+        return null;
+    }
+
     public EstablishmentLocationChronicleEvent(Place place) {
         super(place);
         type = convertType(place.getTypes());

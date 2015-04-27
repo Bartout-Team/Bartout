@@ -18,4 +18,7 @@ public abstract class ChronicleEvent implements Serializable {
     public Calendar getMoment() {
         return moment;
     }
+
+    public abstract String getDisplayName();
+
 }

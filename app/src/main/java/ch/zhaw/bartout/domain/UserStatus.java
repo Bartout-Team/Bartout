@@ -18,11 +18,13 @@ public class UserStatus implements Serializable {
     private final double reductionFactorMen = 0.7;
     private final double resorptionDeficit = 0.2;
     private final double alcoholBreakDown = 0.15;
+    private Chronicle chronicle;
 
     public UserStatus(User user) {
         this.user = user;
         legalAlcoholLimit = 0.5;
         consumptions = new ArrayList<Consumption>();
+        chronicle = Chronicle.getActiveChronicle();
     }
 
     public boolean fitToDrive() {
@@ -57,12 +59,12 @@ public class UserStatus implements Serializable {
                 endTime = consumptions.get(indexOfNextConsumption).getConsumptionTime();
             }
             double durationBetweenStartAndEndInSec = (endTime.getTimeInMillis()-startTime.getTimeInMillis())/1000;
-            double alcoholAbbau = durationBetweenStartAndEndInSec/60/60* alcoholBreakDown;
-            double alcoholVolumeMinusAbbau = alocholVolume-alcoholAbbau;
-            if (alcoholVolumeMinusAbbau<0){
-                alcoholVolumeMinusAbbau=0;
+            double alcoholBreakDown = durationBetweenStartAndEndInSec/60/60* this.alcoholBreakDown;
+            double alcoholVolumeMinusBreakDown = alocholVolume-alcoholBreakDown;
+            if (alcoholVolumeMinusBreakDown<0){
+                alcoholVolumeMinusBreakDown=0;
             }
-            alcoholVolume+=alcoholVolumeMinusAbbau;
+            alcoholVolume+=alcoholVolumeMinusBreakDown;
         }
         return alcoholVolume;
     }
@@ -79,6 +81,23 @@ public class UserStatus implements Serializable {
 
     public void addConsumption(Consumption consumption){
         consumptions.add(consumption);
+        //refreshEvents();
+    }
+
+    private void refreshEvents() {
+        //GetEventsFromUser
+        //DeleteEventsFromUser
+        //AddNewEventsFromUser
+        addIntegerVolumeValueEvent();
+        addFitToDriveEvent();
+    }
+
+    private void addFitToDriveEvent() {
+        ChronicleEvent chronicleEvent = new UserStatusChronicleEvent(user.copy());
+        chronicle.addEvent(chronicleEvent);
+    }
+
+    private void addIntegerVolumeValueEvent() {
     }
 
     public boolean removeConsumption(Consumption consumption){
@@ -88,4 +107,5 @@ public class UserStatus implements Serializable {
     public List<Consumption> getConsumptions(){
         return Collections.unmodifiableList(consumptions);
     }
+
 }

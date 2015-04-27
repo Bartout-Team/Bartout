@@ -10,4 +10,9 @@ public class RankingChronicleEvent extends ChronicleEvent {
     public Ranking getRanking() {   return ranking; }
 
     public void setRanking(Ranking ranking) {   this.ranking = ranking; }
+
+    @Override
+    public String getDisplayName() {
+        return null;
+    }
 }
