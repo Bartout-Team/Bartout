@@ -152,6 +152,7 @@ public class SearchActivity extends BaseActivity {
      */
     public void filterOnClick(View view) {
         map.clear();
+        places.clear();
         SearchFilterFragment filterFragment = SearchFilterFragment.newInstance(filter);
         filterFragment.attatch(new SearchFilterFragment.NoticeDialogListener() {
             @Override

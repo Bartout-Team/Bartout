@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import ch.zhaw.bartout.R;
@@ -120,6 +121,7 @@ public class BartourActivity extends BaseActivity implements UserFragment.OnFrag
         }else {
             bartour.setEnd(Calendar.getInstance());
             startActivity(getString(R.string.title_home));
+            finish();
         }
     }
 
