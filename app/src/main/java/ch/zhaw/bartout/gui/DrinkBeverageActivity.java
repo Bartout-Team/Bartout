@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DrinkBeverageActivity extends BaseActivity {
 
@@ -27,7 +28,7 @@ public class DrinkBeverageActivity extends BaseActivity {
     private ListView listViewUsers;
 
     private Bartour bartour;
-    private ArrayList<User> users = new ArrayList<User>();
+    private List<User> users = new ArrayList<User>();
 
     public DrinkBeverageActivity() {super(R.layout.activity_drink_beverage);}
 
@@ -39,7 +40,6 @@ public class DrinkBeverageActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         bartour = Bartout.getInstance().getActiveBartour();
         users = bartour.getUsers();
 
