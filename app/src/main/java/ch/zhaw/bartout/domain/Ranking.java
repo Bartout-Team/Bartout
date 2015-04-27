@@ -16,7 +16,7 @@ public class Ranking implements Serializable {
 
     public Ranking(List<User> users){
         this.users = users;
-        this.orderedUsers = new ArrayList<>();
+        this.orderedUsers = new ArrayList<RankingUser>();
     }
 
     public void updateRanking(){

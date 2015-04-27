@@ -63,5 +63,6 @@
         <item>Essen</item>
         <item>Club</item>
     </array>
+    <string name="toast_location_check_in">Erfolgreich eingecheckt!</string>
 
 </resources>
