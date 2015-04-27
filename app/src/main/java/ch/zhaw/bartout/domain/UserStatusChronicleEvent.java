@@ -3,7 +3,7 @@ package ch.zhaw.bartout.domain;
 /**
  * Created by Nico on 31.03.2015.
  */
-public class UserStatusChronicleEvent extends UserChronicleEvent {
+public abstract class UserStatusChronicleEvent extends UserChronicleEvent {
 
     public UserStatusChronicleEvent(User user){
         super(user);
@@ -16,8 +16,4 @@ public class UserStatusChronicleEvent extends UserChronicleEvent {
 
     public UserStatus getStatus() { return status;  }
 
-    @Override
-    public String getDisplayName() {
-        return null;
-    }
 }

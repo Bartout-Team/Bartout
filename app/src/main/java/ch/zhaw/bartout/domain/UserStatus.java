@@ -87,15 +87,17 @@ public class UserStatus implements Serializable {
         //DeleteEventsFromUser
         //AddNewEventsFromUser
         addIntegerVolumeValueEvent();
-        addFitToDriveEvent();
+        addFitToDriveEvent(true);
     }
 
-    private void addFitToDriveEvent() {
-        ChronicleEvent chronicleEvent = new UserStatusChronicleEvent(user.copy());
+    private void addFitToDriveEvent(boolean isFitToDrive) {
+        ChronicleEvent chronicleEvent = new FitToDriveChronicleEvent(user.copy(),isFitToDrive);
         Chronicle.getActiveChronicle().addEvent(chronicleEvent);
     }
 
     private void addIntegerVolumeValueEvent() {
+        ChronicleEvent chronicleEvent = new AlcoholLevelChronicleEvent(user.copy());
+        Chronicle.getActiveChronicle().addEvent(chronicleEvent);
     }
 
     public boolean removeConsumption(Consumption consumption){
