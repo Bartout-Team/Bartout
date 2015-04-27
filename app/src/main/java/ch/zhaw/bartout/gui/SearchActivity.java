@@ -19,9 +19,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
 import ch.zhaw.bartout.R;
 import ch.zhaw.bartout.domain.ATMLocationChronicleEvent;
@@ -133,7 +137,11 @@ public class SearchActivity extends BaseActivity {
     }
 
     private Location getCurrentLocation() {
-        Location loc = locationManager.getLastKnownLocation(locationManager.getBestProvider(new Criteria(), true));
+        String p = locationManager.getBestProvider(new Criteria(), true);
+        if (p == null) {
+            p = locationManager.getBestProvider(new Criteria(), false);
+        }
+        Location loc = locationManager.getLastKnownLocation(p);
         return loc;
     }
 
@@ -157,13 +165,17 @@ public class SearchActivity extends BaseActivity {
 
     private void searchPlaces(Location loc) {
         AsyncTask<Location, Void, Void> types = new AsyncTask<Location, Void, Void>() {
-            private List<Place> places;
+            private List<Place> places = new ArrayList<Place>();
 
             @Override
             protected Void doInBackground(Location... params) {
-                GooglePlaces client = new GooglePlaces(getString(R.string.google_places_api_key));
-                Location myPosition = params[0];
-                places = client.getNearbyPlacesRankedByDistance(myPosition.getLatitude(), myPosition.getLongitude(), Param.name("types").value(SearchActivity.this.filter));
+                try {
+                    GooglePlaces client = new GooglePlaces(getString(R.string.google_places_api_key));
+                    Location myPosition = params[0];
+                    places = client.getNearbyPlacesRankedByDistance(myPosition.getLatitude(), myPosition.getLongitude(), Param.name("types").value(SearchActivity.this.filter));
+                } catch (Exception ex) {
+                    Logger.getAnonymousLogger().log(new LogRecord(Level.ALL, "No Internet"));
+                }
                 return null;
             }
 
@@ -180,6 +192,7 @@ public class SearchActivity extends BaseActivity {
                 }
             }
         }.execute(loc);
+
     }
 
     private void hideDetails() {

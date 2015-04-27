@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:ems="10"
-            android:id="@+id/EdithTextBeverageAlcoholicStrength"
+            android:id="@+id/editTextBeverageAlcoholicStrength"
             android:layout_alignBottom="@+id/textViewAlcoholicStrength"
             android:layout_toRightOf="@+id/textViewAlcoholicStrength"
             android:layout_toEndOf="@+id/textViewAlcoholicStrength" />
@@ -65,6 +65,15 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:onClick="buttonDrinkOnClick" />
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listViewDrinkUsers"
+            android:layout_below="@+id/editTextBeverageAlcoholicStrength"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:headerDividersEnabled="true" />
 
     </RelativeLayout>
 </LinearLayout>
