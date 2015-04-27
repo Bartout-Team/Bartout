@@ -10,7 +10,6 @@ import java.util.Date;
 public abstract class ChronicleEvent implements Serializable {
 
     private Calendar moment;
-    private String displayName;
 
     public ChronicleEvent() {
         moment = Calendar.getInstance();
@@ -19,7 +18,7 @@ public abstract class ChronicleEvent implements Serializable {
     public Calendar getMoment() {
         return moment;
     }
-    public String getDisplayName(){
-        return displayName;
-    };
+
+    public abstract String getDisplayName();
+
 }
