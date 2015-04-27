@@ -85,10 +85,7 @@ public class BarDetailsFragment extends Fragment {
             }
         });
 
-
-        if(bartour == null) {
-            checkInButton.setColorNormal(Color.GRAY);
-        }
+        setCheckInButtonColor(view);
 
         return view;
     }
@@ -114,6 +111,21 @@ public class BarDetailsFragment extends Fragment {
             if(locationChronicleEvent instanceof EstablishmentLocationChronicleEvent) {
                 textViewType.setText(((EstablishmentLocationChronicleEvent)locationChronicleEvent).getType());
             }
+        }
+    }
+
+    @Override
+    public void onResume(){
+        setCheckInButtonColor(getView());
+
+    }
+
+    private void setCheckInButtonColor(View view) {
+        FloatingActionButton checkInButton = (FloatingActionButton) view.findViewById(R.id.checkInButton);
+        if(bartour == null) {
+            checkInButton.setColorNormal(Color.GRAY);
+        } else {
+            checkInButton.setColorNormal(Color.parseColor("#ff0f9d58"));
         }
     }
 
