@@ -18,13 +18,11 @@ public class UserStatus implements Serializable {
     private final double reductionFactorMen = 0.7;
     private final double resorptionDeficit = 0.2;
     private final double alcoholBreakDown = 0.15;
-    private Chronicle chronicle;
 
     public UserStatus(User user) {
         this.user = user;
         legalAlcoholLimit = 0.5;
         consumptions = new ArrayList<Consumption>();
-        chronicle = Chronicle.getActiveChronicle();
     }
 
     public boolean fitToDrive() {
@@ -94,7 +92,7 @@ public class UserStatus implements Serializable {
 
     private void addFitToDriveEvent() {
         ChronicleEvent chronicleEvent = new UserStatusChronicleEvent(user.copy());
-        chronicle.addEvent(chronicleEvent);
+        Chronicle.getActiveChronicle().addEvent(chronicleEvent);
     }
 
     private void addIntegerVolumeValueEvent() {
