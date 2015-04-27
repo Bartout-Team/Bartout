@@ -116,6 +116,8 @@ public class BarDetailsFragment extends Fragment {
 
     @Override
     public void onResume(){
+        super.onResume();
+        bartour = Bartout.getInstance().getActiveBartour();
         setCheckInButtonColor(getView());
 
     }
@@ -124,8 +126,12 @@ public class BarDetailsFragment extends Fragment {
         FloatingActionButton checkInButton = (FloatingActionButton) view.findViewById(R.id.checkInButton);
         if(bartour == null) {
             checkInButton.setColorNormal(Color.GRAY);
+            checkInButton.setColorPressed(Color.GRAY);
+            checkInButton.setColorRipple(Color.GRAY);
         } else {
-            checkInButton.setColorNormal(Color.parseColor("#ff0f9d58"));
+            checkInButton.setColorNormal(Color.parseColor("#4CAF50"));
+            checkInButton.setColorPressed(Color.parseColor("#2E7D32"));
+            checkInButton.setColorRipple(Color.parseColor("#43A047"));
         }
     }
 
