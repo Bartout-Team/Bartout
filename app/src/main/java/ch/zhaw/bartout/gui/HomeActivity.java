@@ -109,6 +109,8 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemClic
 
         if(bartout.getActiveBartour() != null){
             fab.setColorNormal(Color.GRAY);
+        }else{
+            fab.setColorNormal(Color.parseColor("#ff0f9d58"));
         }
     }
 
