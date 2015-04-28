@@ -15,4 +15,9 @@ public class UserStatusChronicleEvent extends UserChronicleEvent {
     public void setStatus(UserStatus status) {  this.status = status;   }
 
     public UserStatus getStatus() { return status;  }
+
+    @Override
+    public String getDisplayName() {
+        return null;
+    }
 }

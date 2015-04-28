@@ -8,7 +8,6 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,31 +19,29 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
 import ch.zhaw.bartout.R;
 import ch.zhaw.bartout.domain.ATMLocationChronicleEvent;
-import ch.zhaw.bartout.domain.Bartour;
-import ch.zhaw.bartout.domain.Bartout;
-import ch.zhaw.bartout.domain.ChronicleEvent;
 import ch.zhaw.bartout.domain.EstablishmentLocationChronicleEvent;
 import ch.zhaw.bartout.domain.LocationChronicleEvent;
-import ch.zhaw.bartout.domain.Establishment;
 import se.walkercrou.places.GooglePlaces;
 import se.walkercrou.places.Param;
 import se.walkercrou.places.Place;
 
 
 public class SearchActivity extends BaseActivity {
-    private Bartour bartour;
     private static final String BAR_DETAILS_TAG = "BARDETIALS_TAG";
 
     private String filter = "bar";
     private GoogleMap map;
     private LocationManager locationManager;
-    private Place selectedPlace;
     private Map<LatLng, Place> places = new HashMap<LatLng, Place>();
 
     public SearchActivity() {
@@ -54,7 +51,6 @@ public class SearchActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        bartour = Bartout.getInstance().getActiveBartour();
 
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(new OnMapReadyCallback() {
@@ -98,8 +94,10 @@ public class SearchActivity extends BaseActivity {
                 map.getUiSettings().setMapToolbarEnabled(false);
 
                 Location location = getCurrentLocation();
-                showLocation(location);
-                searchPlaces(location);
+                if(location != null){
+                    showLocation(location);
+                    searchPlaces(location);
+                }
             }
         });
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -139,7 +137,11 @@ public class SearchActivity extends BaseActivity {
     }
 
     private Location getCurrentLocation() {
-        Location loc = locationManager.getLastKnownLocation(locationManager.getBestProvider(new Criteria(), true));
+        String p = locationManager.getBestProvider(new Criteria(), true);
+        if (p == null) {
+            p = locationManager.getBestProvider(new Criteria(), false);
+        }
+        Location loc = locationManager.getLastKnownLocation(p);
         return loc;
     }
 
@@ -150,6 +152,7 @@ public class SearchActivity extends BaseActivity {
      */
     public void filterOnClick(View view) {
         map.clear();
+        places.clear();
         SearchFilterFragment filterFragment = SearchFilterFragment.newInstance(filter);
         filterFragment.attatch(new SearchFilterFragment.NoticeDialogListener() {
             @Override
@@ -163,13 +166,17 @@ public class SearchActivity extends BaseActivity {
 
     private void searchPlaces(Location loc) {
         AsyncTask<Location, Void, Void> types = new AsyncTask<Location, Void, Void>() {
-            private List<Place> places;
+            private List<Place> places = new ArrayList<Place>();
 
             @Override
             protected Void doInBackground(Location... params) {
-                GooglePlaces client = new GooglePlaces(getString(R.string.google_places_api_key));
-                Location myPosition = params[0];
-                places = client.getNearbyPlacesRankedByDistance(myPosition.getLatitude(), myPosition.getLongitude(), Param.name("types").value(SearchActivity.this.filter));
+                try {
+                    GooglePlaces client = new GooglePlaces(getString(R.string.google_places_api_key));
+                    Location myPosition = params[0];
+                    places = client.getNearbyPlacesRankedByDistance(myPosition.getLatitude(), myPosition.getLongitude(), Param.name("types").value(SearchActivity.this.filter));
+                } catch (Exception ex) {
+                    Logger.getAnonymousLogger().log(new LogRecord(Level.ALL, "No Internet"));
+                }
                 return null;
             }
 
@@ -186,6 +193,7 @@ public class SearchActivity extends BaseActivity {
                 }
             }
         }.execute(loc);
+
     }
 
     private void hideDetails() {
@@ -198,29 +206,19 @@ public class SearchActivity extends BaseActivity {
     }
 
     private void showDetails(Place place) {
-        selectedPlace = place;
         hideDetails();
-        Fragment f = BarDetailsFragment.getNewInstance(new Establishment(place));
+
+        LocationChronicleEvent locationChronicleEvent;
+        if(place.getTypes().contains("atm") || place.getTypes().contains("bank")) {
+            locationChronicleEvent = new ATMLocationChronicleEvent();
+        } else {
+            locationChronicleEvent = new EstablishmentLocationChronicleEvent(place);
+        }
+        Fragment f = BarDetailsFragment.getNewInstance(locationChronicleEvent);
 
         getFragmentManager().beginTransaction()
                 .add(R.id.relLayout, f, BAR_DETAILS_TAG)
                 .commit();
     }
 
-    public void checkInOnClick(View view) {
-        if(bartour != null){
-            LocationChronicleEvent locationChronicleEvent;
-            if(selectedPlace.getTypes().toString().contains("ATM")) {
-                locationChronicleEvent = new ATMLocationChronicleEvent();
-            } else {
-                locationChronicleEvent = new EstablishmentLocationChronicleEvent();
-                ((EstablishmentLocationChronicleEvent)locationChronicleEvent).setType(selectedPlace.getTypes().toString());
-            }
-            locationChronicleEvent.setLocationName(selectedPlace.getName());
-            locationChronicleEvent.setLocation(selectedPlace.getLatitude(), selectedPlace.getLongitude());
-            bartour.getChronicle().addEvent(locationChronicleEvent);
-            Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.toast_location_check_in), Toast.LENGTH_LONG);
-            toast.show();
-        }
-    }
 }

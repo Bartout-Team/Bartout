@@ -63,6 +63,7 @@
         <item>Essen</item>
         <item>Club</item>
     </array>
-    <string name="toast_location_check_in">Erfolgreich eingecheckt!</string>
+    <string name="toast_location_check_in_success">Erfolgreich eingecheckt!</string>
+    <string name="toast_location_check_in_fail">Keine Bartour aktiv!</string>
 
 </resources>

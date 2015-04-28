@@ -13,4 +13,9 @@ public class UserParticipationChronicleEvent extends UserChronicleEvent {
     private boolean isNewUser;
 
     public boolean isNewUser() {    return isNewUser;   }
+
+    @Override
+    public String getDisplayName() {
+        return null;
+    }
 }
