@@ -1,6 +1,7 @@
 package ch.zhaw.bartout.gui;
 
 import android.os.Bundle;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import ch.zhaw.bartout.R;
@@ -23,8 +24,15 @@ public class ChronicleActivity extends BaseActivity {
         android.content.Intent intent = getIntent();
         Bundle b = intent.getExtras();
         bartour = (Bartour) b.getSerializable(CHRONICLE_EXTRA_BARTOUR);
-        if(bartour != null)
-        ((TextView)findViewById(R.id.text_bartour)).setText(bartour.getName());
+
+
+        ListView listView = (ListView) findViewById(R.id.list_view);
+
+        ChronicleAdapter bartoursAdapter = new ChronicleAdapter(
+                this,
+                bartour.getChronicle().getChronicleEvents()
+        );
+        listView.setAdapter(bartoursAdapter);
     }
 
     @Override

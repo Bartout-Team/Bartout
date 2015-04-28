@@ -107,10 +107,14 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemClic
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.newBartourButton);
         fab.attachToListView(listView);
 
-        if(bartout.getActiveBartour() != null){
+        if(bartout.getActiveBartour() != null) {
             fab.setColorNormal(Color.GRAY);
-        }else{
-            fab.setColorNormal(Color.parseColor("#ff0f9d58"));
+            fab.setColorPressed(Color.GRAY);
+            fab.setColorRipple(Color.GRAY);
+        } else {
+            fab.setColorNormal(Color.parseColor("#4CAF50"));
+            fab.setColorPressed(Color.parseColor("#2E7D32"));
+            fab.setColorRipple(Color.parseColor("#43A047"));
         }
     }
 
