@@ -20,7 +20,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="false"
-                android:text="@string/editTextBeverageName_default" />
+                android:hint="@string/user_name" />
 
             <TextView
                 android:layout_width="wrap_content"

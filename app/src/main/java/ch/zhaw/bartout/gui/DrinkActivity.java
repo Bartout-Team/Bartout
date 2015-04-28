@@ -117,17 +117,15 @@ public class DrinkActivity extends BaseActivity {
 
     }
 
-private void toDrinkBeverageActivity(){
+    private void toDrinkBeverageActivity(){
 
-    Intent intent = new Intent(this, DrinkBeverageActivity.class);
-    Bundle b = new Bundle();
-    b.putSerializable(DrinkBeverageActivity.DRINK_BEVERAGE_CONTENT, bartour);
-    intent.putExtras(b);
-    b.putString(beverageNameKey, beverageName);
-    b.putDouble(beverageVolumeKey, beverageVolume);
-    b.putDouble(beverageAlcoholicKey, beverageAlcoholic);
-    startActivity(intent);
-}
-
-
+        Intent intent = new Intent(this, DrinkBeverageActivity.class);
+        Bundle b = new Bundle();
+        b.putSerializable(DrinkBeverageActivity.DRINK_BEVERAGE_CONTENT, bartour);
+        intent.putExtras(b);
+        b.putString(beverageNameKey, beverageName);
+        b.putDouble(beverageVolumeKey, beverageVolume);
+        b.putDouble(beverageAlcoholicKey, beverageAlcoholic);
+        startActivity(intent);
+    }
 }
