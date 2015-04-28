@@ -41,6 +41,7 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bartout = Bartout.getInstance();
+        bartout.initializeSampleData();
     }
 
     public void newBartourButtonOnClick(View view){

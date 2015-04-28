@@ -28,6 +28,10 @@ public abstract class ChronicleEvent implements Serializable {
         return moment;
     }
 
+    public void setMoment(Calendar moment){
+        this.moment = moment;
+    }
+
     public abstract String getDisplayName();
 
     public View getView(Context context){
