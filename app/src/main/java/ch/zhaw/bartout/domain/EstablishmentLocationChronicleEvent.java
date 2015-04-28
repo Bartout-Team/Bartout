@@ -9,7 +9,6 @@ import se.walkercrou.places.Place;
  * Created by Nico on 31.03.2015.
  */
 public class EstablishmentLocationChronicleEvent extends LocationChronicleEvent {
-    private String type;
 
     public EstablishmentLocationChronicleEvent() {}
 
@@ -20,14 +19,11 @@ public class EstablishmentLocationChronicleEvent extends LocationChronicleEvent 
 
     public EstablishmentLocationChronicleEvent(Place place) {
         super(place);
-        type = convertType(place.getTypes());
     }
 
-    public String getType() {   return type;   }
 
-    public void setType(String type) {  this.type = type;   }
 
-    private String convertType(List<String> gTypes) {
+    protected String convertType(List<String> gTypes) {
         ArrayList<String> types = new ArrayList<String>();
         if (gTypes.contains("night_club")) {
             types.add("Nachtclub");
@@ -40,12 +36,6 @@ public class EstablishmentLocationChronicleEvent extends LocationChronicleEvent 
         }
         if (gTypes.contains("bar")) {
             types.add("Bar");
-        }
-        if (gTypes.contains("atm")) {
-            types.add("Bankomat");
-        }
-        if (gTypes.contains("bank")) {
-            types.add("Bank");
         }
         return types.toString().replace("[", "").replace("]", "");
     }

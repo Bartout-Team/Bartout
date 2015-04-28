@@ -151,5 +151,5 @@ public abstract class BaseActivity extends Activity{
         drawerToggle.onConfigurationChanged(newConfig);
     }
 
-    abstract protected int getNameRes();
+    protected abstract int getNameRes();
 }

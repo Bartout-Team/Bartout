@@ -186,7 +186,7 @@ public class SearchActivity extends BaseActivity {
                         MarkerOptions markerOptions = new MarkerOptions();
                         markerOptions.title(place.getName().toString())
                                 .position(new LatLng(place.getLatitude(), place.getLongitude()));
-                        if(place.getTypes().contains("atm") || place.getTypes().contains("bank")) {
+                        if(place.getTypes().contains(getString(R.string.search_filter_atm_name)) || place.getTypes().contains(getString(R.string.search_filter_bank_name))) {
                             markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_money_pin));
                         }else {
                             markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_action_beer_pin));
@@ -213,8 +213,8 @@ public class SearchActivity extends BaseActivity {
         hideDetails();
 
         LocationChronicleEvent locationChronicleEvent;
-        if(place.getTypes().contains("atm") || place.getTypes().contains("bank")) {
-            locationChronicleEvent = new EstablishmentLocationChronicleEvent(place);
+        if(place.getTypes().contains(getString(R.string.search_filter_atm_name)) || place.getTypes().contains(getString(R.string.search_filter_bank_name))) {
+            locationChronicleEvent = new ATMLocationChronicleEvent(place);
         } else {
             locationChronicleEvent = new EstablishmentLocationChronicleEvent(place);
         }
