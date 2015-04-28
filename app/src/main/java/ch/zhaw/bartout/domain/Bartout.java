@@ -34,12 +34,11 @@ public class Bartout implements Serializable {
         bartours = new ArrayList<Bartour>();
         Calendar end = Calendar.getInstance();
         end.add(Calendar.HOUR, 2);
-
         addBartour(new Bartour().setName("First Tour").setEnd(end));
         addBartour(new Bartour().setName("Second Tour").setEnd(end));
         addBartour(new Bartour().setName("Third Tour").setEnd(end));
-        activeBartour = null;
-        //addBartour(new Bartour().setName("Active Tour"));
+        //activeBartour = null;
+        addBartour(new Bartour().setName("Active Tour"));
 
         for(Bartour tour : bartours){
             User user = new User().setName("First User");
