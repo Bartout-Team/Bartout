@@ -41,6 +41,12 @@ public class EstablishmentLocationChronicleEvent extends LocationChronicleEvent 
         if (gTypes.contains("bar")) {
             types.add("Bar");
         }
+        if (gTypes.contains("atm")) {
+            types.add("Bankomat");
+        }
+        if (gTypes.contains("bank")) {
+            types.add("Bank");
+        }
         return types.toString().replace("[", "").replace("]", "");
     }
 
