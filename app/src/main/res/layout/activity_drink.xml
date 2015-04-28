@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
-    tools:context="ch.zhaw.bartout.gui.DrinkActivity">
+    tools:context="ch.zhaw.bartout.controller.DrinkActivity">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -18,7 +18,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:scaleType="fitCenter"
-            android:focusableInTouchMode="true"
+            android:focusableInTouchMode="false"
             android:text="@string/buttonBeerLarge_text"
             android:onClick="buttonBierLargeOnClick" />
 
