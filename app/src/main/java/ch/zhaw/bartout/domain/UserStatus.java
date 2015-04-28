@@ -34,29 +34,10 @@ public class UserStatus implements Serializable {
     }
 
     public double getAlcoholLevel() {
-        Calendar now = Calendar.getInstance();
         double alcoholVolume = 0;
         for(Consumption consumption : consumptions){
-            double pureAlcoholInMl = consumption.getVolume() * consumption.getAlcoholicStrength();
-            double pureAlcoholInG = pureAlcoholInMl*alcoholWeight;
-            double reductionFactor;
-            if(user.isMan()){
-                reductionFactor = reductionFactorMen;
-            }else{
-                reductionFactor = reductionFactorWomen;
-            }
-            double reducedWeightOfUser = reductionFactor*user.getWeight();
-            double bloodAlcoholContent = pureAlcoholInG/reducedWeightOfUser;
-            double alocholVolume = bloodAlcoholContent-bloodAlcoholContent*resorptionDeficit;
-            Calendar startTime = consumption.getConsumptionTime();
-            Calendar endTime;
-            int indexOfNextConsumption = consumptions.indexOf(consumption)+1;
-            if (indexOfNextConsumption==consumptions.size()){
-                endTime = now;
-            }else{
-                endTime = consumptions.get(indexOfNextConsumption).getConsumptionTime();
-            }
-            double durationBetweenStartAndEndInSec = (endTime.getTimeInMillis()-startTime.getTimeInMillis())/1000;
+            double alocholVolume = getAlcoholVolumeOfConsumption(consumption);
+            double durationBetweenStartAndEndInSec = getDurationBetweenOneAndNextConsumption(consumption);
             double alcoholBreakDown = durationBetweenStartAndEndInSec/60/60* this.alcoholBreakDown;
             double alcoholVolumeMinusBreakDown = alocholVolume-alcoholBreakDown;
             if (alcoholVolumeMinusBreakDown<0){
@@ -82,10 +63,19 @@ public class UserStatus implements Serializable {
         //refreshEvents();
     }
 
+    public boolean removeConsumption(Consumption consumption){
+        return consumptions.remove(consumption);
+    }
+
+    public List<Consumption> getConsumptions(){
+        return Collections.unmodifiableList(consumptions);
+    }
+
     private void refreshEvents() {
         //GetEventsFromUser
         //DeleteEventsFromUser
         //AddNewEventsFromUser
+
         addIntegerVolumeValueEvent();
         addFitToDriveEvent(true);
     }
@@ -100,12 +90,36 @@ public class UserStatus implements Serializable {
         Chronicle.getActiveChronicle().addEvent(chronicleEvent);
     }
 
-    public boolean removeConsumption(Consumption consumption){
-        return consumptions.remove(consumption);
+    /**
+     * Calculates the alcohol volume for one consumption (without alcohol breakdown)
+     * @param consumption the Consumption, for which the alcohol volume should be calculated
+     * @return alcohol volume in ‰
+     */
+    private double getAlcoholVolumeOfConsumption(Consumption consumption){
+        double pureAlcoholInMl = consumption.getVolume() * consumption.getAlcoholicStrength();
+        double pureAlcoholInG = pureAlcoholInMl*alcoholWeight;
+        double reductionFactor;
+        if(user.isMan()){
+            reductionFactor = reductionFactorMen;
+        }else{
+            reductionFactor = reductionFactorWomen;
+        }
+        double reducedWeightOfUser = reductionFactor*user.getWeight();
+        double bloodAlcoholContent = pureAlcoholInG/reducedWeightOfUser;
+        double alocholVolume = bloodAlcoholContent-bloodAlcoholContent*resorptionDeficit;
+        return alocholVolume;
     }
 
-    public List<Consumption> getConsumptions(){
-        return Collections.unmodifiableList(consumptions);
+    private double getDurationBetweenOneAndNextConsumption(Consumption consumption){
+        Calendar startTime = consumption.getConsumptionTime();
+        Calendar endTime;
+        int indexOfNextConsumption = consumptions.indexOf(consumption)+1;
+        if (indexOfNextConsumption==consumptions.size()){
+            endTime = Calendar.getInstance();
+        }else{
+            endTime = consumptions.get(indexOfNextConsumption).getConsumptionTime();
+        }
+        return (endTime.getTimeInMillis()-startTime.getTimeInMillis())/1000;
     }
 
 }
