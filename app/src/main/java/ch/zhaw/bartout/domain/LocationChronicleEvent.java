@@ -1,6 +1,6 @@
 package ch.zhaw.bartout.domain;
 
-import android.location.Location;
+import java.util.List;
 
 import se.walkercrou.places.Place;
 
@@ -9,6 +9,7 @@ import se.walkercrou.places.Place;
  */
 public abstract class LocationChronicleEvent extends ChronicleEvent {
 
+    private String type;
     private String locationName;
     private double latitude;
     private double longitude;
@@ -17,6 +18,7 @@ public abstract class LocationChronicleEvent extends ChronicleEvent {
     public LocationChronicleEvent() {}
 
     public LocationChronicleEvent(Place place) {
+        type = convertType(place.getTypes());
         locationName = place.getName();
         address = place.getAddress();
         latitude = place.getLatitude();
@@ -43,4 +45,10 @@ public abstract class LocationChronicleEvent extends ChronicleEvent {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+
+    public String getType() {   return type;   }
+
+    public void setType(String type) {  this.type = type;   }
+
+    protected abstract String convertType(List<String> gTypes);
 }

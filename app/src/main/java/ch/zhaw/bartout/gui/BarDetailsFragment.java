@@ -78,6 +78,10 @@ public class BarDetailsFragment extends Fragment {
                     bartour.getChronicle().addEvent(locationChronicleEvent);
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(), getString(R.string.toast_location_check_in_success), Toast.LENGTH_LONG);
                     toast.show();
+                    if(locationChronicleEvent instanceof EstablishmentLocationChronicleEvent) {
+                        Intent intent = new Intent(getActivity(), DrinkActivity.class);
+                        startActivity(intent);
+                    }
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(), getString(R.string.toast_location_check_in_fail), Toast.LENGTH_LONG);
                     toast.show();
@@ -108,9 +112,7 @@ public class BarDetailsFragment extends Fragment {
             textViewBarName.setText(locationChronicleEvent.getLocationName());
 
             TextView textViewType = (TextView) getView().findViewById(R.id.textViewType);
-            if(locationChronicleEvent instanceof EstablishmentLocationChronicleEvent) {
-                textViewType.setText(((EstablishmentLocationChronicleEvent)locationChronicleEvent).getType());
-            }
+            textViewType.setText(locationChronicleEvent.getType());
         }
     }
 
