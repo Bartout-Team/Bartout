@@ -8,6 +8,7 @@ import ch.zhaw.bartout.domain.Consumption;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -77,7 +78,17 @@ public class DrinkBeverageActivity extends BaseActivity {
         beverageAlcoholicStrength = Double.parseDouble(editTextAlcoholicStrength.getText().toString());
 
 
-        Consumption consumption = new Consumption(beverageName, beverageAlcoholicStrength, beverageVolume);
+        for (int x= 0; x<listViewUsers.getAdapter().getCount();x++ ){
+
+            View v = listViewUsers.getChildAt(x);
+            CheckBox checkBox = (CheckBox) v.findViewById(R.id.beverageUserItemCheckBox);
+
+            if (checkBox.isEnabled()) {
+                Consumption consumption = new Consumption(beverageName, beverageAlcoholicStrength, beverageVolume);
+            }
+
+        }
+
 
 
     }

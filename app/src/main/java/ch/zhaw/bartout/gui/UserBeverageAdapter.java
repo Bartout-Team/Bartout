@@ -27,7 +27,7 @@ public class UserBeverageAdapter extends ArrayAdapter<User> {
     public View getView(int position, View convertView, ViewGroup parent){
         final User user = getItem(position);
         if(convertView == null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.bartour_user_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.beverage_user_item, parent, false);
         }
         TextView textName = (TextView) convertView.findViewById(R.id.text_name);
         textName.setText(user.getName());
