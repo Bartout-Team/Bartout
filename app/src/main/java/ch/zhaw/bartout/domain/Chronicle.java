@@ -18,6 +18,20 @@ public class Chronicle implements Serializable {
         chronicleEvents.add(event);
     }
 
+    public void removeEvent(ChronicleEvent event){
+        chronicleEvents.remove(event);
+    }
+
+    public List<ChronicleEvent> getChronicleEvents(Class type){
+        List<ChronicleEvent> eventsOfType = new ArrayList<ChronicleEvent>();
+        for(ChronicleEvent chronicleEvent: chronicleEvents){
+            if(chronicleEvent.getClass().isInstance(type)){
+                eventsOfType.add(chronicleEvent);
+            }
+        }
+        return eventsOfType;
+    }
+
     public List<ChronicleEvent> getChronicleEvents() {
         return chronicleEvents;
     }

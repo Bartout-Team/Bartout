@@ -32,6 +32,11 @@ public class Bartout implements Serializable {
 
     protected Bartout(){
         bartours = new ArrayList<Bartour>();
+    }
+
+    public void initializeSampleData(){
+        // Sample Daten dürfen nicht in Konstruktor geladen werden,
+        // da aufgrund unseres Singleton sonst ein rekursive Endlosschleife aufgerufen wird.
         Calendar end = Calendar.getInstance();
         end.add(Calendar.HOUR, 2);
         addBartour(new Bartour().setName("First Tour").setEnd(end));

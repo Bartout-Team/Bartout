@@ -38,7 +38,7 @@ public class UserStatus implements Serializable {
         for(Consumption consumption : consumptions){
             double alocholVolume = getAlcoholVolumeOfConsumption(consumption);
             double durationBetweenStartAndEndInSec = getDurationBetweenOneAndNextConsumption(consumption);
-            double alcoholBreakDown = durationBetweenStartAndEndInSec/60/60* this.alcoholBreakDown;
+            double alcoholBreakDown = getAlcoholBreakDownOfDuration(durationBetweenStartAndEndInSec);
             double alcoholVolumeMinusBreakDown = alocholVolume-alcoholBreakDown;
             if (alcoholVolumeMinusBreakDown<0){
                 alcoholVolumeMinusBreakDown=0;
@@ -60,11 +60,13 @@ public class UserStatus implements Serializable {
 
     public void addConsumption(Consumption consumption){
         consumptions.add(consumption);
-        //refreshEvents();
+        refreshEvents();
     }
 
     public boolean removeConsumption(Consumption consumption){
-        return consumptions.remove(consumption);
+        boolean removeValue = consumptions.remove(consumption);
+        refreshEvents();
+        return removeValue;
     }
 
     public List<Consumption> getConsumptions(){
@@ -72,22 +74,90 @@ public class UserStatus implements Serializable {
     }
 
     private void refreshEvents() {
-        //GetEventsFromUser
-        //DeleteEventsFromUser
-        //AddNewEventsFromUser
-
-        addIntegerVolumeValueEvent();
-        addFitToDriveEvent(true);
+        DeleteEventsFromUser();
+        addAllFitToDriveEvents();
+        addAllAlcoholLevelEvents();
     }
 
-    private void addFitToDriveEvent(boolean isFitToDrive) {
+    private void DeleteEventsFromUser() {
+        List<ChronicleEvent> events = Chronicle.getActiveChronicle().getChronicleEvents(UserStatusChronicleEvent.class);
+        for(ChronicleEvent chronicleEvent: events){
+            UserStatusChronicleEvent userStatusChronicleEvent = (UserStatusChronicleEvent) chronicleEvent;
+            if(userStatusChronicleEvent.getUser().getName().equals(user.getName())){
+                Chronicle.getActiveChronicle().removeEvent(chronicleEvent);
+            }
+        }
+    }
+
+    private void addAllAlcoholLevelEvents() {
+        for(Calendar calendar: getMomentsOfSpecificAlcoholLevel(legalAlcoholLimit,true)){
+            addAlcoholLevelChronicleEvent(calendar);
+        }
+    }
+
+    private void addAllFitToDriveEvents(){
+        for(Calendar calendar: getMomentsOfSpecificAlcoholLevel(legalAlcoholLimit,true)){
+            addFitToDriveEvent(false,calendar);
+        }
+        for(Calendar calendar: getMomentsOfSpecificAlcoholLevel(legalAlcoholLimit-0.01,false)){
+            addFitToDriveEvent(true,calendar);
+        }
+    }
+
+    private void addUserStatusChronicleEvent(ChronicleEvent chronicleEvent,Calendar calendar){
+        chronicleEvent.setMoment(calendar);
+        Chronicle.getActiveChronicle().addEvent(chronicleEvent);
+    }
+
+    /**
+     *
+     * @param level alcohol level
+     * @param increase if true, it gets only a moment, when the level is increasing, else only if decreasing
+     * @return
+     */
+    private List<Calendar>  getMomentsOfSpecificAlcoholLevel(double level, boolean increase) {
+        List<Calendar> calendars = new ArrayList<Calendar>();
+        double alcoholVolume = 0;
+        for(Consumption consumption : consumptions){
+            double alcoholVolumeBeforeBreakDown = alcoholVolume + getAlcoholVolumeOfConsumption(consumption);
+            if(alcoholVolumeBeforeBreakDown>=level){
+                if (increase){
+                    calendars.add(consumption.getConsumptionTime());
+                }else{
+                    int durationOfBreakDown = (int)Math.round(getDurationOfBreakDown(level-alcoholVolumeBeforeBreakDown));
+                    Calendar consumptionTimeWithDurationOfBreakDown = Calendar.getInstance();
+                    consumptionTimeWithDurationOfBreakDown.setTime(consumption.getConsumptionTime().getTime());
+                    consumptionTimeWithDurationOfBreakDown.add(Calendar.SECOND,durationOfBreakDown);
+                    boolean hasNext = (consumptions.indexOf(consumption)<consumptions.size()-1);
+                    if(hasNext){
+                        Consumption next = consumptions.get(consumptions.indexOf(consumption));
+                        if (consumptionTimeWithDurationOfBreakDown.before(next.getConsumptionTime())){
+                            calendars.add(consumptionTimeWithDurationOfBreakDown);
+                        }
+                    }else{
+                        calendars.add(consumptionTimeWithDurationOfBreakDown);
+                    }
+                }
+            }
+            double durationBetweenStartAndEndInSec = getDurationBetweenOneAndNextConsumption(consumption);
+            double alcoholBreakDown = getAlcoholBreakDownOfDuration(durationBetweenStartAndEndInSec);
+            double alcoholVolumeMinusBreakDown = alcoholVolumeBeforeBreakDown-alcoholBreakDown;
+            if (alcoholVolumeMinusBreakDown<0){
+                alcoholVolumeMinusBreakDown=0;
+            }
+            alcoholVolume=alcoholVolumeMinusBreakDown;
+        }
+        return calendars;
+    }
+
+    private void addFitToDriveEvent(boolean isFitToDrive, Calendar calendar) {
         ChronicleEvent chronicleEvent = new FitToDriveChronicleEvent(user.copy(),isFitToDrive);
-        Chronicle.getActiveChronicle().addEvent(chronicleEvent);
+        addUserStatusChronicleEvent(chronicleEvent,calendar);
     }
 
-    private void addIntegerVolumeValueEvent() {
+    private void addAlcoholLevelChronicleEvent(Calendar calendar) {
         ChronicleEvent chronicleEvent = new AlcoholLevelChronicleEvent(user.copy());
-        Chronicle.getActiveChronicle().addEvent(chronicleEvent);
+        addUserStatusChronicleEvent(chronicleEvent, calendar);
     }
 
     /**
@@ -110,6 +180,11 @@ public class UserStatus implements Serializable {
         return alocholVolume;
     }
 
+    /**
+     *
+     * @param consumption
+     * @return duration in seconds
+     */
     private double getDurationBetweenOneAndNextConsumption(Consumption consumption){
         Calendar startTime = consumption.getConsumptionTime();
         Calendar endTime;
@@ -120,6 +195,19 @@ public class UserStatus implements Serializable {
             endTime = consumptions.get(indexOfNextConsumption).getConsumptionTime();
         }
         return (endTime.getTimeInMillis()-startTime.getTimeInMillis())/1000;
+    }
+
+    /**
+     *
+     * @param level
+     * @return duration in seconds
+     */
+    private double getDurationOfBreakDown(double level){
+        return level/alcoholBreakDown;
+    }
+
+    private double getAlcoholBreakDownOfDuration(double duration){
+        return duration/60/60* this.alcoholBreakDown;
     }
 
 }
