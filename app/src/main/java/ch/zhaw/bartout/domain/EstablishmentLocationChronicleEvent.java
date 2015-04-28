@@ -15,7 +15,7 @@ public class EstablishmentLocationChronicleEvent extends LocationChronicleEvent 
 
     @Override
     public String getDisplayName() {
-        return null;
+        return getLocationName() + " besucht";
     }
 
     public EstablishmentLocationChronicleEvent(Place place) {

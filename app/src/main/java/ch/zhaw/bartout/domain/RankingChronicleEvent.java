@@ -13,6 +13,6 @@ public class RankingChronicleEvent extends ChronicleEvent {
 
     @Override
     public String getDisplayName() {
-        return null;
+        return "Ranking";
     }
 }

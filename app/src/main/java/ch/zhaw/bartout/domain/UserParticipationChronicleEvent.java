@@ -16,6 +16,14 @@ public class UserParticipationChronicleEvent extends UserChronicleEvent {
 
     @Override
     public String getDisplayName() {
-        return null;
+        String s = "";
+        if(isNewUser){
+            s = "Neuer Benutzer: ";
+        }else{
+            s = "Benutzer geht: ";
+        }
+        s += getUser().getName();
+
+        return s;
     }
 }
