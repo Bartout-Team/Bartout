@@ -70,39 +70,6 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemClic
 
         listView.setOnItemClickListener(this);
         listView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE_MODAL);
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-                if(selectionMode != null) return false;
-
-                listView.setItemChecked(position, true);
-                listView.setOnItemClickListener(null);
-                selectionMode = startActionMode(new ActionMode.Callback() {
-                    @Override
-                    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                        return false;
-                    }
-
-                    @Override
-                    public void onDestroyActionMode(ActionMode mode) {
-                        selectionMode = null;
-                        listView.setItemChecked(position, false);
-                        listView.setOnItemClickListener(HomeActivity.this);
-                    }
-                });
-                return true;
-            }
-        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.newBartourButton);
         fab.attachToListView(listView);
