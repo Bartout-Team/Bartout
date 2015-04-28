@@ -1,79 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/drawer_layout"
+    tools:context="ch.zhaw.bartout.controller.DrinkActivity">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editTextBeverageName"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="false"
-            android:text="@string/editTextBeverageName_default" />
+            android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/textViewBeverageVolume"
-            android:id="@+id/textViewBeverageVolume"
-            android:layout_below="@+id/editTextBeverageName"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editTextBeverageName"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="false"
+                android:hint="@string/user_name" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:ems="10"
-            android:id="@+id/editTextBeverageVolume"
-            android:layout_alignBottom="@+id/textViewBeverageVolume"
-            android:layout_toRightOf="@+id/textViewBeverageVolume"
-            android:layout_toEndOf="@+id/textViewBeverageVolume" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/textViewBeverageVolume"
+                android:id="@+id/textViewBeverageVolume"
+                android:layout_below="@+id/editTextBeverageName"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/textViewAlcoholicStrength"
-            android:id="@+id/textViewAlcoholicStrength"
-            android:layout_below="@+id/textViewBeverageVolume"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="false" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/editTextBeverageVolume"
+                android:layout_alignBottom="@+id/textViewBeverageVolume"
+                android:layout_toRightOf="@+id/textViewBeverageVolume"
+                android:layout_toEndOf="@+id/textViewBeverageVolume" />
 
-        <EditText
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:ems="10"
-            android:id="@+id/editTextBeverageAlcoholicStrength"
-            android:layout_alignBottom="@+id/textViewAlcoholicStrength"
-            android:layout_toRightOf="@+id/textViewAlcoholicStrength"
-            android:layout_toEndOf="@+id/textViewAlcoholicStrength" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/textViewAlcoholicStrength"
+                android:id="@+id/textViewAlcoholicStrength"
+                android:layout_below="@+id/textViewBeverageVolume"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="false" />
 
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/buttonDrink_text"
-            android:id="@+id/buttonDrink"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:onClick="buttonDrinkOnClick" />
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/editTextBeverageAlcoholicStrength"
+                android:layout_alignBottom="@+id/textViewAlcoholicStrength"
+                android:layout_toRightOf="@+id/textViewAlcoholicStrength"
+                android:layout_toEndOf="@+id/textViewAlcoholicStrength" />
 
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/listViewDrinkUsers"
-            android:layout_below="@+id/editTextBeverageAlcoholicStrength"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:headerDividersEnabled="true" />
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/buttonDrink_text"
+                android:id="@+id/buttonDrink"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:onClick="buttonDrinkOnClick" />
 
-    </RelativeLayout>
-</LinearLayout>
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/listViewDrinkUsers"
+                android:layout_below="@+id/editTextBeverageAlcoholicStrength"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:headerDividersEnabled="true" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <include layout="@layout/navigation_drawer" />
+
+</android.support.v4.widget.DrawerLayout>

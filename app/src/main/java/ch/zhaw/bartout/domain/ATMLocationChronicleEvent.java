@@ -6,6 +6,6 @@ package ch.zhaw.bartout.domain;
 public class ATMLocationChronicleEvent extends LocationChronicleEvent {
     @Override
     public String getDisplayName() {
-        return null;
+        return "Bank beucht: " + getLocationName();
     }
 }

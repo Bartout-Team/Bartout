@@ -34,16 +34,34 @@ public class Bartout implements Serializable {
         bartours = new ArrayList<Bartour>();
         Calendar end = Calendar.getInstance();
         end.add(Calendar.HOUR, 2);
-
         addBartour(new Bartour().setName("First Tour").setEnd(end));
         addBartour(new Bartour().setName("Second Tour").setEnd(end));
         addBartour(new Bartour().setName("Third Tour").setEnd(end));
-        activeBartour = null;
-        //addBartour(new Bartour().setName("Active Tour"));
+        //activeBartour = null;
+        addBartour(new Bartour().setName("Active Tour"));
 
         for(Bartour tour : bartours){
-            tour.addUser(new User().setName("First User"));
+            User user = new User().setName("First User");
+            tour.addUser(user);
             tour.addUser(new User().setName("Second User"));
+
+            EstablishmentLocationChronicleEvent e = new EstablishmentLocationChronicleEvent();
+            e.setType("Bar");
+            e.setLatitude(100);
+            e.setLongitude(100);
+            e.setLocationName("Kennedy's");
+            tour.getChronicle().addEvent(e);
+
+            ATMLocationChronicleEvent a = new ATMLocationChronicleEvent();
+            a.setLocationName("ZKB");
+            a.setLongitude(101);
+            a.setLatitude(101);
+            tour.getChronicle().addEvent(a);
+
+            AlcoholLevelChronicleEvent b = new AlcoholLevelChronicleEvent(user);
+            UserStatus status = new UserStatus(user);
+            status.addConsumption(new Consumption("Guinnes", 4.5,  5));
+            b.setStatus(status);
         }
     }
 
