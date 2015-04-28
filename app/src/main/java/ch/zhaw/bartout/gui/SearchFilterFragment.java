@@ -93,6 +93,10 @@ public class SearchFilterFragment extends DialogFragment {
                 filterBuilder.append(getString(R.string.search_filter_restaurant_name));
             }else if(dispName.equals(getString(R.string.search_filter_food))){
                 filterBuilder.append(getString(R.string.search_filter_food_name));
+            }else if(dispName.equals(getString(R.string.search_filter_atm))){
+                filterBuilder.append(getString(R.string.search_filter_atm_name));
+            }else if(dispName.equals(getString(R.string.search_filter_atm))){
+                filterBuilder.append(getString(R.string.search_filter_bank_name));
             }
         }
         return filterBuilder.toString();

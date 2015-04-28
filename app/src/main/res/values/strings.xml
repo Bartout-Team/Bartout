@@ -55,6 +55,10 @@
     <string name="search_filter_food_name">food</string>
     <string name="search_filter_club">Club</string>
     <string name="search_filter_club_name">night_club</string>
+    <string name="search_filter_atm">Bankomat</string>
+    <string name="search_filter_atm_name">atm</string>
+    <string name="search_filter_bank">Bank</string>
+    <string name="search_filter_bank_name">bank</string>
     <string name="title_search_filter">Filtern</string>
     <string name="title_drink_beverage">Gertänk</string>
     <array name="search_filters">
@@ -62,6 +66,7 @@
         <item>Restaurant</item>
         <item>Essen</item>
         <item>Club</item>
+        <item>Bankomat</item>
     </array>
     <string name="toast_location_check_in_success">Erfolgreich eingecheckt!</string>
     <string name="toast_location_check_in_fail">Keine Bartour aktiv!</string>
