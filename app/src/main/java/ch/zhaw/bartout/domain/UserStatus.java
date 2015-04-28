@@ -174,6 +174,9 @@ public class UserStatus implements Serializable {
         }else{
             reductionFactor = reductionFactorWomen;
         }
+        if (user.getWeight() == 0){
+            throw new IllegalArgumentException("the user weight must not be 0");
+        }
         double reducedWeightOfUser = reductionFactor*user.getWeight();
         double bloodAlcoholContent = pureAlcoholInG/reducedWeightOfUser;
         double alocholVolume = bloodAlcoholContent-bloodAlcoholContent*resorptionDeficit;
