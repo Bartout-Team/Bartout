@@ -1,11 +1,12 @@
 package ch.zhaw.bartout.domain;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
  * Created by tomekman on 04.04.15.
  */
-public class Consumption {
+public class Consumption implements Serializable {
 
     private String name;
     private double alcoholicStrength;

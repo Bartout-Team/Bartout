@@ -18,6 +18,7 @@ public class UserStatus implements Serializable {
     private final double reductionFactorMen = 0.7;
     private final double resorptionDeficit = 0.2;
     private final double alcoholBreakDown = 0.15;
+    private final int[] alcoholLevelsForEvent = {1,2,3,5,6,7,8,9,10};
 
     public UserStatus(User user) {
         this.user = user;
@@ -90,8 +91,10 @@ public class UserStatus implements Serializable {
     }
 
     private void addAllAlcoholLevelEvents() {
-        for(Calendar calendar: getMomentsOfSpecificAlcoholLevel(legalAlcoholLimit,true)){
-            addAlcoholLevelChronicleEvent(calendar);
+        for(int level: alcoholLevelsForEvent){
+            for(Calendar calendar: getMomentsOfSpecificAlcoholLevel(level,true)){
+                addAlcoholLevelChronicleEvent(calendar,level);
+            }
         }
     }
 
@@ -155,8 +158,8 @@ public class UserStatus implements Serializable {
         addUserStatusChronicleEvent(chronicleEvent,calendar);
     }
 
-    private void addAlcoholLevelChronicleEvent(Calendar calendar) {
-        ChronicleEvent chronicleEvent = new AlcoholLevelChronicleEvent(user.copy());
+    private void addAlcoholLevelChronicleEvent(Calendar calendar, int level) {
+        ChronicleEvent chronicleEvent = new AlcoholLevelChronicleEvent(user.copy(),level);
         addUserStatusChronicleEvent(chronicleEvent, calendar);
     }
 
