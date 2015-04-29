@@ -2,7 +2,9 @@ package ch.zhaw.bartout.domain;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.Mockito;
 
+import static org.mockito.Mockito.*;
 import java.util.Calendar;
 import java.util.List;
 
@@ -35,5 +37,11 @@ public class BartoutTest {
         Assert.assertEquals("Check, if there is no active Bartour anymore", null, b.getActiveBartour());
         Assert.assertTrue("Check, if remove returns true, so it found the Tour", b.removeBartour(tour));
         Assert.assertTrue("Check, if Bartour was removed from List", b.getBartours().isEmpty());
+    }
+
+    @Test
+    public void testIntegration(){
+        Bartour bMock = mock(Bartour.class);
+        
     }
 }
