@@ -46,15 +46,16 @@ public class Bartout implements Serializable {
         addBartour(new Bartour().setName("Active Tour"));
 
         for(Bartour tour : bartours){
+            activeBartour = tour; //active tour have to be set, because the events would be added to the active chronicle
             User user = new User().setName("First User");
             user.setWeight(70);
             tour.addUser(user);
             user = new User().setName("Second User");
             tour.addUser(user);
             user.setWeight(70);
-/*            user.getStatus().addConsumption(new Consumption("Guinnes",0.08,500));
+            user.getStatus().addConsumption(new Consumption("Guinnes",0.08,500));
             user.getStatus().addConsumption(new Consumption("Stella",0.05,500));
-            user.getStatus().addConsumption(new Consumption("Staropramen",0.05,500));*/
+            user.getStatus().addConsumption(new Consumption("Staropramen",0.05,500));
             EstablishmentLocationChronicleEvent e = new EstablishmentLocationChronicleEvent();
             e.setType("Bar");
             e.setLatitude(100);
@@ -68,7 +69,7 @@ public class Bartout implements Serializable {
             a.setLatitude(101);
             tour.getChronicle().addEvent(a);
 
-            AlcoholLevelChronicleEvent b = new AlcoholLevelChronicleEvent(user);
+            AlcoholLevelChronicleEvent b = new AlcoholLevelChronicleEvent(user,2);
             UserStatus status = new UserStatus(user);
             status.addConsumption(new Consumption("Guinnes", 4.5,  5));
             b.setStatus(status);

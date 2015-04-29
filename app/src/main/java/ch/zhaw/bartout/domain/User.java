@@ -50,6 +50,7 @@ public class User implements Serializable,Copyable<User> {
 
     @Override
     public User copy() {
-        return (User)DeepCopy.copy(this);
+        User copiedUser = (User)DeepCopy.copy(this);
+        return copiedUser;
     }
 }

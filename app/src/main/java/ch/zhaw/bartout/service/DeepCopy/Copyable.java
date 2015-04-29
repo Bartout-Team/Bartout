@@ -6,6 +6,7 @@ package ch.zhaw.bartout.service.deepcopy;
 
 /**
  * Gives the ability to make a deep copy
+ * The class and every dependent class have to implement the Serializable interface
  * @param <E>
  */
 public interface Copyable<E> {
