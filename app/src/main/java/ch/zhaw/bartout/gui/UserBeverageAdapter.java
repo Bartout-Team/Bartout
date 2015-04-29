@@ -19,8 +19,8 @@ import ch.zhaw.bartout.domain.User;
  */
 public class UserBeverageAdapter extends ArrayAdapter<User> {
 
-    public UserBeverageAdapter(Context context, List<User> bartours){
-        super(context, 0, bartours);
+    public UserBeverageAdapter(Context context, List<User> users){
+        super(context, 0, users);
     }
 
     @Override
