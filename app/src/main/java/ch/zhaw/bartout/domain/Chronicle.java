@@ -25,7 +25,7 @@ public class Chronicle implements Serializable {
     public List<ChronicleEvent> getChronicleEvents(Class type){
         List<ChronicleEvent> eventsOfType = new ArrayList<ChronicleEvent>();
         for(ChronicleEvent chronicleEvent: chronicleEvents){
-            if(chronicleEvent.getClass().isInstance(type)){
+            if(type.isAssignableFrom(chronicleEvent.getClass())){
                 eventsOfType.add(chronicleEvent);
             }
         }

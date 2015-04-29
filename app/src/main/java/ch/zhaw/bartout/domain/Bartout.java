@@ -69,6 +69,8 @@ public class Bartout implements Serializable {
             a.setLatitude(101);
             tour.getChronicle().addEvent(a);
 
+            user = new User().setName("Third User");
+            user.setWeight(70);
             AlcoholLevelChronicleEvent b = new AlcoholLevelChronicleEvent(user,2);
             UserStatus status = new UserStatus(user);
             status.addConsumption(new Consumption("Guinnes", 4.5,  5));
