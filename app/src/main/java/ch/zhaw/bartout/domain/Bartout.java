@@ -32,6 +32,11 @@ public class Bartout implements Serializable {
 
     protected Bartout(){
         bartours = new ArrayList<Bartour>();
+    }
+
+    public void initializeSampleData(){
+        // Sample Daten dürfen nicht in Konstruktor geladen werden,
+        // da aufgrund unseres Singleton sonst ein rekursive Endlosschleife aufgerufen wird.
         Calendar end = Calendar.getInstance();
         end.add(Calendar.HOUR, 2);
         addBartour(new Bartour().setName("First Tour").setEnd(end));
@@ -42,9 +47,14 @@ public class Bartout implements Serializable {
 
         for(Bartour tour : bartours){
             User user = new User().setName("First User");
+            user.setWeight(70);
             tour.addUser(user);
-            tour.addUser(new User().setName("Second User"));
-
+            user = new User().setName("Second User");
+            tour.addUser(user);
+            user.setWeight(70);
+/*            user.getStatus().addConsumption(new Consumption("Guinnes",0.08,500));
+            user.getStatus().addConsumption(new Consumption("Stella",0.05,500));
+            user.getStatus().addConsumption(new Consumption("Staropramen",0.05,500));*/
             EstablishmentLocationChronicleEvent e = new EstablishmentLocationChronicleEvent();
             e.setType("Bar");
             e.setLatitude(100);
