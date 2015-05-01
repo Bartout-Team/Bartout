@@ -40,7 +40,8 @@
                 android:id="@+id/editTextBeverageVolume"
                 android:layout_alignBottom="@+id/textViewBeverageVolume"
                 android:layout_toRightOf="@+id/textViewBeverageVolume"
-                android:layout_toEndOf="@+id/textViewBeverageVolume" />
+                android:layout_toEndOf="@+id/textViewBeverageVolume"
+                android:hint="Volumen" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -50,7 +51,7 @@
                 android:id="@+id/textViewAlcoholicStrength"
                 android:layout_below="@+id/textViewBeverageVolume"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="false" />
+                android:layout_alignParentStart="true" />
 
             <EditText
                 android:layout_width="fill_parent"
@@ -60,7 +61,18 @@
                 android:id="@+id/editTextBeverageAlcoholicStrength"
                 android:layout_alignBottom="@+id/textViewAlcoholicStrength"
                 android:layout_toRightOf="@+id/textViewAlcoholicStrength"
-                android:layout_toEndOf="@+id/textViewAlcoholicStrength" />
+                android:layout_toEndOf="@+id/textViewAlcoholicStrength"
+                android:hint="Alkoholgehalt" />
+
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/listViewDrinkUsers"
+                android:headerDividersEnabled="true"
+                android:layout_below="@+id/textViewAlcoholicStrength"
+                android:layout_alignRight="@+id/editTextBeverageAlcoholicStrength"
+                android:layout_alignEnd="@+id/editTextBeverageAlcoholicStrength"
+                android:layout_above="@+id/buttonDrink" />
 
             <Button
                 android:layout_width="fill_parent"
@@ -70,16 +82,8 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:onClick="buttonDrinkOnClick" />
-
-            <ListView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/listViewDrinkUsers"
-                android:layout_below="@+id/editTextBeverageAlcoholicStrength"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:headerDividersEnabled="true" />
+                android:onClick="buttonDrinkOnClick"
+                android:layout_alignEnd="@+id/listViewDrinkUsers" />
 
         </RelativeLayout>
     </LinearLayout>

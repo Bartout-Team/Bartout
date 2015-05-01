@@ -29,14 +29,14 @@ public class Consumption implements Serializable {
     }
 
     /**
-     * @return returns volume in ml
+     * @return returns volume in dl
      */
     public double getVolume () {
         return volume;
     }
 
     /**
-     * @return returns alcoholic strength in percent (ex. 5% = 0.05)
+     * @return returns alcoholic strength in percent (ex. 5% = 5)
      */
     public double getAlcoholicStrength() {
         return alcoholicStrength;
