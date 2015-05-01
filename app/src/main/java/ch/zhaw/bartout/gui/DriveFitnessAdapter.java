@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -45,7 +46,8 @@ public class DriveFitnessAdapter extends ArrayAdapter<RankingUser> {
             imagefitToDrive.setVisibility(View.VISIBLE);
         }
         name.setText(rankingUser.getUser().getName());
-        alcoholLevel.setText(rankingUser.getUser().getStatus().getAlcoholLevel()+ "‰");
+        DecimalFormat df = new DecimalFormat("#.#");
+        alcoholLevel.setText(df.format(rankingUser.getUser().getStatus().getAlcoholLevel())+ "‰");
         long fitToDriveDuration = rankingUser.getUser().getStatus().fitToDriveDuration();
         if(fitToDriveDuration != 0) {
             textFitToDriveDuration.setText("in " + fitToDriveDuration / 60 / 60 + "h");

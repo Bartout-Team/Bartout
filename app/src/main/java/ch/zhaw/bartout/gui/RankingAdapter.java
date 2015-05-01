@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import ch.zhaw.bartout.R;
@@ -32,7 +33,8 @@ public class RankingAdapter  extends ArrayAdapter<RankingUser> {
         name.setText(String.format(Integer.toString(position+1) + ". " +  user.getUser().getName()));
 
         TextView alcoholLevel = (TextView) convertView.findViewById(R.id.user_alcohol_level);
-        alcoholLevel.setText(Double.toString(user.getUser().getStatus().getAlcoholLevel())+"‰");
+        DecimalFormat df = new DecimalFormat("#.#");
+        alcoholLevel.setText(df.format(user.getUser().getStatus().getAlcoholLevel())+"‰");
         ProgressBar progressBar = (ProgressBar) convertView.findViewById(R.id.user_alcohol_level_progressBar);
         progressBar.setProgress((int)Math.round(user.getAlcoholLevelInPercent()*100));
 
