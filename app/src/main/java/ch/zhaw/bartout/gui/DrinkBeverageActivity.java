@@ -6,19 +6,18 @@ import ch.zhaw.bartout.domain.Bartout;
 import ch.zhaw.bartout.domain.User;
 import ch.zhaw.bartout.domain.Consumption;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DrinkBeverageActivity extends BaseActivity {
 
-    public static final String DRINK_BEVERAGE_CONTENT = "DRINK_BEVERAGE_CONTENT";
     private String beverageName;
     private Double beverageVolume;
     private Double beverageAlcoholicStrength;
@@ -30,7 +29,7 @@ public class DrinkBeverageActivity extends BaseActivity {
     private ListView listViewUsers;
 
     private Bartour bartour;
-    private List<User> users = new ArrayList<User>();
+    private List<User> users = new ArrayList<>();
 
     //Keys
     private String beverageNameKey = "beverageNameKey";
@@ -48,10 +47,10 @@ public class DrinkBeverageActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         android.content.Intent intent = getIntent();
-        Bundle b = intent.getExtras();
-        beverageName = b.getString(beverageNameKey);
-        beverageVolume = b.getDouble(beverageVolumeKey);
-        beverageAlcoholicStrength = b.getDouble(beverageAlcoholicKey);
+
+        beverageName = intent.getStringExtra(beverageNameKey);
+        beverageVolume = intent.getDoubleExtra(beverageVolumeKey, 0.0);
+        beverageAlcoholicStrength = intent.getDoubleExtra(beverageAlcoholicKey, 0.0);
 
         bartour = Bartout.getInstance().getActiveBartour();
         users = bartour.getUsers();
@@ -82,16 +81,16 @@ public class DrinkBeverageActivity extends BaseActivity {
 
             View v = listViewUsers.getChildAt(x);
             CheckBox checkBox = (CheckBox) v.findViewById(R.id.beverageUserItemCheckBox);
-            TextView textName = (TextView) v.findViewById(R.id.text_name);
-            String s = (String) textName.getText();
-
 
             if (checkBox.isEnabled()) {
                 Consumption consumption = new Consumption(beverageName, beverageAlcoholicStrength, beverageVolume);
 
-                User u=users.get(x);
+                User u = users.get(x);
                 u.getStatus().addConsumption(consumption);
             }
+
+            Intent intent = new Intent(this, DrinkActivity.class);
+            startActivity(intent);
 
         }
 

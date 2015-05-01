@@ -4,12 +4,9 @@ package ch.zhaw.bartout.gui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ListView;
 
 import ch.zhaw.bartout.R;
-import ch.zhaw.bartout.domain.Bartour;
-import ch.zhaw.bartout.domain.Bartout;
+
 
 public class DrinkActivity extends BaseActivity {
 
@@ -24,9 +21,6 @@ public class DrinkActivity extends BaseActivity {
     private String beverageAlcoholicKey = "beverageAlcoholicKey";
 
 
-
-    private Bartour bartour;
-
     public DrinkActivity() {
         super(R.layout.activity_drink);
     }
@@ -34,8 +28,6 @@ public class DrinkActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        bartour = Bartout.getInstance().getActiveBartour();
 
         beverageName = "neues Getränk";
         beverageVolume = 0.0;
@@ -79,7 +71,7 @@ public class DrinkActivity extends BaseActivity {
 
     public void buttonCoctailStrongOnClick(View view) {
 
-        beverageName = "Coctail stark";
+        beverageName = "Cocktail stark";
         beverageVolume = 0.1;
         beverageAlcoholic = 12.0;
 
@@ -89,7 +81,7 @@ public class DrinkActivity extends BaseActivity {
 
     public void buttonCoctailSoftOnClick(View view) {
 
-        beverageName = "Coctail schwach";
+        beverageName = "Cocktail schwach";
         beverageVolume = 0.2;
         beverageAlcoholic = 5.0;
 
@@ -100,7 +92,7 @@ public class DrinkActivity extends BaseActivity {
     public void buttonShotOnClick(View view) {
 
         beverageName = "Shot";
-        beverageVolume = 0.2;
+        beverageVolume = 0.02;
         beverageAlcoholic = 40.0;
 
         toDrinkBeverageActivity();
@@ -120,12 +112,10 @@ public class DrinkActivity extends BaseActivity {
     private void toDrinkBeverageActivity(){
 
         Intent intent = new Intent(this, DrinkBeverageActivity.class);
-        Bundle b = new Bundle();
-        b.putSerializable(DrinkBeverageActivity.DRINK_BEVERAGE_CONTENT, bartour);
-        intent.putExtras(b);
-        b.putString(beverageNameKey, beverageName);
-        b.putDouble(beverageVolumeKey, beverageVolume);
-        b.putDouble(beverageAlcoholicKey, beverageAlcoholic);
+        intent.putExtra(beverageNameKey, beverageName);
+        intent.putExtra(beverageVolumeKey, beverageVolume);
+        intent.putExtra(beverageAlcoholicKey, beverageAlcoholic);
+
         startActivity(intent);
     }
 }
