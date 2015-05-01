@@ -36,10 +36,13 @@ dependencies {
     compile 'com.google.android.gms:play-services-maps:7.0.0'
     compile 'com.google.android.gms:play-services-location:7.0.0'
     // Google Places API Client
-    compile 'se.walkercrou:google-places-api-java:2.1.1'
+    compile 'se.walkercrou:google-places-api-java:2.1.2'
     compile 'org.apache.httpcomponents:httpclient-android:4.3.5.1'
     // FAB-Button
     compile 'com.melnykov:floatingactionbutton:1.2.0'
-    compile 'org.mockito:mockito-core:2.0.7-beta'
-    compile 'org.mockito:mockito-all:2.0.2-beta'
+    testCompile 'junit:junit:4.11'
+    testCompile 'org.mockito:mockito-core:1.9.5'
+    androidTestCompile 'junit:junit:4.11'
+    androidTestCompile 'org.mockito:mockito-core:1.9.5'
+
 }
