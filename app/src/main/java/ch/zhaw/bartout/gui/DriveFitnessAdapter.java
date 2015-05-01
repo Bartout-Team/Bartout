@@ -13,21 +13,22 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import ch.zhaw.bartout.R;
+import ch.zhaw.bartout.domain.RankingUser;
 import ch.zhaw.bartout.domain.User;
 
 /**
  * Created by bwa on 03.04.2015.
  */
-public class DriveFitnessAdapter extends ArrayAdapter<User> {
+public class DriveFitnessAdapter extends ArrayAdapter<RankingUser> {
     private DateFormat dateFormat = SimpleDateFormat.getDateInstance();
 
-    public DriveFitnessAdapter(Context context, List<User> users){
-        super(context, 0, users);
+    public DriveFitnessAdapter(Context context, List<RankingUser> rankingUsers){
+        super(context, 0, rankingUsers);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
-        User user = getItem(position);
+        RankingUser rankingUser = getItem(position);
         if(convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.drive_fitness_user_item, parent, false);
         }
@@ -36,15 +37,16 @@ public class DriveFitnessAdapter extends ArrayAdapter<User> {
         TextView alcoholLevel = (TextView) convertView.findViewById(R.id.user_alcohol_level);
         TextView textFitToDriveDuration = (TextView) convertView.findViewById(R.id.fit_to_drive_duration);
         ImageView imagefitToDrive = (ImageView) convertView.findViewById(R.id.fit_to_drive_image);
-        if(user.getStatus().fitToDrive()) {
+        if(rankingUser.getUser().getStatus().fitToDrive()) {
             fitToDrive.setText(R.string.ok);
             imagefitToDrive.setVisibility(View.INVISIBLE);
         } else {
             fitToDrive.setText(R.string.no);
+            imagefitToDrive.setVisibility(View.VISIBLE);
         }
-        name.setText(user.getName());
-        alcoholLevel.setText(user.getStatus().getAlcoholLevel()+ "‰");
-        long fitToDriveDuration = user.getStatus().fitToDriveDuration();
+        name.setText(rankingUser.getUser().getName());
+        alcoholLevel.setText(rankingUser.getUser().getStatus().getAlcoholLevel()+ "‰");
+        long fitToDriveDuration = rankingUser.getUser().getStatus().fitToDriveDuration();
         if(fitToDriveDuration != 0) {
             textFitToDriveDuration.setText("in " + fitToDriveDuration / 60 / 60 + "h");
         } else {

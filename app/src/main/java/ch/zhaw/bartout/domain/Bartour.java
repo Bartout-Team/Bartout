@@ -16,6 +16,7 @@ public class Bartour implements Serializable {
     private String name;
     private List<User> users;
     private Ranking ranking;
+    private Ranking driveFitnessRanking;
     private Chronicle chronicle;
     private Calendar start;
     private Calendar end;
@@ -25,7 +26,8 @@ public class Bartour implements Serializable {
         users = new ArrayList<User>();
         start = Calendar.getInstance();
         end = null;
-        ranking = new Ranking(users);
+        ranking = new Ranking(users, true);
+        driveFitnessRanking = new Ranking(users, false);
         chronicle = new Chronicle();
     }
 
@@ -65,12 +67,14 @@ public class Bartour implements Serializable {
     public void addUser(User user) {
         users.add(user);
         ranking.updateRanking();
+        getDriveFitnessRanking().updateRanking();
         addUserParticipationChronicleEvent(user.copy(),true);
     }
 
     public boolean removeUser(User user) {
         boolean b = users.remove(user);
         ranking.updateRanking();
+        getDriveFitnessRanking().updateRanking();
         addUserParticipationChronicleEvent(user.copy(),false);
         return b;
     }
@@ -105,6 +109,10 @@ public class Bartour implements Serializable {
 
     private void addUserParticipationChronicleEvent(User user, boolean isNewUser){
         chronicle.addEvent(new UserParticipationChronicleEvent(user,isNewUser));
+    }
+
+    public Ranking getDriveFitnessRanking() {
+        return driveFitnessRanking;
     }
 
     interface OnFinishedListener{

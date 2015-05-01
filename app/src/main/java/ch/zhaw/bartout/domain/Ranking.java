@@ -13,10 +13,12 @@ public class Ranking implements Serializable {
 
     private List<User> users;
     private List<RankingUser> orderedUsers;
+    private boolean descending;
 
-    public Ranking(List<User> users){
+    public Ranking(List<User> users, boolean descending){
         this.users = users;
         this.orderedUsers = new ArrayList<RankingUser>();
+        this.descending = descending;
     }
 
     public void updateRanking(){
@@ -32,6 +34,9 @@ public class Ranking implements Serializable {
             user.setAlcoholLevelInPercent(user.getUser().getStatus().getAlcoholLevel()/highestAlcoholLevel);
         }
         Collections.sort(orderedUsers);
+        if(descending) {
+            Collections.reverse(orderedUsers);
+        }
     }
 
     public List<RankingUser> getRanking(){
