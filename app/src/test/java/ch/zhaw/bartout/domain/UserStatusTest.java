@@ -50,14 +50,14 @@ public class UserStatusTest {
         assertEquals("Check, if the status gives false back", false, userStatus.fitToDrive());
         userStatus = new UserStatus(userWomanMock);
         userStatus.addConsumption(new Consumption("", 5, 6));
-        assertEquals("Check, if the status gives false back",false,userStatus.fitToDrive());
+        assertEquals("Check, if the status gives false back", false, userStatus.fitToDrive());
     }
 
     @Test
     public void testFitToDriveTrue() throws Exception {
         UserStatus userStatus = new UserStatus(userManMock);
         userStatus.addConsumption(new Consumption("", 5, 6));
-        assertTrue(userStatus.fitToDrive());
+        assertTrue("Check, if the status gives true back", userStatus.fitToDrive());
     }
 
     @Test
@@ -66,7 +66,21 @@ public class UserStatusTest {
     }
 
     @Test
-    public void testFitToDriveDuration() throws Exception {
+    public void testFitToDriveDurationWoman() throws Exception {
+        UserStatus userStatus = new UserStatus(userWomanMock);
+        userStatus.addConsumption(new Consumption("", 5, 15));
+        assertEquals("Should give back 5.04h", 5.04, (double)userStatus.fitToDriveDuration() / 60 / 60, 0.01);
+    }
+
+    @Test
+    public void testFitToDriveDurationMan() throws Exception {
+        UserStatus userStatus = new UserStatus(userManMock);
+        userStatus.addConsumption(new Consumption("", 5, 15));
+        assertEquals("Should give back 3.85h", 3.85, (double)userStatus.fitToDriveDuration() / 60 / 60, 0.01);
+    }
+
+    @Test
+    public void testFitToDriveDurationNoDuration() throws Exception {
 
     }
 

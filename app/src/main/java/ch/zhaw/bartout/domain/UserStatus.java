@@ -35,7 +35,7 @@ public class UserStatus implements Serializable {
     }
 
     /**
-     * alcohol level of the user, accurate to two decimal places (rounded)
+     * alcohol level of the user
      * @return
      */
     public double getAlcoholLevel() {
@@ -50,7 +50,7 @@ public class UserStatus implements Serializable {
             }
             alcoholVolume+=alcoholVolumeMinusBreakDown;
         }
-        return (double)Math.round(alcoholVolume*100)/100;
+        return alcoholVolume;
     }
 
     /**
@@ -58,7 +58,7 @@ public class UserStatus implements Serializable {
      * @return duration in seconds
      */
     public long fitToDriveDuration() {
-        long fitToDriveDuration = (long) ((getAlcoholLevel()-legalAlcoholLimit)/alcoholBreakDown*60*60);
+        long fitToDriveDuration = (long) Math.round((getAlcoholLevel()-legalAlcoholLimit)/alcoholBreakDown*60*60);
         if(fitToDriveDuration < 0) fitToDriveDuration = 0;
         return fitToDriveDuration;
     }
