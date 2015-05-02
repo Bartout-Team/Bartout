@@ -33,7 +33,7 @@ public class RankingAdapter  extends ArrayAdapter<RankingUser> {
         name.setText(String.format(Integer.toString(position+1) + ". " +  user.getUser().getName()));
 
         TextView alcoholLevel = (TextView) convertView.findViewById(R.id.user_alcohol_level);
-        DecimalFormat df = new DecimalFormat("#.#");
+        DecimalFormat df = new DecimalFormat("#.##");
         alcoholLevel.setText(df.format(user.getUser().getStatus().getAlcoholLevel())+"‰");
         ProgressBar progressBar = (ProgressBar) convertView.findViewById(R.id.user_alcohol_level_progressBar);
         progressBar.setProgress((int)Math.round(user.getAlcoholLevelInPercent()*100));
