@@ -91,10 +91,12 @@ public class UserStatusTest {
 
     @Test
     public void testFitToDriveDurationNoDuration() throws Exception {
-/*        UserStatus userStatus = new UserStatus(userManMock);
-        userStatus.addConsumption(mockConSumption("", 5, 15));
-        //userStatus.removeConsumption()
-        assertEquals("Should give back 3.85h", 3.85, (double) userStatus.fitToDriveDuration() / 60 / 60, 0.01);*/
+        UserStatus userStatus = new UserStatus(userManMock);
+        assertEquals("Nothing drunk, should give back 0h", 0, (double) userStatus.fitToDriveDuration() / 60 / 60, 0.01);
+        Consumption consumption = mockConSumption("", 5, 15);
+        userStatus.addConsumption(consumption);
+        userStatus.removeConsumption(consumption);
+        assertEquals("Added and Removed Drink, Should give back 0h", 0, (double) userStatus.fitToDriveDuration() / 60 / 60, 0.01);
     }
 
     @Test
