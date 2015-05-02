@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 /**
@@ -64,11 +65,19 @@ public class UserStatus implements Serializable {
     }
 
     public void addConsumption(Consumption consumption){
+        if(consumption == null){
+            throw  new IllegalArgumentException("consumption is null");
+        }
         consumptions.add(consumption);
         refreshEvents();
     }
 
     public boolean removeConsumption(Consumption consumption){
+        if(consumption == null){
+            throw  new IllegalArgumentException("consumption is null");
+        }else if(!consumptions.contains(consumption)){
+            throw  new IllegalArgumentException("consumption not found in list");
+        }
         boolean removeValue = consumptions.remove(consumption);
         refreshEvents();
         return removeValue;
