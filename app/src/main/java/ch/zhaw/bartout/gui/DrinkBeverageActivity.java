@@ -82,8 +82,8 @@ public class DrinkBeverageActivity extends BaseActivity {
             View v = listViewUsers.getChildAt(x);
             CheckBox checkBox = (CheckBox) v.findViewById(R.id.beverageUserItemCheckBox);
 
-            if (checkBox.isEnabled()) {
-                Consumption consumption = new Consumption(beverageName, beverageAlcoholicStrength, beverageVolume);
+            if (checkBox.isChecked()) {
+                Consumption consumption = new Consumption(beverageName, beverageAlcoholicStrength, beverageVolume*10);
 
                 User u = users.get(x);
                 u.getStatus().addConsumption(consumption);
