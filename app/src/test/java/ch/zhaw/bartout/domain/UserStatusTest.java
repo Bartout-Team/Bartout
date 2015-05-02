@@ -7,6 +7,7 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -43,20 +44,29 @@ public class UserStatusTest {
         when(Chronicle.getActiveChronicle()).thenReturn(activeChronicleMock);
     }
 
+    private Consumption mockConSumption(String name,double alcoholStrengthInPercent, double alcoholVolumeInDl){
+        Consumption consumptionMock = mock(Consumption.class);
+        when(consumptionMock.getConsumptionTime()).thenReturn(Calendar.getInstance());
+        when(consumptionMock.getName()).thenReturn(name);
+        when(consumptionMock.getAlcoholicStrength()).thenReturn(alcoholStrengthInPercent);
+        when(consumptionMock.getVolume()).thenReturn(alcoholVolumeInDl);
+        return  consumptionMock;
+    }
+
     @Test
     public void testFitToDriveFalse() throws Exception {
         UserStatus userStatus = new UserStatus(userManMock);
-        userStatus.addConsumption(new Consumption("", 5, 15));
+        userStatus.addConsumption(mockConSumption("", 5, 15));
         assertEquals("Check, if the status gives false back", false, userStatus.fitToDrive());
         userStatus = new UserStatus(userWomanMock);
-        userStatus.addConsumption(new Consumption("", 5, 6));
+        userStatus.addConsumption(mockConSumption("", 5, 6));
         assertEquals("Check, if the status gives false back", false, userStatus.fitToDrive());
     }
 
     @Test
     public void testFitToDriveTrue() throws Exception {
         UserStatus userStatus = new UserStatus(userManMock);
-        userStatus.addConsumption(new Consumption("", 5, 6));
+        userStatus.addConsumption(mockConSumption("", 5, 6));
         assertTrue("Check, if the status gives true back", userStatus.fitToDrive());
     }
 
@@ -68,20 +78,23 @@ public class UserStatusTest {
     @Test
     public void testFitToDriveDurationWoman() throws Exception {
         UserStatus userStatus = new UserStatus(userWomanMock);
-        userStatus.addConsumption(new Consumption("", 5, 15));
+        userStatus.addConsumption(mockConSumption("", 5, 15));
         assertEquals("Should give back 5.04h", 5.04, (double)userStatus.fitToDriveDuration() / 60 / 60, 0.01);
     }
 
     @Test
     public void testFitToDriveDurationMan() throws Exception {
         UserStatus userStatus = new UserStatus(userManMock);
-        userStatus.addConsumption(new Consumption("", 5, 15));
+        userStatus.addConsumption(mockConSumption("", 5, 15));
         assertEquals("Should give back 3.85h", 3.85, (double)userStatus.fitToDriveDuration() / 60 / 60, 0.01);
     }
 
     @Test
     public void testFitToDriveDurationNoDuration() throws Exception {
-
+/*        UserStatus userStatus = new UserStatus(userManMock);
+        userStatus.addConsumption(mockConSumption("", 5, 15));
+        //userStatus.removeConsumption()
+        assertEquals("Should give back 3.85h", 3.85, (double) userStatus.fitToDriveDuration() / 60 / 60, 0.01);*/
     }
 
     @Test
