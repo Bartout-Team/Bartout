@@ -71,8 +71,29 @@ public class UserStatusTest {
     }
 
     @Test
-    public void testGetAlcoholLevel() throws Exception {
+         public void testGetAlcoholLevelMan() throws Exception {
+        UserStatus userStatus = new UserStatus(userManMock);
+        userStatus.addConsumption(mockConsumption("", 12, 7.5));
+        assertEquals("After one bottle wine, a man have to have 1.28‰", 1.28, userStatus.getAlcoholLevel(), 0.01);
+    }
 
+    @Test
+    public void testGetAlcoholLevelWoman() throws Exception {
+        UserStatus userStatus = new UserStatus(userWomanMock);
+        userStatus.addConsumption(mockConsumption("", 12, 7.5));
+        assertEquals("After one bottle wine, a man have to have 1.28‰", 1.5,userStatus.getAlcoholLevel(),0.01);
+    }
+
+    @Test
+    public void testGetAlcoholLevelNoDuration() throws Exception {
+        UserStatus userStatusMan = new UserStatus(userManMock);
+        assertEquals("No consumptions, a man have to have 0‰", 0,userStatusMan.getAlcoholLevel(),0);
+        UserStatus userStatusWoman = new UserStatus(userWomanMock);
+        assertEquals("No consumptions, a man have to have 0‰", 0,userStatusWoman.getAlcoholLevel(),0);
+        Consumption consumption = mockConsumption("", 5, 15);
+        userStatusMan.addConsumption(consumption);
+        userStatusMan.removeConsumption(consumption);
+        assertEquals("After added and removed one consumption, a man have to have 0‰", 0, userStatusMan.getAlcoholLevel(), 0);
     }
 
     @Test
