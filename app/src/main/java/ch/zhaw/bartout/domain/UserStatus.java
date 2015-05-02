@@ -22,7 +22,7 @@ public class UserStatus implements Serializable {
 
     public UserStatus(User user) {
         this.user = user;
-        legalAlcoholLimit = 0.5;
+        legalAlcoholLimit = 0.49;
         consumptions = new ArrayList<Consumption>();
     }
 
@@ -34,6 +34,10 @@ public class UserStatus implements Serializable {
         }
     }
 
+    /**
+     * alcohol level of the user, accurate to two decimal places (rounded)
+     * @return
+     */
     public double getAlcoholLevel() {
         double alcoholVolume = 0;
         for(Consumption consumption : consumptions){
@@ -46,7 +50,7 @@ public class UserStatus implements Serializable {
             }
             alcoholVolume+=alcoholVolumeMinusBreakDown;
         }
-        return alcoholVolume;
+        return (double)Math.round(alcoholVolume*100)/100;
     }
 
     /**
@@ -102,7 +106,7 @@ public class UserStatus implements Serializable {
         for(Calendar calendar: getMomentsOfSpecificAlcoholLevel(legalAlcoholLimit,true)){
             addFitToDriveEvent(false,calendar);
         }
-        for(Calendar calendar: getMomentsOfSpecificAlcoholLevel(legalAlcoholLimit-0.01,false)){
+        for(Calendar calendar: getMomentsOfSpecificAlcoholLevel(legalAlcoholLimit,false)){
             addFitToDriveEvent(true,calendar);
         }
     }

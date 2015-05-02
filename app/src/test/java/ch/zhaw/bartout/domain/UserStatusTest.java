@@ -29,9 +29,12 @@ public class UserStatusTest {
         userManMock = mock(User.class);
         when(userManMock.getWeight()).thenReturn(65);
         when(userManMock.isMan()).thenReturn(true);
+        when(userManMock.copy()).thenReturn(userManMock);
+
         userWomanMock = mock(User.class);
         when(userWomanMock.getWeight()).thenReturn(65);
         when(userWomanMock.isMan()).thenReturn(false);
+        when(userWomanMock.copy()).thenReturn(userWomanMock);
 
         activeChronicleMock = mock(Chronicle.class);
         when(activeChronicleMock.getChronicleEvents()).thenReturn(new ArrayList<ChronicleEvent>());
@@ -43,18 +46,18 @@ public class UserStatusTest {
     @Test
     public void testFitToDriveFalse() throws Exception {
         UserStatus userStatus = new UserStatus(userManMock);
-        userStatus.addConsumption(new Consumption("", 5, 5));
-        assertEquals(true, userStatus.fitToDrive());
-/*        userStatus = new UserStatus(userWomanMock);
+        userStatus.addConsumption(new Consumption("", 5, 15));
+        assertEquals("Check, if the status gives false back", false, userStatus.fitToDrive());
+        userStatus = new UserStatus(userWomanMock);
         userStatus.addConsumption(new Consumption("", 5, 6));
-        assertFalse(userStatus.fitToDrive());*/
+        assertEquals("Check, if the status gives false back",false,userStatus.fitToDrive());
     }
 
     @Test
     public void testFitToDriveTrue() throws Exception {
-/*        UserStatus userStatus = new UserStatus(userManMock);
+        UserStatus userStatus = new UserStatus(userManMock);
         userStatus.addConsumption(new Consumption("", 5, 6));
-        assertTrue(userStatus.fitToDrive());*/
+        assertTrue(userStatus.fitToDrive());
     }
 
     @Test
