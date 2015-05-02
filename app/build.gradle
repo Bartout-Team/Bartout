@@ -4,6 +4,17 @@ android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
 
+    configurations.all {
+        resolutionStrategy {
+            // Android Studio uses junit 4.11
+            // se.walkercrou:google-places-api-java:2.1.2' uses also junit 4.11
+            // org.powermock:powermock-module-junit4:1.6.1 uses junit 4.12
+            // that gives version conflict: the resolutionStrategy forces now version 4.12
+            force "junit:junit:4.12"
+        }
+    }
+
+
     defaultConfig {
         applicationId "ch.zhaw.bartout"
         minSdkVersion 16
@@ -40,9 +51,13 @@ dependencies {
     compile 'org.apache.httpcomponents:httpclient-android:4.3.5.1'
     // FAB-Button
     compile 'com.melnykov:floatingactionbutton:1.2.0'
+/*
     testCompile 'junit:junit:4.11'
-    testCompile 'org.mockito:mockito-core:1.9.5'
-    androidTestCompile 'junit:junit:4.11'
-    androidTestCompile 'org.mockito:mockito-core:1.9.5'
+    testCompile 'org.mockito:mockito-core:1.9.5'*/
+    testCompile 'org.powermock:powermock-api-mockito:1.6.1'
+    testCompile 'org.powermock:powermock-module-junit4:1.6.1'
+    testCompile 'org.powermock:powermock-classloading-xstream:1.6.1'
+/*    androidTestCompile 'junit:junit:4.11'
+    androidTestCompile 'org.mockito:mockito-core:1.9.5'*/
 
 }
