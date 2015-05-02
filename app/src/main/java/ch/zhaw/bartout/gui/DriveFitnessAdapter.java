@@ -46,7 +46,7 @@ public class DriveFitnessAdapter extends ArrayAdapter<RankingUser> {
             imagefitToDrive.setVisibility(View.VISIBLE);
         }
         name.setText(rankingUser.getUser().getName());
-        DecimalFormat df = new DecimalFormat("#.#");
+        DecimalFormat df = new DecimalFormat("#.##");
         alcoholLevel.setText(df.format(rankingUser.getUser().getStatus().getAlcoholLevel())+ "‰");
         long fitToDriveDuration = rankingUser.getUser().getStatus().fitToDriveDuration();
         if(fitToDriveDuration != 0) {
