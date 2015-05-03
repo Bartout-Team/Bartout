@@ -16,7 +16,7 @@ import ch.zhaw.bartout.R;
 /**
  * Created by Nico on 31.03.2015.
  */
-public abstract class ChronicleEvent implements Serializable {
+public abstract class ChronicleEvent implements Comparable<ChronicleEvent>, Serializable {
 
     private Calendar moment;
 
@@ -43,4 +43,18 @@ public abstract class ChronicleEvent implements Serializable {
         time.setText(new SimpleDateFormat("HH:mm").format(moment.getTime()));
         return view;
     }
+
+    @Override
+    public int compareTo(ChronicleEvent another) {
+        Long instanceTime = getMoment().getTimeInMillis();
+        Long anotherTime = another.getMoment().getTimeInMillis();
+        if (instanceTime<anotherTime){
+            return -1;
+        } else if(instanceTime>anotherTime){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
 }
