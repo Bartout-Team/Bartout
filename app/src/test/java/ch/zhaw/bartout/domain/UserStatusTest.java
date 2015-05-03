@@ -81,7 +81,7 @@ public class UserStatusTest {
     public void testGetAlcoholLevelWoman() throws Exception {
         UserStatus userStatus = new UserStatus(userWomanMock);
         userStatus.addConsumption(mockConsumption("", 12, 7.5));
-        assertEquals("After one bottle wine, a man have to have 1.28‰", 1.5,userStatus.getAlcoholLevel(),0.01);
+        assertEquals("After one bottle wine, a woman have to have 1.15‰", 1.5,userStatus.getAlcoholLevel(),0.01);
     }
 
     @Test

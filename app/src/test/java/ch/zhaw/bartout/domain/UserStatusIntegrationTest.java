@@ -70,7 +70,7 @@ public class UserStatusIntegrationTest {
     public void testGetAlcoholLevelWoman() throws Exception {
         UserStatus userStatus = new UserStatus(userWoman);
         userStatus.addConsumption(new Consumption("", 12, 7.5));
-        assertEquals("After one bottle wine, a man have to have 1.28‰", 1.5,userStatus.getAlcoholLevel(),0.01);
+        assertEquals("After one bottle wine, a woman have to have 1.15‰", 1.5,userStatus.getAlcoholLevel(),0.01);
     }
 
     @Test
@@ -78,7 +78,7 @@ public class UserStatusIntegrationTest {
         UserStatus userStatusMan = new UserStatus(userMan);
         assertEquals("No consumptions, a man have to have 0‰", 0,userStatusMan.getAlcoholLevel(),0);
         UserStatus userStatusWoman = new UserStatus(userWoman);
-        assertEquals("No consumptions, a man have to have 0‰", 0,userStatusWoman.getAlcoholLevel(),0);
+        assertEquals("No consumptions, a woman have to have 0‰", 0,userStatusWoman.getAlcoholLevel(),0);
         Consumption consumption = new Consumption("", 5, 15);
         userStatusMan.addConsumption(consumption);
         userStatusMan.removeConsumption(consumption);
