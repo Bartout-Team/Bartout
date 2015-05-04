@@ -52,5 +52,4 @@ public class EstablishmentLocationChronicleEvent extends LocationChronicleEvent 
 
         return view;
     }
-
 }
