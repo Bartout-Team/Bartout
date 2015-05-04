@@ -21,10 +21,15 @@ public class ChronicleActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
         android.content.Intent intent = getIntent();
         Bundle b = intent.getExtras();
         bartour = (Bartour) b.getSerializable(CHRONICLE_EXTRA_BARTOUR);
-
 
         ListView listView = (ListView) findViewById(R.id.list_view);
 

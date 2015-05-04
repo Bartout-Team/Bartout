@@ -93,8 +93,13 @@ public abstract class BaseActivity extends Activity{
             intent = new Intent(BaseActivity.this, DrinkActivity.class);
         }else if(name.equals(getString(R.string.title_ranking))){
             intent = new Intent(BaseActivity.this, RankingActivity.class);
-        }else if(name.equals(getString(R.string.title_drive_fitness))){
+        }else if(name.equals(getString(R.string.title_drive_fitness))) {
             intent = new Intent(BaseActivity.this, DriveFitnessActivity.class);
+        }else if(name.equals(getString(R.string.title_chronicle))){
+            intent = new Intent(BaseActivity.this, ChronicleActivity.class);
+            Bundle b = new Bundle();
+            b.putSerializable(ChronicleActivity.CHRONICLE_EXTRA_BARTOUR, Bartout.getInstance().getActiveBartour());
+            intent.putExtras(b);
         }else {
             throw new IllegalStateException("Unknown Activity!");
         }
@@ -114,6 +119,7 @@ public abstract class BaseActivity extends Activity{
             menuItems.add(getString(R.string.title_drink));
             menuItems.add(getString(R.string.title_ranking));
             menuItems.add(getString(R.string.title_drive_fitness));
+            menuItems.add(getString(R.string.title_chronicle));
         }
         drawerList.setItemChecked(menuItems.indexOf(getString(getNameRes())), true);
     }
