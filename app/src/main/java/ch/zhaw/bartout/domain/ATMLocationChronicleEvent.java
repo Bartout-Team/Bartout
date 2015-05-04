@@ -43,7 +43,7 @@ public class ATMLocationChronicleEvent extends LocationChronicleEvent {
         View view = super.getView(context);
 
         ImageView img = (ImageView) view.findViewById(R.id.image_icon);
-        img.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_action_beer_pin));
+        img.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_money_pin));
 
         return view;
     }
