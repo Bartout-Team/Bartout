@@ -8,7 +8,13 @@
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:divider="@drawable/divider"
+        android:dividerHeight="40dp"
+        android:layout_margin="10dp"
+        android:scrollbars="none"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
 
     <include layout="@layout/navigation_drawer" />
 
