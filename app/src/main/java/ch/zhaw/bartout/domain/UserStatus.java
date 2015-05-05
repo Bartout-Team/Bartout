@@ -139,6 +139,7 @@ public class UserStatus implements Serializable {
             if(alcoholVolumeBeforeBreakDown>=level && eventShouldHappen){
                 if (increase){
                     calendars.add(consumption.getConsumptionTime());
+                    eventShouldHappen = false;
                 }else{
                     int durationOfBreakDownInSecOfDiff = (int)Math.round(getDurationOfBreakDown(alcoholVolumeBeforeBreakDown-level)*60*60);
                     Calendar consumptionTimeWithDurationOfBreakDown = Calendar.getInstance();
@@ -149,12 +150,13 @@ public class UserStatus implements Serializable {
                         Consumption next = consumptions.get(consumptions.indexOf(consumption));
                         if (consumptionTimeWithDurationOfBreakDown.before(next.getConsumptionTime())){
                             calendars.add(consumptionTimeWithDurationOfBreakDown);
+                            eventShouldHappen = false;
                         }
                     }else{
                         calendars.add(consumptionTimeWithDurationOfBreakDown);
+                        eventShouldHappen = false;
                     }
                 }
-                eventShouldHappen = false;
             }
             double durationBetweenStartAndEndInSec = getDurationBetweenOneAndNextConsumption(consumption);
             double alcoholBreakDown = getAlcoholBreakDownOfDuration(durationBetweenStartAndEndInSec);
