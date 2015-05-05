@@ -26,6 +26,10 @@ public class UserStatus implements Serializable {
         consumptions = new ArrayList<Consumption>();
     }
 
+    /**
+     * is a user fit to drive
+     * @return true if the user is fit to drive or false if he isn't
+     */
     public boolean fitToDrive() {
         if(fitToDriveDuration() == 0) {
             return true;
@@ -36,7 +40,7 @@ public class UserStatus implements Serializable {
 
     /**
      * alcohol level of the user
-     * @return
+     * @return alcohol level in per mill
      */
     public double getAlcoholLevel() {
         double alcoholVolume = 0;
@@ -54,7 +58,7 @@ public class UserStatus implements Serializable {
     }
 
     /**
-     *
+     * Gets the time until the user is fit to drive
      * @return duration in seconds
      */
     public long fitToDriveDuration() {

@@ -61,8 +61,8 @@ public class Bartour implements Serializable {
     }
 
     /**
-     * Fügt den Benutzer der Benutzerliste hinzu und updatet die Klasse Ranking
-     * @param user
+     * Adds a user to the list of bartour users.
+     * @param user The user added to the list.
      */
     public void addUser(User user) {
         users.add(user);
@@ -71,6 +71,11 @@ public class Bartour implements Serializable {
         addUserParticipationChronicleEvent(user.copy(),true);
     }
 
+    /**
+     * Removes a user from the list of bartour users.
+     * @param user The user removed from the list.
+     * @return True if user could be removed from list, false otherwise.
+     */
     public boolean removeUser(User user) {
         boolean b = users.remove(user);
         ranking.updateRanking();
@@ -80,7 +85,7 @@ public class Bartour implements Serializable {
     }
 
     /**
-     * Returns duration of Bartour or -1 if Bartour is not finish yet.
+     * Returns duration of Bartour since creation or -1 if Bartour is not finish yet.
      * @return Duration in seconds, -1 if Bartour is not finish yet.
      */
     public long getDuration(){
@@ -91,6 +96,10 @@ public class Bartour implements Serializable {
         }
     }
 
+    /**
+     * If the bartour is currently active.
+     * @return True if the bartour is active, false otherwise.
+     */
     public boolean getIsActive(){
         return end == null;
     }
@@ -107,6 +116,11 @@ public class Bartour implements Serializable {
         return chronicle;
     }
 
+    /**
+     * Adds a UserParticipationChronicleEvent to the chronicle.
+     * @param user Which user the event will be created for.
+     * @param isNewUser If it is a new user or not.
+     */
     private void addUserParticipationChronicleEvent(User user, boolean isNewUser){
         chronicle.addEvent(new UserParticipationChronicleEvent(user,isNewUser));
     }
