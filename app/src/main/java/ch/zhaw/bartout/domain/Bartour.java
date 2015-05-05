@@ -118,5 +118,16 @@ public class Bartour implements Serializable {
     interface OnFinishedListener{
         public void OnFinished();
     }
+    
+    @Override
+    public boolean equals(Object other){
+        if(! (other instanceof Bartour)) return false;
+        Bartour otherTour = (Bartour)other;
+        if(!name.equals(otherTour.getName())) return false;
+        if(start != null && !start.equals(otherTour.getStart())) return false;
+        if(end != null && !end.equals(otherTour.getEnd())) return false;
+
+        return true;
+    }
 }
 

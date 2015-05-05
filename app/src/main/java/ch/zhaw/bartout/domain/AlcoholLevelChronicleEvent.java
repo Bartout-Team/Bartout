@@ -25,7 +25,7 @@ public class AlcoholLevelChronicleEvent extends UserStatusChronicleEvent {
 
     @Override
     public String getDisplayName() {
-        return String.format("%s hat %d ‰",getUser().getName(),level);
+        return String.format("<b>%s</b> hat %d ‰",getUser().getName(),level);
     }
 
     @Override
