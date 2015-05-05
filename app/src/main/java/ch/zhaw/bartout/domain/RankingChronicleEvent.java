@@ -13,6 +13,11 @@ public class RankingChronicleEvent extends ChronicleEvent {
 
     private Ranking ranking;
 
+    public  RankingChronicleEvent(Ranking ranking){
+        super();
+        this.ranking = ranking;
+    }
+
     public Ranking getRanking() {   return ranking; }
 
     public void setRanking(Ranking ranking) {   this.ranking = ranking; }

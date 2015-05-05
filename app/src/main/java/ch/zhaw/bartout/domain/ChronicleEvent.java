@@ -19,9 +19,10 @@ import ch.zhaw.bartout.R;
 public abstract class ChronicleEvent implements Comparable<ChronicleEvent>, Serializable {
 
     private Calendar moment;
+    private String momentFormated;
 
     public ChronicleEvent() {
-        moment = Calendar.getInstance();
+        setMoment(Calendar.getInstance());
     }
 
     public Calendar getMoment() {
@@ -30,7 +31,9 @@ public abstract class ChronicleEvent implements Comparable<ChronicleEvent>, Seri
 
     public void setMoment(Calendar moment){
         this.moment = moment;
+        this.momentFormated = new java.text.SimpleDateFormat("yyyy MMM dd HH:mm:ss").format(getMoment().getTime());
     }
+
 
     public abstract String getDisplayName();
 
