@@ -72,7 +72,7 @@ public class DrinkActivity extends BaseActivity {
     public void buttonCoctailStrongOnClick(View view) {
 
         beverageName = "Cocktail stark";
-        beverageVolume = 0.1;
+        beverageVolume = 0.2;
         beverageAlcoholic = 12.0;
 
         toDrinkBeverageActivity();
