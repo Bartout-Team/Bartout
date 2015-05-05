@@ -87,12 +87,12 @@ public class UserStatus implements Serializable {
     }
 
     private void refreshEvents() {
-        DeleteEventsFromUser();
+        deleteEventsFromUser();
         addAllFitToDriveEvents();
         addAllAlcoholLevelEvents();
     }
 
-    private void DeleteEventsFromUser() {
+    private void deleteEventsFromUser() {
         List<ChronicleEvent> events = Chronicle.getActiveChronicle().getChronicleEvents(UserStatusChronicleEvent.class);
         for(ChronicleEvent chronicleEvent: events){
             UserStatusChronicleEvent userStatusChronicleEvent = (UserStatusChronicleEvent) chronicleEvent;
