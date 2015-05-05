@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.util.Calendar;
+
 import ch.zhaw.bartout.R;
 
 /**
@@ -17,6 +19,10 @@ public class BartourChronicleEvent extends ChronicleEvent {
     public BartourChronicleEvent(String name, boolean isStart){
         this.isStart = isStart;
         this.name = name;
+    }
+    public BartourChronicleEvent(String name, boolean isStart,Calendar startTime){
+        this(name,isStart);
+        setMoment(startTime);
     }
 
     @Override

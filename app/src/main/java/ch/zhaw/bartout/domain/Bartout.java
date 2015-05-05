@@ -126,7 +126,7 @@ public class Bartout implements Serializable {
                 activeBartour = null;
             }
         });
-        BartourChronicleEvent event = new BartourChronicleEvent(bartour.getName(), true);
+        BartourChronicleEvent event = new BartourChronicleEvent(bartour.getName(), true,bartour.getStart());
         bartour.getChronicle().addEvent(event);
     }
 
