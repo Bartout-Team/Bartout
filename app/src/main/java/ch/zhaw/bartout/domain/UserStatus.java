@@ -133,16 +133,17 @@ public class UserStatus implements Serializable {
     private List<Calendar>  getMomentsOfSpecificAlcoholLevel(double level, boolean increase) {
         List<Calendar> calendars = new ArrayList<Calendar>();
         double alcoholVolume = 0;
+        boolean eventShouldHappen = true;
         for(Consumption consumption : consumptions){
             double alcoholVolumeBeforeBreakDown = alcoholVolume + getAlcoholVolumeOfConsumption(consumption);
-            if(alcoholVolumeBeforeBreakDown>=level){
+            if(alcoholVolumeBeforeBreakDown>=level && eventShouldHappen){
                 if (increase){
                     calendars.add(consumption.getConsumptionTime());
                 }else{
-                    int durationOfBreakDownInSeconds = (int)Math.round(getDurationOfBreakDown(alcoholVolumeBeforeBreakDown-level)*60*60);
+                    int durationOfBreakDownInSecOfDiff = (int)Math.round(getDurationOfBreakDown(alcoholVolumeBeforeBreakDown-level)*60*60);
                     Calendar consumptionTimeWithDurationOfBreakDown = Calendar.getInstance();
                     consumptionTimeWithDurationOfBreakDown.setTime(consumption.getConsumptionTime().getTime());
-                    consumptionTimeWithDurationOfBreakDown.add(Calendar.SECOND,durationOfBreakDownInSeconds);
+                    consumptionTimeWithDurationOfBreakDown.add(Calendar.SECOND,durationOfBreakDownInSecOfDiff);
                     boolean hasNext = (consumptions.indexOf(consumption)<consumptions.size()-1);
                     if(hasNext){
                         Consumption next = consumptions.get(consumptions.indexOf(consumption));
@@ -153,12 +154,16 @@ public class UserStatus implements Serializable {
                         calendars.add(consumptionTimeWithDurationOfBreakDown);
                     }
                 }
+                eventShouldHappen = false;
             }
             double durationBetweenStartAndEndInSec = getDurationBetweenOneAndNextConsumption(consumption);
             double alcoholBreakDown = getAlcoholBreakDownOfDuration(durationBetweenStartAndEndInSec);
             double alcoholVolumeMinusBreakDown = alcoholVolumeBeforeBreakDown-alcoholBreakDown;
             if (alcoholVolumeMinusBreakDown<0){
                 alcoholVolumeMinusBreakDown=0;
+            }
+            if (alcoholVolumeBeforeBreakDown>level && level > alcoholVolumeMinusBreakDown){
+                eventShouldHappen = true;
             }
             alcoholVolume=alcoholVolumeMinusBreakDown;
         }
