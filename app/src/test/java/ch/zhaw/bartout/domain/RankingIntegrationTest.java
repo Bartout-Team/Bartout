@@ -7,26 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 
-/**
- * Created by bwa on 03.05.2015.
- */
-public class RankingTest {
+public class RankingIntegrationTest {
 
     private List<User> users;
     private Ranking descendingRanking;
     private Ranking ascendingRanking;
-    private User user1Mock;
-    private User user2Mock;
 
     @Before
     public void setUp() {
-        user1Mock = mock(User.class);
-        user2Mock = mock(User.class);
         users = new ArrayList<User>();
-        users.add(user1Mock);
-        users.add(user2Mock);
+        users.add(new User());
+        users.add(new User());
         descendingRanking = new Ranking(users, true);
         ascendingRanking = new Ranking(users, false);
 
