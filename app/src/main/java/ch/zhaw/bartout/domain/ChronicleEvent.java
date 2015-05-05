@@ -16,12 +16,13 @@ import ch.zhaw.bartout.R;
 /**
  * Created by Nico on 31.03.2015.
  */
-public abstract class ChronicleEvent implements Serializable {
+public abstract class ChronicleEvent implements Comparable<ChronicleEvent>, Serializable {
 
     private Calendar moment;
+    private String momentFormated;
 
     public ChronicleEvent() {
-        moment = Calendar.getInstance();
+        setMoment(Calendar.getInstance());
     }
 
     public Calendar getMoment() {
@@ -30,7 +31,9 @@ public abstract class ChronicleEvent implements Serializable {
 
     public void setMoment(Calendar moment){
         this.moment = moment;
+        this.momentFormated = new java.text.SimpleDateFormat("yyyy MMM dd HH:mm:ss").format(getMoment().getTime());
     }
+
 
     public abstract String getDisplayName();
 
@@ -43,4 +46,18 @@ public abstract class ChronicleEvent implements Serializable {
         time.setText(new SimpleDateFormat("HH:mm").format(moment.getTime()));
         return view;
     }
+
+    @Override
+    public int compareTo(ChronicleEvent another) {
+        Long instanceTime = getMoment().getTimeInMillis();
+        Long anotherTime = another.getMoment().getTimeInMillis();
+        if (instanceTime<anotherTime){
+            return -1;
+        } else if(instanceTime>anotherTime){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
 }

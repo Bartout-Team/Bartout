@@ -1,21 +1,15 @@
 package ch.zhaw.bartout.gui;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import ch.zhaw.bartout.R;
-import ch.zhaw.bartout.domain.Bartour;
 import ch.zhaw.bartout.domain.ChronicleEvent;
-import ch.zhaw.bartout.domain.RankingChronicleEvent;
 
 
 /**

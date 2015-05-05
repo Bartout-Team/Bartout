@@ -2,6 +2,7 @@ package ch.zhaw.bartout.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -33,6 +34,7 @@ public class Chronicle implements Serializable {
     }
 
     public List<ChronicleEvent> getChronicleEvents() {
+        Collections.sort(chronicleEvents);
         return chronicleEvents;
     }
 

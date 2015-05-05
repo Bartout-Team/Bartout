@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 /**
@@ -18,7 +17,7 @@ public class UserStatus implements Serializable {
     private final double reductionFactorWomen = 0.6;
     private final double reductionFactorMen = 0.7;
     private final double resorptionDeficit = 0.2;
-    private final double alcoholBreakDown = 0.15;
+    private final double alcoholBreakDownInOneHour = 0.15;
     private final int[] alcoholLevelsForEvent = {1,2,3,5,6,7,8,9,10};
 
     public UserStatus(User user) {
@@ -59,7 +58,7 @@ public class UserStatus implements Serializable {
      * @return duration in seconds
      */
     public long fitToDriveDuration() {
-        long fitToDriveDuration = (long) Math.round((getAlcoholLevel()-legalAlcoholLimit)/alcoholBreakDown*60*60);
+        long fitToDriveDuration = (long) Math.round((getAlcoholLevel()-legalAlcoholLimit)/ alcoholBreakDownInOneHour *60*60);
         if(fitToDriveDuration < 0) fitToDriveDuration = 0;
         return fitToDriveDuration;
     }
@@ -140,10 +139,10 @@ public class UserStatus implements Serializable {
                 if (increase){
                     calendars.add(consumption.getConsumptionTime());
                 }else{
-                    int durationOfBreakDown = (int)Math.round(getDurationOfBreakDown(level-alcoholVolumeBeforeBreakDown));
+                    int durationOfBreakDownInSeconds = (int)Math.round(getDurationOfBreakDown(alcoholVolumeBeforeBreakDown-level)*60*60);
                     Calendar consumptionTimeWithDurationOfBreakDown = Calendar.getInstance();
                     consumptionTimeWithDurationOfBreakDown.setTime(consumption.getConsumptionTime().getTime());
-                    consumptionTimeWithDurationOfBreakDown.add(Calendar.SECOND,durationOfBreakDown);
+                    consumptionTimeWithDurationOfBreakDown.add(Calendar.SECOND,durationOfBreakDownInSeconds);
                     boolean hasNext = (consumptions.indexOf(consumption)<consumptions.size()-1);
                     if(hasNext){
                         Consumption next = consumptions.get(consumptions.indexOf(consumption));
@@ -219,14 +218,14 @@ public class UserStatus implements Serializable {
     /**
      *
      * @param level
-     * @return duration in seconds
+     * @return duration in hours
      */
     private double getDurationOfBreakDown(double level){
-        return level/alcoholBreakDown;
+        return level/ alcoholBreakDownInOneHour;
     }
 
     private double getAlcoholBreakDownOfDuration(double duration){
-        return duration/60/60* this.alcoholBreakDown;
+        return duration/60/60* this.alcoholBreakDownInOneHour;
     }
 
 }
