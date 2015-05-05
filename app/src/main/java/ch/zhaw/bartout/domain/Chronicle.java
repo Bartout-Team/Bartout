@@ -19,8 +19,10 @@ public class Chronicle implements Serializable {
         chronicleEvents.add(event);
     }
 
-    public void removeEvent(ChronicleEvent event){
-        chronicleEvents.remove(event);
+    public void removeEvent(ChronicleEvent event)  {
+        if(!chronicleEvents.remove(event)){
+            throw new Error("Event not found!");
+        }
     }
 
     public List<ChronicleEvent> getChronicleEvents(Class type){
@@ -30,12 +32,12 @@ public class Chronicle implements Serializable {
                 eventsOfType.add(chronicleEvent);
             }
         }
-        return eventsOfType;
+        return Collections.unmodifiableList(eventsOfType);
     }
 
     public List<ChronicleEvent> getChronicleEvents() {
         Collections.sort(chronicleEvents);
-        return chronicleEvents;
+        return Collections.unmodifiableList(chronicleEvents);
     }
 
     public static Chronicle getActiveChronicle(){

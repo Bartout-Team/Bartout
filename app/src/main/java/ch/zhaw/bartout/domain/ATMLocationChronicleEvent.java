@@ -23,7 +23,7 @@ public class ATMLocationChronicleEvent extends LocationChronicleEvent {
 
     @Override
     public String getDisplayName() {
-        return "Bank besucht: " + getLocationName();
+        return "Bank besucht: <b>" + getLocationName() + "</b>";
     }
 
     @Override

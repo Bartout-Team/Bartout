@@ -33,6 +33,7 @@ public class RankingActivity extends BaseActivity {
     @Override
     public void onResume() {
         super.onResume();
+        ranking.updateRanking();;
         adapter.notifyDataSetChanged();
     }
 

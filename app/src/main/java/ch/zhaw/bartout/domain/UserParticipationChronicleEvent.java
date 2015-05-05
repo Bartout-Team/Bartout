@@ -28,7 +28,7 @@ public class UserParticipationChronicleEvent extends UserChronicleEvent {
         }else{
             s = "Benutzer geht: ";
         }
-        s += getUser().getName();
+        s += "<b>"+getUser().getName()+"</b>";
 
         return s;
     }

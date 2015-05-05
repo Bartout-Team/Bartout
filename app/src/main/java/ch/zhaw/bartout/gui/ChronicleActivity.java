@@ -29,15 +29,17 @@ public class ChronicleActivity extends BaseActivity {
         super.onResume();
         android.content.Intent intent = getIntent();
         Bundle b = intent.getExtras();
-        bartour = (Bartour) b.getSerializable(CHRONICLE_EXTRA_BARTOUR);
+        Bartour tour = (Bartour) b.getSerializable(CHRONICLE_EXTRA_BARTOUR);
+        if(!tour.equals(bartour)) {
+            bartour = tour;
+            ListView listView = (ListView) findViewById(R.id.list_view);
 
-        ListView listView = (ListView) findViewById(R.id.list_view);
-
-        ChronicleAdapter bartoursAdapter = new ChronicleAdapter(
-                this,
-                bartour.getChronicle().getChronicleEvents()
-        );
-        listView.setAdapter(bartoursAdapter);
+            ChronicleAdapter bartoursAdapter = new ChronicleAdapter(
+                    this,
+                    bartour.getChronicle().getChronicleEvents()
+            );
+            listView.setAdapter(bartoursAdapter);
+        }
     }
 
     @Override
