@@ -22,6 +22,7 @@ public abstract class ChronicleEvent implements Comparable<ChronicleEvent>, Seri
     private Calendar moment;
     private String momentFormated;
 
+
     public ChronicleEvent() {
         setMoment(Calendar.getInstance());
     }
@@ -30,14 +31,26 @@ public abstract class ChronicleEvent implements Comparable<ChronicleEvent>, Seri
         return moment;
     }
 
+    /**
+     * Sets the Momet
+     * @param moment
+     */
     public void setMoment(Calendar moment){
         this.moment = moment;
         this.momentFormated = new java.text.SimpleDateFormat("yyyy MMM dd HH:mm:ss").format(getMoment().getTime());
     }
 
-
+    /**
+     * Gets the Display name, which is displayed in the Timeline
+     * @return Display Name
+     */
     public abstract String getDisplayName();
 
+    /**
+     * Gets the View, which to show in the Timeline
+     * @param context Context to interagate with resources
+     * @return return the View object, which represents a Chronicle-Item
+     */
     public View getView(Context context){
         View view = LayoutInflater.from(context).inflate(R.layout.chronicle_event_item, null, false);
         TextView t = (TextView) view.findViewById(R.id.text_name);
@@ -48,6 +61,11 @@ public abstract class ChronicleEvent implements Comparable<ChronicleEvent>, Seri
         return view;
     }
 
+    /**
+     * Compar two ChronicleEvents based on the time
+     * @param another other Obj to compare with
+     * @return if another is greater, equals or less
+     */
     @Override
     public int compareTo(ChronicleEvent another) {
         Long instanceTime = getMoment().getTimeInMillis();
@@ -60,5 +78,4 @@ public abstract class ChronicleEvent implements Comparable<ChronicleEvent>, Seri
             return 0;
         }
     }
-
 }
