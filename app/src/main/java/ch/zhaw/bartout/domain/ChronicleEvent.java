@@ -1,6 +1,7 @@
 package ch.zhaw.bartout.domain;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -40,7 +41,7 @@ public abstract class ChronicleEvent implements Comparable<ChronicleEvent>, Seri
     public View getView(Context context){
         View view = LayoutInflater.from(context).inflate(R.layout.chronicle_event_item, null, false);
         TextView t = (TextView) view.findViewById(R.id.text_name);
-        t.setText(getDisplayName());
+        t.setText(Html.fromHtml(getDisplayName()));
 
         TextView time = (TextView) view.findViewById(R.id.textView_time);
         time.setText(new SimpleDateFormat("HH:mm").format(moment.getTime()));

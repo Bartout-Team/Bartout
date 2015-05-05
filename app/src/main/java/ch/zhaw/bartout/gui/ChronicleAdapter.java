@@ -27,9 +27,9 @@ public class ChronicleAdapter extends ArrayAdapter<ChronicleEvent> {
     public View getView(int position, View convertView, ViewGroup parent){
         ChronicleEvent event = getItem(position);
 
-        if(convertView == null){
+        //if(convertView == null){
             convertView = event.getView(getContext());
-        }
+        //}
 
         return convertView;
     }

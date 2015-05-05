@@ -19,9 +19,9 @@ public class FitToDriveChronicleEvent extends UserStatusChronicleEvent {
     @Override
     public String getDisplayName() {
         if (isFitToDrive){
-            return String.format("%s darf wieder fahren",getUser().getName());
+            return String.format("<b>%s</b> darf wieder fahren",getUser().getName());
         }else{
-            return String.format("%s darf nicht mehr fahren",getUser().getName());
+            return String.format("<b>%s</b> darf nicht mehr fahren",getUser().getName());
         }
     }
 
