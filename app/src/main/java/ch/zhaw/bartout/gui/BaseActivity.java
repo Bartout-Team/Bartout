@@ -97,9 +97,6 @@ public abstract class BaseActivity extends Activity{
             intent = new Intent(BaseActivity.this, DriveFitnessActivity.class);
         }else if(name.equals(getString(R.string.title_chronicle))){
             intent = new Intent(BaseActivity.this, ChronicleActivity.class);
-            Bundle b = new Bundle();
-            b.putSerializable(ChronicleActivity.CHRONICLE_EXTRA_BARTOUR, Bartout.getInstance().getActiveBartour());
-            intent.putExtras(b);
         }else {
             throw new IllegalStateException("Unknown Activity!");
         }

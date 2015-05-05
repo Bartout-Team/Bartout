@@ -6,10 +6,12 @@ import android.widget.TextView;
 
 import ch.zhaw.bartout.R;
 import ch.zhaw.bartout.domain.Bartour;
+import ch.zhaw.bartout.domain.Bartout;
 
 public class ChronicleActivity extends BaseActivity {
 
     private Bartour bartour;
+    private ChronicleAdapter chronicleAdapter;
 
     public static final String CHRONICLE_EXTRA_BARTOUR = "chronicle_extra_bartour";
 
@@ -29,17 +31,18 @@ public class ChronicleActivity extends BaseActivity {
         super.onResume();
         android.content.Intent intent = getIntent();
         Bundle b = intent.getExtras();
-        Bartour tour = (Bartour) b.getSerializable(CHRONICLE_EXTRA_BARTOUR);
-        if(!tour.equals(bartour)) {
-            bartour = tour;
-            ListView listView = (ListView) findViewById(R.id.list_view);
-
-            ChronicleAdapter bartoursAdapter = new ChronicleAdapter(
-                    this,
-                    bartour.getChronicle().getChronicleEvents()
-            );
-            listView.setAdapter(bartoursAdapter);
+        if(b != null && b.containsKey(CHRONICLE_EXTRA_BARTOUR)) {
+            bartour = (Bartour) b.getSerializable(CHRONICLE_EXTRA_BARTOUR);
+        } else {
+            bartour = Bartout.getInstance().getActiveBartour();
         }
+        ListView listView = (ListView) findViewById(R.id.list_view);
+
+        chronicleAdapter = new ChronicleAdapter(
+                this,
+                bartour.getChronicle().getChronicleEvents()
+        );
+        listView.setAdapter(chronicleAdapter);
     }
 
     @Override

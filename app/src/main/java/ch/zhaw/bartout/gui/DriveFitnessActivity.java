@@ -40,6 +40,7 @@ public class DriveFitnessActivity extends BaseActivity {
 
     public void onResume() {
         super.onResume();
+        driveFitnessRanking.updateRanking();
         adapter.notifyDataSetChanged();
     }
 

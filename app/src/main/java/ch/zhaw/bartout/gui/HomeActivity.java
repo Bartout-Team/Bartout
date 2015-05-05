@@ -70,7 +70,6 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemClic
         listView.setAdapter(bartoursAdapter);
 
         listView.setOnItemClickListener(this);
-        listView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE_MODAL);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.newBartourButton);
         fab.attachToListView(listView);
