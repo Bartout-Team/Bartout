@@ -85,6 +85,8 @@ public class Bartout implements Serializable {
             Bartour activeTour = new Bartour();
             activeTour.setName("Active Tour");
 
+            addBartour(activeTour);
+
             User user = new User();
             user.setName("John");
             user.setWeight(70);
