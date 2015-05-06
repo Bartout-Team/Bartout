@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by srueg on 29.03.15.
  */
-public class Bartour implements Serializable {
+public class Bartour implements Comparable<Bartour>,  Serializable {
 
     private String name;
     private List<User> users;
@@ -142,6 +142,11 @@ public class Bartour implements Serializable {
         if(end != null && !end.equals(otherTour.getEnd())) return false;
 
         return true;
+    }
+
+    @Override
+    public int compareTo(Bartour another) {
+        return another.start.compareTo(start);
     }
 }
 

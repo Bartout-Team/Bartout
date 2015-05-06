@@ -128,6 +128,7 @@ public class Bartout implements Serializable {
         });
         BartourChronicleEvent event = new BartourChronicleEvent(bartour.getName(), true,bartour.getStart());
         bartour.getChronicle().addEvent(event);
+        Collections.sort(bartours);
     }
 
     public boolean removeBartour(Bartour bartour){
