@@ -79,7 +79,7 @@ public class DrinkBeverageActivity extends BaseActivity {
 
         for (int x= 0; x<listViewUsers.getAdapter().getCount();x++ ){
 
-            View v = listViewUsers.getChildAt(x);
+            View v = getViewByPosition(x, listViewUsers);
             CheckBox checkBox = (CheckBox) v.findViewById(R.id.beverageUserItemCheckBox);
 
             if (checkBox.isChecked()) {
@@ -88,14 +88,21 @@ public class DrinkBeverageActivity extends BaseActivity {
                 User u = users.get(x);
                 u.getStatus().addConsumption(consumption);
             }
-
-            Intent intent = new Intent(this, DrinkActivity.class);
-            startActivity(intent);
-
         }
+        Intent intent = new Intent(this, DrinkActivity.class);
+        startActivity(intent);
+    }
 
+    private View getViewByPosition(int pos, ListView listView) {
+        final int firstListItemPosition = listView.getFirstVisiblePosition();
+        final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
 
-
+        if (pos < firstListItemPosition || pos > lastListItemPosition ) {
+            return listView.getAdapter().getView(pos, null, listView);
+        } else {
+            final int childIndex = pos - firstListItemPosition;
+            return listView.getChildAt(childIndex);
+        }
     }
 
 }
