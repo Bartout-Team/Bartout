@@ -16,6 +16,14 @@
         android:focusable="false"
         android:focusableInTouchMode="false"/>
 
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        android:visibility="gone"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        />
+
     <include layout="@layout/navigation_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

@@ -70,5 +70,7 @@
     </array>
     <string name="toast_location_check_in_success">Erfolgreich eingecheckt!</string>
     <string name="toast_location_check_in_fail">Keine Bartour aktiv!</string>
+    <string name="timeline_name">Timeline</string>
+    <string name="map_name">Karte</string>
 
 </resources>

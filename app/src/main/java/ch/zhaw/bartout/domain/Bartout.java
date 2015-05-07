@@ -64,15 +64,15 @@ public class Bartout implements Serializable {
 
                 EstablishmentLocationChronicleEvent e = new EstablishmentLocationChronicleEvent();
                 e.setType("Bar");
-                e.setLatitude(100);
-                e.setLongitude(100);
+                e.setLatitude(47.432789);
+                e.setLongitude(8.558526);
                 e.setLocationName("Kennedy's");
                 tour.getChronicle().addEvent(e);
 
                 ATMLocationChronicleEvent a = new ATMLocationChronicleEvent();
                 a.setLocationName("ZKB");
-                a.setLongitude(101);
-                a.setLatitude(101);
+                a.setLongitude(8.558526);
+                a.setLatitude(47.452689);
                 tour.getChronicle().addEvent(a);
 
                 user = new User();
@@ -99,8 +99,8 @@ public class Bartout implements Serializable {
 
             EstablishmentLocationChronicleEvent e = new EstablishmentLocationChronicleEvent();
             e.setType("Bar");
-            e.setLatitude(100);
-            e.setLongitude(100);
+            e.setLatitude(47.402589);
+            e.setLongitude(8.558526);
             e.setLocationName("Kennedy's");
             activeTour.getChronicle().addEvent(e);
 
