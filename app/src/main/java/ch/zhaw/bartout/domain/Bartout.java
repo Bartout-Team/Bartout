@@ -19,7 +19,8 @@ import ch.zhaw.bartout.domain.bartour.user.User;
  */
 
 /**
- * Facade-Controller
+ * The class Bartout is the facade-controller of the app.
+ * It ensures that there is always only one instance of Bartout. It holds all bartours.
  */
 public class Bartout implements Serializable {
 
