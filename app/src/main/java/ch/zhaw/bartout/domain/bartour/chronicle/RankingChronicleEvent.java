@@ -10,7 +10,7 @@ import ch.zhaw.bartout.domain.bartour.ranking.RankingUser;
 import ch.zhaw.bartout.domain.bartour.ranking.Ranking;
 
 /**
- * Created by Nico on 31.03.2015.
+ * The class holds a Ranking to display it at the chronicle.
  */
 public class RankingChronicleEvent extends ChronicleEvent {
 
