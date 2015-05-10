@@ -3,7 +3,7 @@ package ch.zhaw.bartout.domain.bartour.chronicle;
 import ch.zhaw.bartout.domain.bartour.user.User;
 
 /**
- * Created by Nico on 31.03.2015.
+ * The class holds all chronicleEvents that are user-related.
  */
 public abstract class UserChronicleEvent extends ChronicleEvent {
 
