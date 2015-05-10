@@ -7,6 +7,10 @@ import ch.zhaw.bartout.domain.bartour.user.User;
  */
 public abstract class UserChronicleEvent extends ChronicleEvent {
 
+    /**
+     * Create a UserChronicleEvent with a User
+     * @param user The User, for which the Event is created.
+     */
     public UserChronicleEvent(User user){
         super();
         this.user = user;

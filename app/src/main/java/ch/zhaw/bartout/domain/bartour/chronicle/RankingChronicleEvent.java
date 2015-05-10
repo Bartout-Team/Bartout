@@ -16,6 +16,10 @@ public class RankingChronicleEvent extends ChronicleEvent {
 
     private Ranking ranking;
 
+    /**
+     * Create a RankingChronicleEvent with a Ranking
+     * @param ranking Ranking for the Event
+     */
     public  RankingChronicleEvent(Ranking ranking){
         super();
         this.ranking = ranking;

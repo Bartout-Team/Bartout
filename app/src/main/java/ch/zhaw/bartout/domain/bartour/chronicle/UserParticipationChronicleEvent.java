@@ -12,6 +12,11 @@ import ch.zhaw.bartout.domain.bartour.user.User;
  */
 public class UserParticipationChronicleEvent extends UserChronicleEvent {
 
+    /**
+     * Creates a UserParticipationChronicleEvent with a User
+     * @param user The User, for which the Event is created.
+     * @param isNewUser true if a new User joined the Bartour, flase if a User left the Bartour
+     */
     public UserParticipationChronicleEvent(User user, boolean isNewUser){
         super(user);
         this.isNewUser=isNewUser;

@@ -19,6 +19,11 @@ public class AlcoholLevelChronicleEvent extends UserStatusChronicleEvent {
 
     private int level;
 
+    /**
+     * Constructor for AlcoholLevelChronicleEvent
+     * @param user User for which the ChronicleEvent is created
+     * @param level AlcoholLevel of the User
+     */
     public AlcoholLevelChronicleEvent(User user, int level) {
         super(user);
         this.level = level;

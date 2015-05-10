@@ -8,6 +8,10 @@ import ch.zhaw.bartout.domain.bartour.user.UserStatus;
  */
 public abstract class UserStatusChronicleEvent extends UserChronicleEvent {
 
+    /**
+     * Creates a UserStatusChronicleEvent with a User
+     * @param user User for which the Event was created.
+     */
     public UserStatusChronicleEvent(User user){
         super(user);
         status = user.getStatus();
