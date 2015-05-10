@@ -13,7 +13,7 @@ import ch.zhaw.bartout.domain.bartour.chronicle.FitToDriveChronicleEvent;
 import ch.zhaw.bartout.domain.bartour.chronicle.UserStatusChronicleEvent;
 
 /**
- * Created by bwa on 29.03.2015.
+ * This class holds the alcohollevel of a user and all data required for its calculation.
  */
 public class UserStatus implements Serializable {
     private User user;
