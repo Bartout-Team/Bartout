@@ -22,12 +22,20 @@ public class Ranking implements Serializable, Copyable<Ranking> {
     private List<RankingUser> orderedUsers;
     private boolean descending;
 
+    /**
+     * Constructor for Ranking
+     * @param users Users which occure in the Ranking
+     * @param descending true for descending, false for ascending
+     */
     public Ranking(List<User> users, boolean descending){
         this.users = users;
         this.orderedUsers = new ArrayList<RankingUser>();
         this.descending = descending;
     }
 
+    /**
+     * Updates the Ranking based on new AlcoholLevels
+     */
     public void updateRanking(){
         List<RankingUser> newOrderedList = new ArrayList<RankingUser>();
 
@@ -76,6 +84,10 @@ public class Ranking implements Serializable, Copyable<Ranking> {
         return listHasChanged;
     }
 
+    /**
+     * Make a deep copy of a Ranking
+     * @return deep copy of Ranking
+     */
     @Override
     public Ranking copy() {
         Ranking ranking = (Ranking) DeepCopy.copy(this);

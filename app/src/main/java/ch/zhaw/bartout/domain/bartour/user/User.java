@@ -48,6 +48,10 @@ public class User implements Serializable,Copyable<User> {
         return status;
     }
 
+    /**
+     * Make a deep copy of a User
+     * @return deep copy of User
+     */
     @Override
     public User copy() {
         User copiedUser = (User)DeepCopy.copy(this);

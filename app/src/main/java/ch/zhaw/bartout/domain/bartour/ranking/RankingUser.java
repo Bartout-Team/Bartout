@@ -13,6 +13,10 @@ public class RankingUser implements Comparable<RankingUser>, Serializable {
     private User user;
     private double alcoholLevelInPercent;
 
+    /**
+     * Constructor for RankingUser
+     * @param user User obj, for which the RankingUser is created.
+     */
     public RankingUser(User user){
         this.user = user;
     }
