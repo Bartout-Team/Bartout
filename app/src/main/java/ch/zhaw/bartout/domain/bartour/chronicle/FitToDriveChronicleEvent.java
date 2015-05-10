@@ -1,10 +1,11 @@
-package ch.zhaw.bartout.domain;
+package ch.zhaw.bartout.domain.bartour.chronicle;
 
 import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 
 import ch.zhaw.bartout.R;
+import ch.zhaw.bartout.domain.bartour.user.User;
 
 /**
  * Created by serge on 28.04.2015.

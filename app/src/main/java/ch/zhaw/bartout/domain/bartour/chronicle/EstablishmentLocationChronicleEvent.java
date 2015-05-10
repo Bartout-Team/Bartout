@@ -1,4 +1,4 @@
-package ch.zhaw.bartout.domain;
+package ch.zhaw.bartout.domain.bartour.chronicle;
 
 import android.content.Context;
 import android.view.View;

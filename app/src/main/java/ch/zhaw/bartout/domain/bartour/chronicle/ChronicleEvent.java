@@ -1,16 +1,14 @@
-package ch.zhaw.bartout.domain;
+package ch.zhaw.bartout.domain.bartour.chronicle;
 
 import android.content.Context;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 import ch.zhaw.bartout.R;
 

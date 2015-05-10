@@ -28,9 +28,9 @@ import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 import ch.zhaw.bartout.R;
-import ch.zhaw.bartout.domain.ATMLocationChronicleEvent;
-import ch.zhaw.bartout.domain.EstablishmentLocationChronicleEvent;
-import ch.zhaw.bartout.domain.LocationChronicleEvent;
+import ch.zhaw.bartout.domain.bartour.chronicle.ATMLocationChronicleEvent;
+import ch.zhaw.bartout.domain.bartour.chronicle.EstablishmentLocationChronicleEvent;
+import ch.zhaw.bartout.domain.bartour.chronicle.LocationChronicleEvent;
 import se.walkercrou.places.GooglePlaces;
 import se.walkercrou.places.Param;
 import se.walkercrou.places.Place;

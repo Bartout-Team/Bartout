@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import ch.zhaw.bartout.R;
-import ch.zhaw.bartout.domain.User;
+import ch.zhaw.bartout.domain.bartour.user.User;
 
 /**
  * Created by bwa on 01.04.2015.

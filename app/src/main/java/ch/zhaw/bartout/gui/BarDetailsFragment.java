@@ -16,10 +16,10 @@ import android.widget.Toast;
 import com.melnykov.fab.FloatingActionButton;
 
 import ch.zhaw.bartout.R;
-import ch.zhaw.bartout.domain.Bartour;
+import ch.zhaw.bartout.domain.bartour.Bartour;
 import ch.zhaw.bartout.domain.Bartout;
-import ch.zhaw.bartout.domain.EstablishmentLocationChronicleEvent;
-import ch.zhaw.bartout.domain.LocationChronicleEvent;
+import ch.zhaw.bartout.domain.bartour.chronicle.EstablishmentLocationChronicleEvent;
+import ch.zhaw.bartout.domain.bartour.chronicle.LocationChronicleEvent;
 import se.walkercrou.places.GooglePlaces;
 
 

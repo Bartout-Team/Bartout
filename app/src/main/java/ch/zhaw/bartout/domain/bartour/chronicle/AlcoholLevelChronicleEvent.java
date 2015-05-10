@@ -1,4 +1,4 @@
-package ch.zhaw.bartout.domain;
+package ch.zhaw.bartout.domain.bartour.chronicle;
 
 /**
  * Created by serge on 27.04.2015.
@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import ch.zhaw.bartout.R;
+import ch.zhaw.bartout.domain.bartour.user.User;
 
 /**
  * Snapshot of the specific integer alcohol level of a user

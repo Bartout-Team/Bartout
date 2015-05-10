@@ -1,6 +1,8 @@
-package ch.zhaw.bartout.domain;
+package ch.zhaw.bartout.domain.bartour.ranking;
 
 import java.io.Serializable;
+
+import ch.zhaw.bartout.domain.bartour.user.User;
 
 /**
  * Created by serge on 06.04.2015.

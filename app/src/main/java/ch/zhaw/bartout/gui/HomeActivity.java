@@ -4,10 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.ActionMode;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -15,7 +12,7 @@ import android.widget.Toast;
 import com.melnykov.fab.FloatingActionButton;
 
 import ch.zhaw.bartout.R;
-import ch.zhaw.bartout.domain.Bartour;
+import ch.zhaw.bartout.domain.bartour.Bartour;
 import ch.zhaw.bartout.domain.Bartout;
 
 

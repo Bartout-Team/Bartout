@@ -5,7 +5,7 @@ import android.widget.ListView;
 
 import ch.zhaw.bartout.R;
 import ch.zhaw.bartout.domain.Bartout;
-import ch.zhaw.bartout.domain.Ranking;
+import ch.zhaw.bartout.domain.bartour.ranking.Ranking;
 
 public class RankingActivity extends BaseActivity {
 

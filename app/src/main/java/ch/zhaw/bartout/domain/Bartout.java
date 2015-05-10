@@ -6,6 +6,13 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
+import ch.zhaw.bartout.domain.bartour.Bartour;
+import ch.zhaw.bartout.domain.bartour.chronicle.ATMLocationChronicleEvent;
+import ch.zhaw.bartout.domain.bartour.chronicle.BartourChronicleEvent;
+import ch.zhaw.bartout.domain.bartour.chronicle.EstablishmentLocationChronicleEvent;
+import ch.zhaw.bartout.domain.bartour.user.Consumption;
+import ch.zhaw.bartout.domain.bartour.user.User;
+
 
 /**
  * Created by srueg on 29.03.15.

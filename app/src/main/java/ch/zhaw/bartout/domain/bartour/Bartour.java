@@ -1,4 +1,4 @@
-package ch.zhaw.bartout.domain;
+package ch.zhaw.bartout.domain.bartour;
 
 
 import java.io.Serializable;
@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+
+import ch.zhaw.bartout.domain.bartour.chronicle.Chronicle;
+import ch.zhaw.bartout.domain.bartour.ranking.Ranking;
+import ch.zhaw.bartout.domain.bartour.user.User;
+import ch.zhaw.bartout.domain.bartour.chronicle.UserParticipationChronicleEvent;
 
 
 /**
@@ -129,7 +134,7 @@ public class Bartour implements Comparable<Bartour>,  Serializable {
         return driveFitnessRanking;
     }
 
-    interface OnFinishedListener{
+    public interface OnFinishedListener{
         public void OnFinished();
     }
     

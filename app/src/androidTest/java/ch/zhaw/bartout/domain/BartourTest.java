@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import ch.zhaw.bartout.domain.bartour.Bartour;
+import ch.zhaw.bartout.domain.bartour.user.User;
 
 public class BartourTest extends InstrumentationTestCase {
 

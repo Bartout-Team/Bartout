@@ -6,7 +6,7 @@ import static org.mockito.Mockito.*;
 import java.util.Calendar;
 import java.util.List;
 
-import ch.zhaw.bartout.domain.User;
+import ch.zhaw.bartout.domain.bartour.Bartour;
 
 public class BartoutTest {
 

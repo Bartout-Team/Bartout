@@ -2,30 +2,25 @@ package ch.zhaw.bartout.gui;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
-import android.graphics.Color;
-import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import ch.zhaw.bartout.R;
-import ch.zhaw.bartout.domain.ATMLocationChronicleEvent;
-import ch.zhaw.bartout.domain.Bartour;
+import ch.zhaw.bartout.domain.bartour.chronicle.ATMLocationChronicleEvent;
+import ch.zhaw.bartout.domain.bartour.Bartour;
 import ch.zhaw.bartout.domain.Bartout;
-import ch.zhaw.bartout.domain.ChronicleEvent;
-import ch.zhaw.bartout.domain.LocationChronicleEvent;
+import ch.zhaw.bartout.domain.bartour.chronicle.ChronicleEvent;
+import ch.zhaw.bartout.domain.bartour.chronicle.LocationChronicleEvent;
 
 
 public class ChronicleActivity extends BaseActivity {
@@ -117,9 +112,9 @@ public class ChronicleActivity extends BaseActivity {
                 boolean first = true;
                 PolylineOptions line = new PolylineOptions();
                 map.addPolyline(line);
-                for(ChronicleEvent event : bartour.getChronicle().getChronicleEvents(LocationChronicleEvent.class)){
-                    LocationChronicleEvent locationEvent = (LocationChronicleEvent)event;
-                    if(first){
+                for (ChronicleEvent event : bartour.getChronicle().getChronicleEvents(LocationChronicleEvent.class)) {
+                    LocationChronicleEvent locationEvent = (LocationChronicleEvent) event;
+                    if (first) {
                         first = false;
                         map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(locationEvent.getLatitude(), locationEvent.getLongitude()), 15));
                     }
@@ -127,9 +122,9 @@ public class ChronicleActivity extends BaseActivity {
                     LatLng latLng = new LatLng(locationEvent.getLatitude(), locationEvent.getLongitude());
                     marker.title(locationEvent.getLocationName().toString())
                             .position(latLng);
-                    if(locationEvent instanceof ATMLocationChronicleEvent) {
+                    if (locationEvent instanceof ATMLocationChronicleEvent) {
                         marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_money_pin));
-                    }else {
+                    } else {
                         marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_action_beer_pin));
                     }
                     map.addMarker(marker);

@@ -9,7 +9,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import ch.zhaw.bartout.domain.ChronicleEvent;
+import ch.zhaw.bartout.domain.bartour.chronicle.ChronicleEvent;
 
 
 /**

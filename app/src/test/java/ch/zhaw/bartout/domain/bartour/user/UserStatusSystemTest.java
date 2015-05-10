@@ -1,9 +1,13 @@
-package ch.zhaw.bartout.domain;
+package ch.zhaw.bartout.domain.bartour.user;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Calendar;
+import ch.zhaw.bartout.domain.Bartout;
+import ch.zhaw.bartout.domain.bartour.Bartour;
+import ch.zhaw.bartout.domain.bartour.user.Consumption;
+import ch.zhaw.bartout.domain.bartour.user.User;
+import ch.zhaw.bartout.domain.bartour.user.UserStatus;
 
 import static org.junit.Assert.*;
 

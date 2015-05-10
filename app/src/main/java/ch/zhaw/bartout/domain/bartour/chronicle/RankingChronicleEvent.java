@@ -1,4 +1,4 @@
-package ch.zhaw.bartout.domain;
+package ch.zhaw.bartout.domain.bartour.chronicle;
 
 import android.content.Context;
 import android.view.View;
@@ -6,6 +6,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import ch.zhaw.bartout.R;
+import ch.zhaw.bartout.domain.bartour.ranking.RankingUser;
+import ch.zhaw.bartout.domain.bartour.ranking.Ranking;
 
 /**
  * Created by Nico on 31.03.2015.

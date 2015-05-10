@@ -1,4 +1,4 @@
-package ch.zhaw.bartout.domain;
+package ch.zhaw.bartout.domain.bartour.user;
 
 import java.io.Serializable;
 

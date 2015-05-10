@@ -16,7 +16,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import ch.zhaw.bartout.R;
-import ch.zhaw.bartout.domain.User;
+import ch.zhaw.bartout.domain.bartour.user.User;
 
 
 /**

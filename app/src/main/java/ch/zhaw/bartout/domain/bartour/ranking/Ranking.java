@@ -1,4 +1,4 @@
-package ch.zhaw.bartout.domain;
+package ch.zhaw.bartout.domain.bartour.ranking;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -6,6 +6,9 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import ch.zhaw.bartout.domain.bartour.chronicle.RankingChronicleEvent;
+import ch.zhaw.bartout.domain.bartour.user.User;
+import ch.zhaw.bartout.domain.bartour.chronicle.Chronicle;
 import ch.zhaw.bartout.service.deepcopy.Copyable;
 import ch.zhaw.bartout.service.deepcopy.DeepCopy;
 

@@ -1,10 +1,10 @@
 package ch.zhaw.bartout.gui;
 
 import ch.zhaw.bartout.R;
-import ch.zhaw.bartout.domain.Bartour;
+import ch.zhaw.bartout.domain.bartour.Bartour;
 import ch.zhaw.bartout.domain.Bartout;
-import ch.zhaw.bartout.domain.User;
-import ch.zhaw.bartout.domain.Consumption;
+import ch.zhaw.bartout.domain.bartour.user.User;
+import ch.zhaw.bartout.domain.bartour.user.Consumption;
 
 import android.content.Intent;
 import android.os.Bundle;

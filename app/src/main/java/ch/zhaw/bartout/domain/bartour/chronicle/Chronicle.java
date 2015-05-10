@@ -1,9 +1,11 @@
-package ch.zhaw.bartout.domain;
+package ch.zhaw.bartout.domain.bartour.chronicle;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import ch.zhaw.bartout.domain.Bartout;
 
 /**
  * Created by bwa on 29.03.2015.

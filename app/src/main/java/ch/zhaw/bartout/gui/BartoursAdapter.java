@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import ch.zhaw.bartout.R;
-import ch.zhaw.bartout.domain.Bartour;
+import ch.zhaw.bartout.domain.bartour.Bartour;
 
 
 /**

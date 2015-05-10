@@ -1,7 +1,8 @@
-package ch.zhaw.bartout.domain;
+package ch.zhaw.bartout.domain.bartour.chronicle;
 
 import java.util.List;
 
+import ch.zhaw.bartout.domain.bartour.chronicle.ChronicleEvent;
 import se.walkercrou.places.Place;
 
 /**

@@ -1,10 +1,16 @@
-package ch.zhaw.bartout.domain;
+package ch.zhaw.bartout.domain.bartour.user;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+
+import ch.zhaw.bartout.domain.bartour.chronicle.AlcoholLevelChronicleEvent;
+import ch.zhaw.bartout.domain.bartour.chronicle.Chronicle;
+import ch.zhaw.bartout.domain.bartour.chronicle.ChronicleEvent;
+import ch.zhaw.bartout.domain.bartour.chronicle.FitToDriveChronicleEvent;
+import ch.zhaw.bartout.domain.bartour.chronicle.UserStatusChronicleEvent;
 
 /**
  * Created by bwa on 29.03.2015.

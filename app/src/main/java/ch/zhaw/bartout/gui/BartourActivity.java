@@ -10,13 +10,12 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 import ch.zhaw.bartout.R;
 import ch.zhaw.bartout.domain.Bartout;
-import ch.zhaw.bartout.domain.User;
-import ch.zhaw.bartout.domain.Bartour;
+import ch.zhaw.bartout.domain.bartour.user.User;
+import ch.zhaw.bartout.domain.bartour.Bartour;
 
 public class BartourActivity extends BaseActivity implements UserFragment.OnFragmentInteractionListener {
     private Bartour bartour;

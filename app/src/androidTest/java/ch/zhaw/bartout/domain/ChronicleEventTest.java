@@ -1,9 +1,10 @@
 package ch.zhaw.bartout.domain;
 
-import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Calendar;
+import ch.zhaw.bartout.domain.bartour.chronicle.ATMLocationChronicleEvent;
+import ch.zhaw.bartout.domain.bartour.chronicle.ChronicleEvent;
+import ch.zhaw.bartout.domain.bartour.chronicle.EstablishmentLocationChronicleEvent;
 
 import static org.junit.Assert.*;
 

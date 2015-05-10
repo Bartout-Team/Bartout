@@ -1,4 +1,4 @@
-package ch.zhaw.bartout.domain;
+package ch.zhaw.bartout.domain.bartour.user;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -8,6 +8,12 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import ch.zhaw.bartout.domain.bartour.chronicle.Chronicle;
+import ch.zhaw.bartout.domain.bartour.chronicle.ChronicleEvent;
+import ch.zhaw.bartout.domain.bartour.user.Consumption;
+import ch.zhaw.bartout.domain.bartour.user.User;
+import ch.zhaw.bartout.domain.bartour.user.UserStatus;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;

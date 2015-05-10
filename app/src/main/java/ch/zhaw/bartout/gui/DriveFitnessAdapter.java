@@ -14,8 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import ch.zhaw.bartout.R;
-import ch.zhaw.bartout.domain.RankingUser;
-import ch.zhaw.bartout.domain.User;
+import ch.zhaw.bartout.domain.bartour.ranking.RankingUser;
 
 /**
  * Created by bwa on 03.04.2015.

@@ -1,4 +1,6 @@
-package ch.zhaw.bartout.domain;
+package ch.zhaw.bartout.domain.bartour.chronicle;
+
+import ch.zhaw.bartout.domain.bartour.user.User;
 
 /**
  * Created by Nico on 31.03.2015.
