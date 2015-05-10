@@ -21,8 +21,6 @@ public class RankingIntegrationTest {
         users.add(new User());
         descendingRanking = new Ranking(users, true);
         ascendingRanking = new Ranking(users, false);
-
-
     }
 
     @Test
