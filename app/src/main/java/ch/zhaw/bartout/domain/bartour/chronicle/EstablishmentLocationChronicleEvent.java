@@ -11,7 +11,7 @@ import ch.zhaw.bartout.R;
 import se.walkercrou.places.Place;
 
 /**
- * Created by Nico on 31.03.2015.
+ * The class holds events, that represent the check-in or check-out of a bar.
  */
 public class EstablishmentLocationChronicleEvent extends LocationChronicleEvent {
 
