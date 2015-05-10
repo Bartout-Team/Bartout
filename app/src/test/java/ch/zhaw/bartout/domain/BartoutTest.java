@@ -1,6 +1,7 @@
 package ch.zhaw.bartout.domain;
 
 import org.junit.Assert;
+import org.junit.Test;
 
 import static org.mockito.Mockito.*;
 import java.util.Calendar;
