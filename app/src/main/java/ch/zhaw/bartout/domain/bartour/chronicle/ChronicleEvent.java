@@ -13,7 +13,7 @@ import java.util.Calendar;
 import ch.zhaw.bartout.R;
 
 /**
- * Created by Nico on 31.03.2015.
+ * The class ChronicleEvent is the parent-class for all ChronicleEvent-classes, like RankingChronicleEvent and LocationChronicleEvent and their sub-classes.
  */
 public abstract class ChronicleEvent implements Comparable<ChronicleEvent>, Serializable {
 
