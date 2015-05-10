@@ -8,7 +8,7 @@ import ch.zhaw.bartout.R;
 import ch.zhaw.bartout.domain.bartour.user.User;
 
 /**
- * Created by Nico on 31.03.2015.
+ * The classe holds the entry or leaving of a User to display it at the chronicle.
  */
 public class UserParticipationChronicleEvent extends UserChronicleEvent {
 
