@@ -46,6 +46,9 @@ public class Bartout implements Serializable {
         bartours = new ArrayList<Bartour>();
     }
 
+    /**
+     * Initializes some Sampledata for testing. Call this in the first Activity.
+     */
     public void initializeSampleData(){
         if(startup) {
             startup = false;
@@ -118,14 +121,26 @@ public class Bartout implements Serializable {
         }
     }
 
+    /**
+     * Gets all Bartours in an unmodifiable list. Use add/removeBartour to modify the list.
+     * @return unmodifiable List of Bartours
+     */
     public List<Bartour> getBartours(){
         return Collections.unmodifiableList(bartours);
     }
 
+    /**
+     * Gets the currently active Bartour or null
+     * @return currently active Bartour or null
+     */
     public Bartour getActiveBartour(){
         return activeBartour;
     }
 
+    /**
+     * Add a Bartour
+     * @param bartour
+     */
     public void addBartour(final Bartour bartour) {
         bartours.add(bartour);
         activeBartour = bartour;
@@ -142,8 +157,12 @@ public class Bartout implements Serializable {
         Collections.sort(bartours);
     }
 
+    /**
+     * Remove a Bartour
+     * @param bartour Bartour to be removed
+     * @return returns true, if the Bartour was found and could be removed.
+     */
     public boolean removeBartour(Bartour bartour){
         return bartours.remove(bartour);
     }
-
 }
