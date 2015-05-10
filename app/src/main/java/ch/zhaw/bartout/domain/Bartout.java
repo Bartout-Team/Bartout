@@ -17,6 +17,10 @@ import ch.zhaw.bartout.domain.bartour.user.User;
 /**
  * Created by srueg on 29.03.15.
  */
+
+/**
+ * Facade-Controller
+ */
 public class Bartout implements Serializable {
 
     // Singleton

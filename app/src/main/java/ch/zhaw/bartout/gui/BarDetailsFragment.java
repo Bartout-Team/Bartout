@@ -104,7 +104,7 @@ public class BarDetailsFragment extends Fragment {
             RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             p.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
             p.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-            getView().setId(R.id.fragmentDetails);
+            //getView().setId(R.id.fragmentDetails);
             p.addRule(RelativeLayout.ALIGN_PARENT_START);
             getView().setLayoutParams(p);
 
