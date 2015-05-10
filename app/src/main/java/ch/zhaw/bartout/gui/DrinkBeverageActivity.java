@@ -29,7 +29,7 @@ public class DrinkBeverageActivity extends BaseActivity {
     private ListView listViewUsers;
 
     private Bartour bartour;
-    private List<User> users = new ArrayList<>();
+    private List<User> users = new ArrayList<User>();
 
     //Keys
     private String beverageNameKey = "beverageNameKey";
