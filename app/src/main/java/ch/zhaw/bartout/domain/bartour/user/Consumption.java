@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 
 /**
- * Created by tomekman on 04.04.15.
+ * The class Consumption holds a beverage wiht its alcoholic strength and the time of the consumption.
  */
 public class Consumption implements Serializable {
 
