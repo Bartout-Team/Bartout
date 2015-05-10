@@ -14,7 +14,7 @@ import ch.zhaw.bartout.service.deepcopy.DeepCopy;
 
 
 /**
- * Created by bwa on 29.03.2015.
+ * The class Ranking is responsible for the ranking of the alcohol-levels of all users of a bartour.
  */
 public class Ranking implements Serializable, Copyable<Ranking> {
 
