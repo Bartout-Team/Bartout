@@ -14,7 +14,7 @@ import ch.zhaw.bartout.domain.bartour.chronicle.UserParticipationChronicleEvent;
 
 
 /**
- * Created by srueg on 29.03.15.
+ * The class Bartour manages a Bartour. It holds a chronicle, a ranking and a list of users.
  */
 public class Bartour implements Comparable<Bartour>,  Serializable {
 
