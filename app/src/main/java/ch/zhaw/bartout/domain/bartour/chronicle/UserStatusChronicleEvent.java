@@ -4,7 +4,7 @@ import ch.zhaw.bartout.domain.bartour.user.User;
 import ch.zhaw.bartout.domain.bartour.user.UserStatus;
 
 /**
- * Created by Nico on 31.03.2015.
+ * The class manages all changes of User to display it at the chronicle.
  */
 public abstract class UserStatusChronicleEvent extends UserChronicleEvent {
 
