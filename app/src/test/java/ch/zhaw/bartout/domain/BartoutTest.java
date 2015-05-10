@@ -28,6 +28,7 @@ public class BartoutTest {
     public void testAddRemoveBartour(){
         Bartout b = Bartout.getInstance();
         Bartour tour = new Bartour();
+        tour.setName("Tour");
         b.addBartour(tour);
         Assert.assertFalse("Check, if there is exactly one Bartour", b.getBartours().isEmpty());
         Assert.assertSame("Check, if active Bartour references my previously created Bartour", tour, b.getActiveBartour());
