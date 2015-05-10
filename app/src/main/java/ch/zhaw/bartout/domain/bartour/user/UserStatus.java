@@ -73,6 +73,10 @@ public class UserStatus implements Serializable {
         return fitToDriveDuration;
     }
 
+    /**
+     * Adds a new Consumption for a User and updates all ChronicleEvents
+     * @param consumption Consumption to add
+     */
     public void addConsumption(Consumption consumption){
         if(consumption == null){
             throw  new IllegalArgumentException("consumption is null");
@@ -81,6 +85,11 @@ public class UserStatus implements Serializable {
         refreshEvents();
     }
 
+    /**
+     * Remove a Consumption.
+     * @param consumption Consumption to remvoe
+     * @return returns true if the Consumption was found and removed.
+     */
     public boolean removeConsumption(Consumption consumption){
         if(consumption == null){
             throw  new IllegalArgumentException("consumption is null");
@@ -92,6 +101,10 @@ public class UserStatus implements Serializable {
         return removeValue;
     }
 
+    /**
+     * Gets all Consumptions in an unmodifiable List. Use add/removeConsumption to modify the list.
+     * @return unmodifiable List of Consumptions
+     */
     public List<Consumption> getConsumptions(){
         return Collections.unmodifiableList(consumptions);
     }
@@ -129,7 +142,7 @@ public class UserStatus implements Serializable {
         }
     }
 
-    private void addUserStatusChronicleEvent(ChronicleEvent chronicleEvent,Calendar calendar){
+    private void addUserStatusChronicleEvent(ChronicleEvent chronicleEvent,Calendar calendar) {
         chronicleEvent.setMoment(calendar);
         Chronicle.getActiveChronicle().addEvent(chronicleEvent);
     }

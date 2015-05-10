@@ -53,6 +53,11 @@ public class Bartour implements Comparable<Bartour>,  Serializable {
         return end;
     }
 
+    /**
+     * Sets the End of the Bartour and calls OnFinished Listener
+     * @param end Calendar obj for End of Bartout.
+     * @return Bartour obj for chaining.
+     */
     public Bartour setEnd(Calendar end){
         this.end = end;
         if(finishedListener != null) {
@@ -61,6 +66,10 @@ public class Bartour implements Comparable<Bartour>,  Serializable {
         return this;
     }
 
+    /**
+     * Gets all Users in an unmodifiable List. Use add/removeUser to modify the list.
+     * @return unmodifiable List of Users
+     */
     public List<User> getUsers() {
         return Collections.unmodifiableList(users);
     }
@@ -135,6 +144,9 @@ public class Bartour implements Comparable<Bartour>,  Serializable {
     }
 
     public interface OnFinishedListener{
+        /**
+         * Gets called when a Bartour finished.
+         */
         public void OnFinished();
     }
     
