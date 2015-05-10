@@ -6,7 +6,7 @@ import ch.zhaw.bartout.service.deepcopy.Copyable;
 import ch.zhaw.bartout.service.deepcopy.DeepCopy;
 
 /**
- * Created by bwa on 29.03.2015.
+ * The class User holdes all items of a user.
  */
 public class User implements Serializable,Copyable<User> {
     private String name;
